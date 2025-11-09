@@ -5,7 +5,12 @@
     "role": "Full Stack Developer",
     "image": "/pfp.jpg",
     "bio": "Passionate about building scalable web applications with modern technologies.",
-    "skills": ["React", "Node.js", "TypeScript"]
+    "skills": ["React", "Node.js", "TypeScript"],
+    "social": {
+      "github": "https://github.com/member1",
+      "linkedin": "https://linkedin.com/in/member1",
+      "email": "member1@devsquad.com"
+    }
   },
   {
     "id": 2,
@@ -13,7 +18,12 @@
     "role": "UI/UX Designer",
     "image": "/pfp.jpg",
     "bio": "Creating beautiful and intuitive user experiences that delight users.",
-    "skills": ["Figma", "Adobe XD", "User Research"]
+    "skills": ["Figma", "Adobe XD", "User Research"],
+    "social": {
+      "github": "https://github.com/member2",
+      "linkedin": "https://linkedin.com/in/member2",
+      "email": "member2@devsquad.com"
+    }
   },
   {
     "id": 3,
@@ -21,7 +31,12 @@
     "role": "Backend Engineer",
     "image": "/pfp.jpg",
     "bio": "Specializing in robust server architectures and database optimization.",
-    "skills": ["Python", "PostgreSQL", "AWS"]
+    "skills": ["Python", "PostgreSQL", "AWS"],
+    "social": {
+      "github": "https://github.com/member3",
+      "linkedin": "https://linkedin.com/in/member3",
+      "email": "member3@devsquad.com"
+    }
   },
   {
     "id": 4,
@@ -29,15 +44,25 @@
     "role": "Frontend Developer",
     "image": "/pfp.jpg",
     "bio": "Crafting pixel-perfect interfaces with attention to detail and performance.",
-    "skills": ["React", "CSS", "Animation"]
-  }, 
+    "skills": ["React", "CSS", "Animation"],
+    "social": {
+      "github": "https://github.com/member4",
+      "linkedin": "https://linkedin.com/in/member4",
+      "email": "member4@devsquad.com"
+    }
+  },
   {
     "id": 5,
     "name": "Member 5",
     "role": "DevOps Engineer",
     "image": "/pfp.jpg",
     "bio": "Ensuring smooth deployment pipelines and infrastructure reliability.",
-    "skills": ["Docker", "Kubernetes", "CI/CD"]
+    "skills": ["Docker", "Kubernetes", "CI/CD"],
+    "social": {
+      "github": "https://github.com/member5",
+      "linkedin": "https://linkedin.com/in/member5",
+      "email": "member5@devsquad.com"
+    }
   },
   {
     "id": 6,
@@ -45,7 +70,12 @@
     "role": "Data Scientist",
     "image": "/pfp.jpg",
     "bio": "Turning data into actionable insights through advanced analytics.",
-    "skills": ["Python", "Machine Learning", "Data Visualization"]
+    "skills": ["Python", "Machine Learning", "Data Visualization"],
+    "social": {
+      "github": "https://github.com/member6",
+      "linkedin": "https://linkedin.com/in/member6",
+      "email": "member6@devsquad.com"
+    }
   },
   {
     "id": 7,
@@ -53,7 +83,12 @@
     "role": "Project Manager",
     "image": "/pfp.jpg",
     "bio": "Leading teams to deliver projects on time and within scope.",
-    "skills": ["Agile", "Scrum", "Communication"]
+    "skills": ["Agile", "Scrum", "Communication"],
+    "social": {
+      "github": "https://github.com/member7",
+      "linkedin": "https://linkedin.com/in/member7",
+      "email": "member7@devsquad.com"
+    }
   },
   {
     "id": 8,
@@ -61,6 +96,11 @@
     "role": "Quality Assurance Engineer",
     "image": "/pfp.jpg",
     "bio": "Ensuring software quality through rigorous testing and automation.",
-    "skills": ["Selenium", "Jest", "Test Automation"]
+    "skills": ["Selenium", "Jest", "Test Automation"],
+    "social": {
+      "github": "https://github.com/member8",
+      "linkedin": "https://linkedin.com/in/member8",
+      "email": "member8@devsquad.com"
+    }
   }
 ]

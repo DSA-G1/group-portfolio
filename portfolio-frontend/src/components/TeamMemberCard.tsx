@@ -1,3 +1,5 @@
+import SocialLinks from "./SocialLinks";
+
 interface TeamMember {
   id: number;
   name: string;
@@ -5,6 +7,11 @@ interface TeamMember {
   image: string;
   bio: string;
   skills: string[];
+  social?: {
+    github?: string;
+    linkedin?: string;
+    email?: string;
+  };
 }
 
 interface TeamMemberCardProps {
@@ -24,14 +31,21 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
           <div className="text-center">
             <h3 className="font-cubic text-xl text-foreground mb-2">{member.name}</h3>
             <p className="font-frankfurter text-sm text-foreground mb-3">{member.role}</p>
-            <p className="font-frankfurter text-xs text-foreground/90 mb-3">{member.bio}</p>
-            <div className="flex flex-wrap gap-2 justify-center">
+            <p className="font-frankfurter text-xs text-foreground/90 mb-4">{member.bio}</p>
+            <div className="flex flex-wrap gap-2 justify-center mb-4">
               {member.skills.map((skill, index) => (
                 <span key={index} className="px-2 py-1 bg-accent text-accent-foreground rounded-full text-xs font-frankfurter">
                   {skill}
                 </span>
               ))}
             </div>
+            {member.social && (
+              <SocialLinks
+                github={member.social.github}
+                linkedin={member.social.linkedin}
+                email={member.social.email}
+              />
+            )}
           </div>
         </div>
       </div>

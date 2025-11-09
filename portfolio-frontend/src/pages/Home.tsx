@@ -38,7 +38,7 @@ const Home = () => {
               variant="outline"
               className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-frankfurter text-lg px-8 py-6"
             >
-              <NavLink to="/contact">Get in Touch</NavLink>
+              <a href="mailto:info@devsquad.com">Get in Touch</a>
             </Button>
           </div>
         </div>
@@ -87,7 +87,7 @@ const Home = () => {
             size="lg"
             className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter text-lg px-12 py-7"
           >
-            <NavLink to="/contact">Start a Project</NavLink>
+            <a href="mailto:info@devsquad.com">Start a Project</a>
           </Button>
         </div>
       </section>

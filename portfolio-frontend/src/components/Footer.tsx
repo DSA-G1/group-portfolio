@@ -30,9 +30,9 @@ const Footer = () => {
               <NavLink to="/works" className="font-frankfurter text-foreground hover:text-accent transition-colors">
                 Works
               </NavLink>
-              <NavLink to="/contact" className="font-frankfurter text-foreground hover:text-accent transition-colors">
+             {/*<NavLink to="/contact" className="font-frankfurter text-foreground hover:text-accent transition-colors">
                 Contact
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
 
