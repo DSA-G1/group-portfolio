@@ -79,15 +79,15 @@
   },
   {
     "id": 7,
-    "name": "Chariz Santos",
+    "name": "Chariz Kyle Santos",
     "role": "UI/UX and Frontend Lead",
     "image": "/chariz.jpg",
-    "bio": "Leading teams to deliver projects on time and within scope.",
-    "skills": ["Agile", "Scrum", "Communication"],
+    "bio": "Chariz Kyle Santos is the team’s Lead UI/UX Designer and Front-End Developer, responsible for creating easy-to-use and attractive interfaces while making sure the website runs smoothly. With a keen eye for design, Chariz bridges creativity and functionality to bring the team’s ideas to life on the web.",
+    "skills": ["Python", "HTML", "CSS", "Canva"],
     "social": {
-      "github": "https://github.com/member7",
-      "linkedin": "https://linkedin.com/in/member7",
-      "email": "member7@devsquad.com"
+      "github": "https://github.com/charizkyle",
+      "linkedin": "https://www.linkedin.com/in/charizkylesantos/",
+      "email": "santoscharizkyle@gmail.com"
     }
   },
   {
