@@ -6,7 +6,7 @@
     "image": "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=600&h=400&fit=crop",
     "description": "A data structure project implementing queue and dequeue functionalities.",
     "technologies": ["Python"],
-    "link": ""
+  "link": "/works/queue"
   },
   {
     "id": 2,

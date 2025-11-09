@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Member 1",
+    "name": "Gillian Punzal",
     "role": "Full Stack Developer",
     "image": "/pfp.jpg",
     "bio": "Passionate about building scalable web applications with modern technologies.",
@@ -14,9 +14,9 @@
   },
   {
     "id": 2,
-    "name": "Member 2",
-    "role": "UI/UX Designer",
-    "image": "/pfp.jpg",
+    "name": "Heidilyn Caling",
+    "role": "UI/UX Designer and Content Manager",
+    "image": "/heidi.jpeg",
     "bio": "Creating beautiful and intuitive user experiences that delight users.",
     "skills": ["Figma", "Adobe XD", "User Research"],
     "social": {
@@ -27,9 +27,9 @@
   },
   {
     "id": 3,
-    "name": "Member 3",
-    "role": "Backend Engineer",
-    "image": "/pfp.jpg",
+    "name": "Eunice Reyes",
+    "role": "Documentation lead",
+    "image": "/eunice.jpg",
     "bio": "Specializing in robust server architectures and database optimization.",
     "skills": ["Python", "PostgreSQL", "AWS"],
     "social": {
@@ -40,9 +40,9 @@
   },
   {
     "id": 4,
-    "name": "Member 4",
+    "name": "Iza Marie C. Tomacruz",
     "role": "Frontend Developer",
-    "image": "/pfp.jpg",
+    "image": "/Iza.jpeg",
     "bio": "Crafting pixel-perfect interfaces with attention to detail and performance.",
     "skills": ["React", "CSS", "Animation"],
     "social": {
@@ -53,9 +53,9 @@
   },
   {
     "id": 5,
-    "name": "Member 5",
-    "role": "DevOps Engineer",
-    "image": "/pfp.jpg",
+    "name": "Rasmine Blas",
+    "role": "Documentation lead and Content Manager",
+    "image": "/rasmine.jpeg",
     "bio": "Ensuring smooth deployment pipelines and infrastructure reliability.",
     "skills": ["Docker", "Kubernetes", "CI/CD"],
     "social": {
@@ -66,9 +66,9 @@
   },
   {
     "id": 6,
-    "name": "Member 6",
-    "role": "Data Scientist",
-    "image": "/pfp.jpg",
+    "name": "Leonard Galivo",
+    "role": "Deployment Specialist",
+    "image": "/Leonard.jpg",
     "bio": "Turning data into actionable insights through advanced analytics.",
     "skills": ["Python", "Machine Learning", "Data Visualization"],
     "social": {
@@ -79,9 +79,9 @@
   },
   {
     "id": 7,
-    "name": "Member 7",
-    "role": "Project Manager",
-    "image": "/pfp.jpg",
+    "name": "Chariz Santos",
+    "role": "UI/UX and Frontend Lead",
+    "image": "/chariz.jpg",
     "bio": "Leading teams to deliver projects on time and within scope.",
     "skills": ["Agile", "Scrum", "Communication"],
     "social": {
@@ -92,9 +92,9 @@
   },
   {
     "id": 8,
-    "name": "Member 8",
-    "role": "Quality Assurance Engineer",
-    "image": "/pfp.jpg",
+    "name": "Erika Villamin",
+    "role": "Frontend Developer",
+    "image": "/erika.jpg",
     "bio": "Ensuring software quality through rigorous testing and automation.",
     "skills": ["Selenium", "Jest", "Test Automation"],
     "social": {
