@@ -17,12 +17,12 @@
     "name": "Heidilyn Caling",
     "role": "UI/UX Designer and Content Manager",
     "image": "/heidi.jpeg",
-    "bio": "Creating beautiful and intuitive user experiences that delight users.",
-    "skills": ["Figma", "Adobe XD", "User Research"],
+    "bio": "A passionate member of DevSquad with experience in UI/UX design, basic Python programming, and quality assurance testing. Dedicated to creating user-friendly interfaces, ensuring software quality, and continuously learning to enhance both design and coding skills.",
+    "skills": ["GitHub", "Python", "HTML"],
     "social": {
-      "github": "https://github.com/member2",
+      "github": "https://github.com/heidilyncaling",
       "linkedin": "https://linkedin.com/in/member2",
-      "email": "member2@devsquad.com"
+      "email": "calingheidilyn@gmail.com"
     }
   },
   {
@@ -30,12 +30,12 @@
     "name": "Eunice Reyes",
     "role": "Documentation lead",
     "image": "/eunice.jpg",
-    "bio": "Specializing in robust server architectures and database optimization.",
-    "skills": ["Python", "PostgreSQL", "AWS"],
+    "bio": "A beginner programmer who is open to exploring new platforms and languages, and has an interest in developing simple games and creating websites tailored to personal interests.",
+    "skills": ["Python", "CSS", "HTML", "GitHub"],
     "social": {
-      "github": "https://github.com/member3",
+      "github": "https://github.com/Babbsrey22",
       "linkedin": "https://linkedin.com/in/member3",
-      "email": "member3@devsquad.com"
+      "email": "reyes05eunice@gmail.com"
     }
   },
   {
@@ -43,12 +43,12 @@
     "name": "Iza Marie C. Tomacruz",
     "role": "Frontend Developer",
     "image": "/Iza.jpeg",
-    "bio": "Crafting pixel-perfect interfaces with attention to detail and performance.",
-    "skills": ["React", "CSS", "Animation"],
+    "bio": "Her interests include technology, programming, and embedded systems, and she has practical experience with Python, HTML, CSS, and GitHub. She aims to strengthen my skills in both hardware and software development through academic and hands-on projects.",
+    "skills": ["Python", "CSS", "HTML", "GitHub"],
     "social": {
-      "github": "https://github.com/member4",
-      "linkedin": "https://linkedin.com/in/member4",
-      "email": "member4@devsquad.com"
+      "github": "https://github.com/IzaTomacruz",
+      "linkedin": "https://www.linkedin.com/in/iza-marie-tomacruz-57004330b",
+      "email": "izamarietomacruz0@gmail.com"
     }
   },
   {
@@ -56,12 +56,12 @@
     "name": "Rasmine Blas",
     "role": "Documentation lead and Content Manager",
     "image": "/rasmine.jpeg",
-    "bio": "Ensuring smooth deployment pipelines and infrastructure reliability.",
-    "skills": ["Docker", "Kubernetes", "CI/CD"],
+    "bio": "I am a Computer Engineering student with a strong foundation in coding and a deep passion for technology. I am committed to further developing my technical skills and applying my knowledge to create efficient and innovative solutions in the field of computing.",
+    "skills": ["Python", "VSC"],
     "social": {
-      "github": "https://github.com/member5",
-      "linkedin": "https://linkedin.com/in/member5",
-      "email": "member5@devsquad.com"
+      "github": "https://github.com/rasmine-b",
+      "linkedin": "https://www.linkedin.com/in/rasmineblas",
+      "email": "blasrasmine@gmail.com"
     }
   },
   {
@@ -69,12 +69,12 @@
     "name": "Leonard Galivo",
     "role": "Deployment Specialist",
     "image": "/Leonard.jpg",
-    "bio": "Turning data into actionable insights through advanced analytics.",
-    "skills": ["Python", "Machine Learning", "Data Visualization"],
+    "bio": "Just another programmer who talks to his computer more than people, and somehow, it listens.",
+    "skills": ["Python", "Tkinter", "Canva", "GitHub"],
     "social": {
-      "github": "https://github.com/member6",
-      "linkedin": "https://linkedin.com/in/member6",
-      "email": "member6@devsquad.com"
+      "github": "https://github.com/leonardmarkgalivo",
+      "linkedin": "https://www.linkedin.com/in/leonard-mark-galivo-05343b333",
+      "email": "leonardmarkgalivo@gmail.com"
     }
   },
   {
@@ -92,15 +92,15 @@
   },
   {
     "id": 8,
-    "name": "Erika Villamin",
+    "name": "Erika Mae Villamin",
     "role": "Frontend Developer",
     "image": "/erika.jpg",
-    "bio": "Ensuring software quality through rigorous testing and automation.",
-    "skills": ["Selenium", "Jest", "Test Automation"],
+    "bio": "A motivated student who loves coding, making creative web projects, and learning new technologies",
+    "skills": ["Python", "HTML", "GitHub"],
     "social": {
-      "github": "https://github.com/member8",
-      "linkedin": "https://linkedin.com/in/member8",
-      "email": "member8@devsquad.com"
+      "github": "https://github.com/erikavillamin",
+      "linkedin": "https://www.linkedin.com/in/erika-mae-villamin-5b23791b3",
+      "email": "erikamaevillamin@gmail.com"
     }
   }
 ]
