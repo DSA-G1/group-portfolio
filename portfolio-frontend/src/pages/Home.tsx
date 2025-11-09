@@ -1,0 +1,100 @@
+import { NavLink } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import TeamMemberCard from "@/components/TeamMemberCard";
+import teamData from "@/data/team.json";
+import { ArrowRight } from "lucide-react";
+
+const Home = () => {
+  const featuredTeam = teamData.slice(0, 3);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="font-frankfurter text-4xl md:text-6xl text-foreground mb-4">
+            We Are
+          </h1>
+          <h2 className="font-cubic text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+            <span className="text-foreground">DEV</span>
+            <span className="text-primary">SQUAD</span>
+          </h2>
+          <p className="font-frankfurter text-xl md:text-2xl text-foreground mb-12 max-w-2xl mx-auto">
+            Empowering ideas through code and creativity
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              asChild
+              className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter text-lg px-8 py-6"
+            >
+              <NavLink to="/works">View Our Work</NavLink>
+            </Button>
+            <Button 
+              asChild
+              variant="outline"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-frankfurter text-lg px-8 py-6"
+            >
+              <NavLink to="/contact">Get in Touch</NavLink>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Preview Section */}
+      <section className="py-20 px-4 bg-muted">
+        <div className="container mx-auto">
+          <h2 className="font-cubic text-3xl md:text-5xl text-center mb-4">
+            <span className="text-foreground">Meet Our </span>
+            <span className="text-primary">Amazing Team</span>
+          </h2>
+          <p className="font-frankfurter text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Talented individuals working together to create extraordinary digital experiences
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {featuredTeam.map((member) => (
+              <TeamMemberCard key={member.id} member={member} />
+            ))}
+          </div>
+          <div className="text-center">
+            <Button 
+              asChild
+              className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter text-lg px-8 py-6"
+            >
+              <NavLink to="/about" className="flex items-center gap-2">
+                Meet the Full Team <ArrowRight size={20} />
+              </NavLink>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h2 className="font-cubic text-4xl md:text-6xl mb-6">
+            <span className="text-foreground">READY TO WORK </span>
+            <span className="text-primary">TOGETHER</span>
+          </h2>
+          <p className="font-frankfurter text-lg md:text-xl text-primary mb-8 max-w-2xl mx-auto">
+            Let's create something amazing together! Whether you have a project in mind or just want to chat, we'd love to hear from you.
+          </p>
+          <Button 
+            asChild
+            size="lg"
+            className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter text-lg px-12 py-7"
+          >
+            <NavLink to="/contact">Start a Project</NavLink>
+          </Button>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Home;

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Queue and Dequeue",
+    "category": "Data Structures and Algorithms",
+    "image": "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=600&h=400&fit=crop",
+    "description": "A data structure project implementing queue and dequeue functionalities.",
+    "technologies": ["Python"],
+    "link": ""
+  },
+  {
+    "id": 2,
+    "title": "Coming Soon",
+    "category": "",
+    "image": "https://www.shutterstock.com/image-vector/coming-soon-on-dark-background-600nw-2364512887.jpg",
+    "description": "",
+    "technologies": [""],
+    "link": ""
+  },
+  {
+    "id": 3,
+    "title": "Coming Soon",
+    "category": "AI/ML",
+    "image": "https://www.shutterstock.com/image-vector/coming-soon-on-dark-background-600nw-2364512887.jpg",
+    "description": "",
+    "technologies": [""],
+    "link": ""
+  }
+]

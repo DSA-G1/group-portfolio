@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Member 1",
+    "role": "Full Stack Developer",
+    "image": "/pfp.jpg",
+    "bio": "Passionate about building scalable web applications with modern technologies.",
+    "skills": ["React", "Node.js", "TypeScript"]
+  },
+  {
+    "id": 2,
+    "name": "Member 2",
+    "role": "UI/UX Designer",
+    "image": "/pfp.jpg",
+    "bio": "Creating beautiful and intuitive user experiences that delight users.",
+    "skills": ["Figma", "Adobe XD", "User Research"]
+  },
+  {
+    "id": 3,
+    "name": "Member 3",
+    "role": "Backend Engineer",
+    "image": "/pfp.jpg",
+    "bio": "Specializing in robust server architectures and database optimization.",
+    "skills": ["Python", "PostgreSQL", "AWS"]
+  },
+  {
+    "id": 4,
+    "name": "Member 4",
+    "role": "Frontend Developer",
+    "image": "/pfp.jpg",
+    "bio": "Crafting pixel-perfect interfaces with attention to detail and performance.",
+    "skills": ["React", "CSS", "Animation"]
+  }, 
+  {
+    "id": 5,
+    "name": "Member 5",
+    "role": "DevOps Engineer",
+    "image": "/pfp.jpg",
+    "bio": "Ensuring smooth deployment pipelines and infrastructure reliability.",
+    "skills": ["Docker", "Kubernetes", "CI/CD"]
+  },
+  {
+    "id": 6,
+    "name": "Member 6",
+    "role": "Data Scientist",
+    "image": "/pfp.jpg",
+    "bio": "Turning data into actionable insights through advanced analytics.",
+    "skills": ["Python", "Machine Learning", "Data Visualization"]
+  },
+  {
+    "id": 7,
+    "name": "Member 7",
+    "role": "Project Manager",
+    "image": "/pfp.jpg",
+    "bio": "Leading teams to deliver projects on time and within scope.",
+    "skills": ["Agile", "Scrum", "Communication"]
+  },
+  {
+    "id": 8,
+    "name": "Member 8",
+    "role": "Quality Assurance Engineer",
+    "image": "/pfp.jpg",
+    "bio": "Ensuring software quality through rigorous testing and automation.",
+    "skills": ["Selenium", "Jest", "Test Automation"]
+  }
+]
