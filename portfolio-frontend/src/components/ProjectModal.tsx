@@ -28,7 +28,7 @@ const ProjectModal = ({ project, open, onOpenChange }: ProjectModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-h-[90vh] overflow-y-auto w-[90%] md:w-[70%] max-w-none">
         <DialogHeader>
           <DialogTitle className="font-cubic text-2xl text-foreground">{project.title}</DialogTitle>
         </DialogHeader>
@@ -42,12 +42,12 @@ const ProjectModal = ({ project, open, onOpenChange }: ProjectModalProps) => {
           <p className="font-frankfurter text-foreground">{project.description}</p>
           
           <div>
-            <h4 className="font-cubic text-lg text-foreground mb-3">Technologies Used</h4>
+            <h3 className="font-cubic text-lg text-foreground mb-2">Technologies Used</h3>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech, index) => (
-                <span 
+                <span
                   key={index}
-                  className="px-3 py-1 bg-primary text-primary-foreground rounded-full text-sm font-frankfurter"
+                  className="font-frankfurter bg-primary/10 text-primary px-3 py-1 rounded-full text-sm"
                 >
                   {tech}
                 </span>
@@ -55,13 +55,12 @@ const ProjectModal = ({ project, open, onOpenChange }: ProjectModalProps) => {
             </div>
           </div>
 
-          <Button 
-            asChild
+          <Button
             className="w-full bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter"
+            onClick={() => window.open(project.link, "_blank")}
           >
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-              Visit Project <ExternalLink size={18} />
-            </a>
+            <ExternalLink className="mr-2" size={20} />
+            View Project
           </Button>
         </div>
       </DialogContent>
