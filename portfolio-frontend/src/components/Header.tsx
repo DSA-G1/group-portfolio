@@ -13,8 +13,9 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-primary">
-      <nav className="container mx-auto px-4 py-4">
+    // Header is fixed but visually the nav will be a centered, rounded floating bar
+    <header className="fixed top-4 left-0 right-0 z-50 pointer-events-none">
+      <nav className="mx-4 sm:mx-6 md:mx-auto max-w-6xl pointer-events-auto bg-primary/95 backdrop-blur-sm shadow-lg rounded-full px-4 py-3">
         <div className="flex items-center justify-between">
           <NavLink to="/" className="font-cubic text-2xl md:text-3xl font-bold text-foreground hover:text-accent transition-colors">
             DEVSQUAD
