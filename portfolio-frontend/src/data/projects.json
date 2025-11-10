@@ -12,7 +12,7 @@
     "id": 2,
     "title": "Coming Soon",
     "category": "",
-    "image": "https://www.shutterstock.com/image-vector/coming-soon-on-dark-background-600nw-2364512887.jpg",
+    "image": "/public/projects/coming-soon.png",
     "description": "",
     "technologies": [""],
     "link": ""
@@ -20,8 +20,8 @@
   {
     "id": 3,
     "title": "Coming Soon",
-    "category": "AI/ML",
-    "image": "https://www.shutterstock.com/image-vector/coming-soon-on-dark-background-600nw-2364512887.jpg",
+    "category": "",
+    "image": "/public/projects/coming-soon.png",
     "description": "",
     "technologies": [""],
     "link": ""

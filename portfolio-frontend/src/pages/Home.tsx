@@ -22,7 +22,7 @@ const Home = () => {
           <h1 className="font-body text-4xl md:text-6xl text-foreground mb-4">
             We Are
           </h1>
-          <h2 className="font-header text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+          <h2 className="font-header text-6xl md:text-8xl lg:text-[96px] leading-tight font-bold mb-6">
             <span className="text-foreground">DEV</span>
             <span className="text-primary">SQUAD</span>
           </h2>
@@ -78,10 +78,13 @@ const Home = () => {
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
-          <h2 className="font-header text-4xl md:text-6xl mb-6">
-            <span className="text-foreground">READY TO WORK </span>
-            <span className="text-primary">TOGETHER</span>
-          </h2>
+          {/* Header image. Place ready.png in public/ and reference as '/ready.png' */}
+          <img
+            src="/ready.png"
+            alt="Ready to Wor"
+            className="mx-auto mb-4 w-64 md:w-96 lg:w-[700px] object-contain"
+            loading="eager"
+          />
           <p className="font-body text-lg md:text-xl text-primary mb-8 max-w-2xl mx-auto">
             Let's create something amazing together! Whether you have a project in mind or just want to chat, we'd love to hear from you.
           </p>
