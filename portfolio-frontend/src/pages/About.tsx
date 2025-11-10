@@ -17,10 +17,10 @@ const About = () => {
           </h1>
           <div className="max-w-4xl mx-auto">
             <p className="font-frankfurter text-lg text-foreground mb-6 text-center">
-              We are the DevSquad, a group of aspiringComputer Engineers from BSCpE 2-2
-              driven by curiosity, teamwork, and a passion forinnovation. Our mission is to design
+              We are the DevSquad, a group of aspiring Computer Engineers from BSCpE 2-2
+              driven by curiosity, teamwork, and a passion for innovation. Our mission is to design
               and develop creative tech projects that challenge our skills and inspire others. We
-              focus on projects involving software development, hardware integration, andUI/UX 
+              focus on projects involving software development, hardware integration, and UI/UX 
               design—combining logic and creativity to bring ideas to life. 
             </p>
           </div>
