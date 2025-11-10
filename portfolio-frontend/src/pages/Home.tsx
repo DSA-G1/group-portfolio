@@ -23,20 +23,20 @@ const Home = () => {
             <span className="text-foreground">DEV</span>
             <span className="text-primary">SQUAD</span>
           </h2>
-          <p className="font-frankfurter text-xl md:text-2xl text-foreground mb-12 max-w-2xl mx-auto">
+          <p className="font-body text-xl md:text-2xl text-foreground mb-12 max-w-2xl mx-auto">
             Empowering ideas through code and creativity
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               asChild
-              className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter text-lg px-8 py-6"
+              className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-body text-lg px-8 py-6"
             >
               <NavLink to="/works">View Our Work</NavLink>
             </Button>
             <Button 
               asChild
               variant="outline"
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-frankfurter text-lg px-8 py-6"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-body text-lg px-8 py-6"
             >
               <a href="mailto:info@devsquad.com">Get in Touch</a>
             </Button>
@@ -51,7 +51,7 @@ const Home = () => {
             <span className="text-foreground">MEET OUR </span>
             <span className="text-primary">AMAZING TEAM</span>
           </h2>
-          <p className="font-frankfurter text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="font-body text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Talented individuals working together to create extraordinary digital experiences
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -62,7 +62,7 @@ const Home = () => {
           <div className="text-center">
             <Button 
               asChild
-              className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter text-lg px-8 py-6"
+              className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-body text-lg px-8 py-6"
             >
               <NavLink to="/about" className="flex items-center gap-2">
                 Meet the Full Team <ArrowRight size={20} />
@@ -75,17 +75,17 @@ const Home = () => {
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
-          <h2 className="font-cubic text-4xl md:text-6xl mb-6">
+          <h2 className="font-header text-4xl md:text-6xl mb-6">
             <span className="text-foreground">READY TO WORK </span>
             <span className="text-primary">TOGETHER</span>
           </h2>
-          <p className="font-frankfurter text-lg md:text-xl text-primary mb-8 max-w-2xl mx-auto">
+          <p className="font-body text-lg md:text-xl text-primary mb-8 max-w-2xl mx-auto">
             Let's create something amazing together! Whether you have a project in mind or just want to chat, we'd love to hear from you.
           </p>
           <Button 
             asChild
             size="lg"
-            className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter text-lg px-12 py-7"
+            className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-body text-lg px-12 py-7"
           >
             <a href="mailto:info@devsquad.com">Start a Project</a>
           </Button>
