@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Gillian Punzal",
     "role": "Full Stack Developer",
-    "image": "/pfp.jpg",
+    "image": "/profile/pfp.jpg",
     "bio": "Passionate about building scalable web applications with modern technologies.",
     "skills": ["React", "Node.js", "TypeScript"],
     "social": {
@@ -16,7 +16,7 @@
     "id": 2,
     "name": "Heidilyn Caling",
     "role": "UI/UX Designer and Content Manager",
-    "image": "/heidi.jpeg",
+    "image": "/profile/heidi.jpeg",
     "bio": "A passionate member of DevSquad with experience in UI/UX design, basic Python programming, and quality assurance testing. Dedicated to creating user-friendly interfaces, ensuring software quality, and continuously learning to enhance both design and coding skills.",
     "skills": ["GitHub", "Python", "HTML"],
     "social": {
@@ -29,7 +29,7 @@
     "id": 3,
     "name": "Eunice Reyes",
     "role": "Documentation lead",
-    "image": "/eunice.jpg",
+    "image": "/profile/eunice.jpg",
     "bio": "A beginner programmer who is open to exploring new platforms and languages, and has an interest in developing simple games and creating websites tailored to personal interests.",
     "skills": ["Python", "CSS", "HTML", "GitHub"],
     "social": {
@@ -42,7 +42,7 @@
     "id": 4,
     "name": "Iza Marie C. Tomacruz",
     "role": "Frontend Developer",
-    "image": "/Iza.jpeg",
+    "image": "/profile/Iza.jpeg",
     "bio": "Her interests include technology, programming, and embedded systems, and she has practical experience with Python, HTML, CSS, and GitHub. She aims to strengthen my skills in both hardware and software development through academic and hands-on projects.",
     "skills": ["Python", "CSS", "HTML", "GitHub"],
     "social": {
@@ -55,7 +55,7 @@
     "id": 5,
     "name": "Rasmine Blas",
     "role": "Documentation lead and Content Manager",
-    "image": "/rasmine.jpeg",
+    "image": "/profile/rasmine.jpeg",
     "bio": "I am a Computer Engineering student with a strong foundation in coding and a deep passion for technology. I am committed to further developing my technical skills and applying my knowledge to create efficient and innovative solutions in the field of computing.",
     "skills": ["Python", "VSC"],
     "social": {
@@ -68,7 +68,7 @@
     "id": 6,
     "name": "Leonard Galivo",
     "role": "Deployment Specialist",
-    "image": "/Leonard.jpg",
+    "image": "/profile/Leonard.jpg",
     "bio": "Just another programmer who talks to his computer more than people, and somehow, it listens.",
     "skills": ["Python", "Tkinter", "Canva", "GitHub"],
     "social": {
@@ -81,7 +81,7 @@
     "id": 7,
     "name": "Chariz Kyle Santos",
     "role": "UI/UX and Frontend Lead",
-    "image": "/chariz.jpg",
+    "image": "/profile/chariz.jpg",
     "bio": "Chariz Kyle Santos is the team’s Lead UI/UX Designer and Front-End Developer, responsible for creating easy-to-use and attractive interfaces while making sure the website runs smoothly. With a keen eye for design, Chariz bridges creativity and functionality to bring the team’s ideas to life on the web.",
     "skills": ["Python", "HTML", "CSS", "Canva"],
     "social": {
@@ -94,7 +94,7 @@
     "id": 8,
     "name": "Erika Mae Villamin",
     "role": "Frontend Developer",
-    "image": "/erika.jpg",
+    "image": "/profile/erika.jpg",
     "bio": "A motivated student who loves coding, making creative web projects, and learning new technologies",
     "skills": ["Python", "HTML", "GitHub"],
     "social": {

@@ -17,13 +17,11 @@ const About = () => {
           </h1>
           <div className="max-w-4xl mx-auto">
             <p className="font-frankfurter text-lg text-foreground mb-6 text-center">
-              We are a passionate team of developers, designers, and creators who believe in the power of technology to transform ideas into reality. Our mission is to build innovative digital solutions that make a difference.
-            </p>
-            <p className="font-frankfurter text-lg text-foreground mb-6 text-center">
-              With expertise spanning across web development, mobile apps, AI integration, and UI/UX design, we bring a holistic approach to every project. We don't just write code – we craft experiences that resonate with users and drive results.
-            </p>
-            <p className="font-frankfurter text-lg text-foreground text-center">
-              Our collaborative approach ensures that every voice is heard, every idea is explored, and every solution is crafted with precision and care. Together, we turn your vision into a digital masterpiece.
+              We are the DevSquad, a group of aspiringComputer Engineers from BSCpE 2-2
+              driven by curiosity, teamwork, and a passion forinnovation. Our mission is to design
+              and develop creative tech projects that challenge our skills and inspire others. We
+              focus on projects involving software development, hardware integration, andUI/UX 
+              design—combining logic and creativity to bring ideas to life. 
             </p>
           </div>
         </div>

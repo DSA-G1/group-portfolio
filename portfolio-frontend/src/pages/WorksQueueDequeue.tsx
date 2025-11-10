@@ -59,7 +59,16 @@ const WorksQueueDequeue = () => {
                 className="border rounded px-4 py-2 text-lg text-accent-foreground"
               />
               <Button className="bg-primary hover:bg-accent text-primary-foreground font-frankfurter px-6 py-2">
-                Deque
+                Enqueue
+              </Button>
+              <Button className="bg-primary hover:bg-accent text-primary-foreground font-frankfurter px-6 py-2">
+                Dequeue
+              </Button>
+              <Button  className="bg-accent hover:bg-primary text-accent-foreground font-frankfurter px-6 py-2">
+                Enqueue Head
+              </Button>
+              <Button  className="bg-accent hover:bg-primary text-accent-foreground font-frankfurter px-6 py-2">
+                Dequeue Tail
               </Button>
             </div>
 
