@@ -37,10 +37,10 @@ const About = () => {
             <span className="text-foreground">OUR </span>
             <span className="text-primary">TEAM</span>
           </h2>
-          <p className="font-body text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Meet the talented individuals who make the magic happen
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(360px,1fr))] justify-center">
             {teamData.map((member) => (
               <TeamMemberCard key={member.id} member={member} />
             ))}

@@ -1,24 +1,24 @@
 [
   {
     "id": 1,
-    "name": "Gillian Punzal",
-    "role": "Full Stack Developer",
-    "image": "/profile/pfp.jpg",
+    "name": "Gillian R. Punzal",
+    "role": "Project Manager and Backend Developer",
+    "image": "/pfp.jpg",
     "bio": "Passionate about building scalable web applications with modern technologies.",
-    "skills": ["React", "Node.js", "TypeScript"],
+    "skills": ["React", "Node.js", "TypeScript", "Javascript", "Figma"],
     "social": {
-      "github": "https://github.com/member1",
-      "linkedin": "https://linkedin.com/in/member1",
-      "email": "member1@devsquad.com"
+      "github": "https://github.com/theholyguacamolee",
+      "linkedin": "https://www.linkedin.com/in/gillianrpunzal/",
+      "email": "gilrpunzal@gmail.com"
     }
   },
   {
     "id": 2,
-    "name": "Heidilyn Caling",
-    "role": "UI/UX Designer and Content Manager",
+    "name": "Heidilyn L. Caling",
+    "role": "UI/UX Designer, QA Tester and Content Manager",
     "image": "/profile/heidi.jpeg",
     "bio": "A passionate member of DevSquad with experience in UI/UX design, basic Python programming, and quality assurance testing. Dedicated to creating user-friendly interfaces, ensuring software quality, and continuously learning to enhance both design and coding skills.",
-    "skills": ["GitHub", "Python", "HTML"],
+    "skills": ["Python", "HTML"],
     "social": {
       "github": "https://github.com/heidilyncaling",
       "linkedin": "https://linkedin.com/in/member2",
@@ -27,11 +27,11 @@
   },
   {
     "id": 3,
-    "name": "Eunice Reyes",
-    "role": "Documentation lead",
+    "name": "Eunice Q. Reyes",
+    "role": "Documentation Lead, QA Tester and Content Manager",
     "image": "/profile/eunice.jpg",
     "bio": "A beginner programmer who is open to exploring new platforms and languages, and has an interest in developing simple games and creating websites tailored to personal interests.",
-    "skills": ["Python", "CSS", "HTML", "GitHub"],
+    "skills": ["Python", "CSS", "HTML"],
     "social": {
       "github": "https://github.com/Babbsrey22",
       "linkedin": "https://www.linkedin.com/in/eunice-reyes-27777a36a/",
@@ -43,8 +43,8 @@
     "name": "Iza Marie C. Tomacruz",
     "role": "Frontend Developer",
     "image": "/profile/Iza.jpeg",
-    "bio": "Her interests include technology, programming, and embedded systems, and she has practical experience with Python, HTML, CSS, and GitHub. She aims to strengthen my skills in both hardware and software development through academic and hands-on projects.",
-    "skills": ["Python", "CSS", "HTML", "GitHub"],
+    "bio": "An aspiring software developer with interests in technology, programming, and embedded systems, and has practical experience with Python, HTML, CSS, and GitHub. Aims to strengthen skills in hardware and software development through academic and hands-on projects.",
+    "skills": ["Python", "CSS", "HTML"],
     "social": {
       "github": "https://github.com/IzaTomacruz",
       "linkedin": "https://www.linkedin.com/in/iza-marie-tomacruz-57004330b",
@@ -53,11 +53,11 @@
   },
   {
     "id": 5,
-    "name": "Rasmine Blas",
-    "role": "Documentation lead and Content Manager",
+    "name": "Rasmine J. Blas",
+    "role": "Documentation Lead, QA Tester and Content Manager",
     "image": "/profile/rasmine.jpeg",
-    "bio": "I am a Computer Engineering student with a strong foundation in coding and a deep passion for technology. I am committed to further developing my technical skills and applying my knowledge to create efficient and innovative solutions in the field of computing.",
-    "skills": ["Python", "VSC"],
+    "bio": "A Computer Engineering student with a strong foundation in coding and a deep passion for technology, who is committed to further developing her technical skills and applying knowledge to create efficient and innovative solutions in the field of computing.",
+    "skills": ["Python", "VSCode"],
     "social": {
       "github": "https://github.com/rasmine-b",
       "linkedin": "https://www.linkedin.com/in/rasmineblas",
@@ -66,11 +66,11 @@
   },
   {
     "id": 6,
-    "name": "Leonard Galivo",
+    "name": "Leonard Mark D. Galivo",
     "role": "Deployment Specialist",
     "image": "/profile/Leonard.jpg",
     "bio": "Just another programmer who talks to his computer more than people, and somehow, it listens.",
-    "skills": ["Python", "Tkinter", "Canva", "GitHub"],
+    "skills": ["Python", "Tkinter", "Canva", "Flask", "React", "Figma"],
     "social": {
       "github": "https://github.com/leonardmarkgalivo",
       "linkedin": "https://www.linkedin.com/in/leonard-mark-galivo-05343b333",
@@ -79,10 +79,10 @@
   },
   {
     "id": 7,
-    "name": "Chariz Kyle Santos",
+    "name": "Chariz Kyle A. Santos",
     "role": "UI/UX and Frontend Lead",
     "image": "/profile/chariz.jpg",
-    "bio": "Chariz Kyle Santos is the team’s Lead UI/UX Designer and Front-End Developer, responsible for creating easy-to-use and attractive interfaces while making sure the website runs smoothly. With a keen eye for design, Chariz bridges creativity and functionality to bring the team’s ideas to life on the web.",
+    "bio": "Lead UI/UX Designer and Front-End Developer, responsible for creating easy-to-use and attractive interfaces while making sure the website runs smoothly. With a keen eye for design, Chariz bridges creativity and functionality to bring the team's ideas to life on the web.",
     "skills": ["Python", "HTML", "CSS", "Canva"],
     "social": {
       "github": "https://github.com/charizkyle",
@@ -92,11 +92,11 @@
   },
   {
     "id": 8,
-    "name": "Erika Mae Villamin",
+    "name": "Erika Mae I. Villamin",
     "role": "Frontend Developer",
     "image": "/profile/erika.jpg",
     "bio": "A motivated student who loves coding, making creative web projects, and learning new technologies",
-    "skills": ["Python", "HTML", "GitHub"],
+    "skills": ["Python", "HTML", "React", "VSCode"],
     "social": {
       "github": "https://github.com/erikavillamin",
       "linkedin": "https://www.linkedin.com/in/erika-mae-villamin-5b23791b3",

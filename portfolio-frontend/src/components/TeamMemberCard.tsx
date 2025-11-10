@@ -20,38 +20,68 @@ interface TeamMemberCardProps {
 
 const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
   return (
-    <div className="group relative overflow-hidden rounded-xl bg-card transition-all hover:scale-105">
-      <div className="aspect-square overflow-hidden">
-        <img
-          src={member.image}
-          alt={member.name}
-          className="h-full w-full object-cover transition-all group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6">
-          <div className="text-center">
-            <h3 className="font-cubic text-xl text-foreground mb-2">{member.name}</h3>
-            <p className="font-frankfurter text-sm text-foreground mb-3">{member.role}</p>
-            <p className="font-frankfurter text-xs text-foreground/90 mb-4">{member.bio}</p>
-            <div className="flex flex-wrap gap-2 justify-center mb-4">
+    <div className="relative overflow-hidden rounded-xl bg-card transition-all hover:scale-105">
+      <div className="p-6 md:p-8">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          {/* Avatar (rounded square) */}
+          <div className="flex-shrink-0 w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden bg-muted">
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="flex-1">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="font-cubic text-xl md:text-2xl text-foreground">{member.name}</h3>
+                <p className="font-body text-sm text-primary mt-1">{member.role}</p>
+              </div>
+            </div>
+
+            <p className="font-body text-sm text-foreground/90 mt-4 mb-4">
+              {member.bio}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mb-4">
               {member.skills.map((skill, index) => (
-                <span key={index} className="px-2 py-1 bg-accent text-accent-foreground rounded-full text-xs font-frankfurter">
+                <span key={index} className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-xs font-frankfurter">
                   {skill}
                 </span>
               ))}
             </div>
-            {member.social && (
-              <SocialLinks
-                github={member.social.github}
-                linkedin={member.social.linkedin}
-                email={member.social.email}
-              />
-            )}
+
+            <div className="flex items-center gap-4">
+              {/* Primary action - View Portfolio (if social.email or a portfolio link exists, placeholder) */}
+              <a
+                href={member.social?.github ?? '#'}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-full shadow-md"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <path d="M14 3H21V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M21 3L10 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M21 21H3V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-sm font-frankfurter">View Portfolio</span>
+              </a>
+
+              {/* Social links (icons) - clickable */}
+              {member.social && (
+                <div className="flex items-center gap-2">
+                  <SocialLinks
+                    github={member.social.github}
+                    linkedin={member.social.linkedin}
+                    email={member.social.email}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="p-4">
-        <h3 className="font-cubic text-lg text-foreground">{member.name}</h3>
-        <p className="font-frankfurter text-sm text-primary">{member.role}</p>
       </div>
     </div>
   );
