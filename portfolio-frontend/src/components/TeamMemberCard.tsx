@@ -24,7 +24,7 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
       <div className="p-6 md:p-8">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
           {/* Avatar (rounded square) */}
-          <div className="flex-shrink-0 w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden bg-muted">
+          <div className="flex-shrink-0 w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden bg-muted"> {/* Avatar pics */}
             <img
               src={member.image}
               alt={member.name}
