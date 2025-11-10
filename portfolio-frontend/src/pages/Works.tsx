@@ -21,8 +21,8 @@ const Works = () => {
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto">
           <h1 className="font-cubic text-4xl md:text-6xl text-center mb-6">
-            <span className="text-foreground">Featured </span>
-            <span className="text-primary">Projects</span>
+            <span className="text-foreground">OUR AMAZING </span>
+            <span className="text-primary">WORKS</span>
           </h1>
           <p className="font-frankfurter text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Explore our portfolio of innovative solutions and creative projects that showcase our expertise and passion for excellence.
