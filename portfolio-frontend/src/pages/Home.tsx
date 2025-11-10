@@ -16,10 +16,10 @@ const Home = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="font-frankfurter text-4xl md:text-6xl text-foreground mb-4">
+          <h1 className="font-body text-4xl md:text-6xl text-foreground mb-4">
             We Are
           </h1>
-          <h2 className="font-cubic text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+          <h2 className="font-header text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
             <span className="text-foreground">DEV</span>
             <span className="text-primary">SQUAD</span>
           </h2>
@@ -47,9 +47,9 @@ const Home = () => {
       {/* Team Preview Section */}
       <section className="py-20 px-4 bg-muted">
         <div className="container mx-auto">
-          <h2 className="font-cubic text-3xl md:text-5xl text-center mb-4">
-            <span className="text-foreground">Meet Our </span>
-            <span className="text-primary">Amazing Team</span>
+          <h2 className="font-header text-3xl md:text-5xl text-center mb-4">
+            <span className="text-foreground">MEET OUR </span>
+            <span className="text-primary">AMAZING TEAM</span>
           </h2>
           <p className="font-frankfurter text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Talented individuals working together to create extraordinary digital experiences
