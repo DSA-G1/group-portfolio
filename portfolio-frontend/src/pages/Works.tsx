@@ -15,16 +15,19 @@ const Works = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div 
+    className="min-h-screen bg-cover bg-center bg-no-repeat"
+    style={{ backgroundImage: "url('/public/background/about-page.png')"}}
+    >
       <Header />
       
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto">
-          <h1 className="font-cubic text-4xl md:text-6xl text-center mb-6">
+          <h1 className="font-header text-5xl md:text-6xl text-center mb-6">
             <span className="text-foreground">OUR AMAZING </span>
             <span className="text-primary">WORKS</span>
           </h1>
-          <p className="font-frankfurter text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="font-body text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Explore our portfolio of innovative solutions and creative projects that showcase our expertise and passion for excellence.
           </p>
           

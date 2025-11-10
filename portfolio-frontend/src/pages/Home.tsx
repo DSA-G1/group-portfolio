@@ -10,7 +10,10 @@ const Home = () => {
   const featuredTeam = teamData.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div 
+    className="min-h-screen bg-cover bg-center bg-no-repeat"
+    style={{ backgroundImage: "url('/background/home-page.png')"}}
+    >
       <Header />
       
       {/* Hero Section */}
@@ -45,7 +48,7 @@ const Home = () => {
       </section>
 
       {/* Team Preview Section */}
-      <section className="py-20 px-4 bg-muted">
+      <section className="py-20 px-4">
         <div className="container mx-auto">
           <h2 className="font-header text-3xl md:text-5xl text-center mb-4">
             <span className="text-foreground">MEET OUR </span>

@@ -95,3 +95,17 @@ All colors MUST be HSL.
     font-family: "Cubic", "Frankfurter", ui-sans-serif, system-ui;
   }
 }
+
+/* index.css */
+.hero-bg {
+  background-image: url('/background/home-page-mobile.png');
+  background-size: contain;
+  background-position: center;
+}
+@media (min-width: 768px) {
+  .hero-bg {
+    background-image: url('/background/home-page-desktop.png');
+    background-size: cover;
+    background-position: center top;
+  }
+}
