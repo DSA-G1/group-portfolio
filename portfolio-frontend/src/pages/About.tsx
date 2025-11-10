@@ -15,7 +15,7 @@ const About = () => {
       {/* About Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto">
-          <h1 className="font-header text-5xl md:text-6xl text-center mb-8">
+          <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-8">
             <span className="text-foreground">ABOUT </span>
             <span className="text-primary">DEVSQUAD</span>
           </h1>
@@ -33,7 +33,7 @@ const About = () => {
       {/* Team Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
-          <h2 className="font-header text-5xl md:text-5xl text-center mb-4">
+          <h2 className="font-header text-5xl md:text-6xl lg:text-7xl text-center mb-4">
             <span className="text-foreground">OUR </span>
             <span className="text-primary">TEAM</span>
           </h2>
@@ -51,7 +51,7 @@ const About = () => {
       {/* Values Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
-          <h2 className="font-header text-5xl md:text-5xl text-center mb-12">
+          <h2 className="font-header text-5xl md:text-6xl lg:text-7xl text-center mb-12">
             <span className="text-foreground">OUR </span>
             <span className="text-primary">VALUES</span>
           </h2>

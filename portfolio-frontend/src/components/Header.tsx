@@ -17,7 +17,7 @@ const Header = () => {
     <header className="fixed top-4 left-0 right-0 z-50 pointer-events-none">
       <nav className="mx-4 sm:mx-6 md:mx-auto max-w-6xl pointer-events-auto bg-primary/95 backdrop-blur-sm shadow-lg rounded-full px-4 py-3">
         <div className="flex items-center justify-between">
-          <NavLink to="/" className="font-cubic text-2xl md:text-3xl font-bold text-foreground hover:text-accent transition-colors">
+          <NavLink to="/" className="font-header text-3xl md:text-4xl text-foreground hover:text-accent transition-colors">
             DEVSQUAD
           </NavLink>
 
