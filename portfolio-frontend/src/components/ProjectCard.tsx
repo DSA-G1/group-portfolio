@@ -19,16 +19,19 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
   return (
     <div 
       onClick={onClick}
-      className="group cursor-pointer overflow-hidden rounded-xl bg-card transition-all hover:scale-105"
+      className="group cursor-pointer overflow-hidden rounded-[50px] bg-[#1f1131] border-2 border-white transition-all hover:scale-105 hover:shadow-lg"
     >
-      <div className="aspect-video overflow-hidden relative">
+      <div className="aspect-video overflow-hidden relative rounded-t-[50px]">
         <img
           src={project.image}
           alt={project.title}
           className="h-full w-full object-cover transition-all group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/80 transition-all flex items-center justify-center">
-          <ExternalLink className="text-foreground opacity-0 group-hover:opacity-100 transition-opacity" size={40} />
+        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/80 transition-all flex items-center justify-center rounded-t-[50px]">
+          <ExternalLink 
+            className="text-foreground opacity-0 group-hover:opacity-100 transition-opacity" 
+            size={40} 
+          />
         </div>
       </div>
       <div className="p-6">

@@ -20,65 +20,70 @@ interface TeamMemberCardProps {
 
 const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
   return (
-    <div className="relative overflow-hidden rounded-xl bg-card transition-all hover:scale-105">
-      <div className="p-6 md:p-8">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-          {/* Avatar (rounded square) */}
-          <div className="flex-shrink-0 w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden bg-muted"> {/* Avatar pics */}
-            <img
-              src={member.image}
-              alt={member.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
+    <div className="relative rounded-[50px] transition-all hover:scale-[1.03] h-full">
+      {/* Glow effect behind the card */}
+      <div className="absolute inset-0 rounded-[50px] blur-3xl opacity-20 bg-[#f181b6] -z-10"></div>
 
-          {/* Content */}
-          <div className="flex-1">
-            <div className="flex items-start justify-between">
+      {/* 🪩 Glassmorphism Card */}
+      <div className="relative overflow-hidden rounded-[50px] bg-white/30 backdrop-blur-md shadow-md transition-all flex flex-col h-full border-2 border-[#f181b6] hover:bg-[#1f1131] hover:shadow-lg">
+        <div className="p-6 md:p-8 flex-1 flex flex-col">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-6 flex-1">
+            {/* Avatar */}
+            <div className="flex-shrink-0 w-28 h-28 md:w-32 md:h-32 rounded-[50px] overflow-hidden bg-muted/20 backdrop-blur-sm">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 flex flex-col justify-between">
               <div>
-                <h3 className="font-cubic text-xl md:text-2xl text-foreground">{member.name}</h3>
-                <p className="font-body text-sm text-primary mt-1">{member.role}</p>
-              </div>
-            </div>
+                <h3 className="font-cubic text-xl md:text-2xl text-white">{member.name}</h3>
+                <p className="font-body text-sm text-primary/90 mt-1">{member.role}</p>
 
-            <p className="font-body text-sm text-foreground/90 mt-4 mb-4">
-              {member.bio}
-            </p>
+                <p className="font-body text-sm text-white/80 mt-4 mb-4">
+                  {member.bio}
+                </p>
 
-            <div className="flex flex-wrap gap-2 mb-4">
-              {member.skills.map((skill, index) => (
-                <span key={index} className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-xs font-frankfurter">
-                  {skill}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-4">
-              {/* Primary action - View Portfolio (if social.email or a portfolio link exists, placeholder) */}
-              <a
-                href={member.social?.github ?? '#'}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-full shadow-md"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                  <path d="M14 3H21V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M21 3L10 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M21 21H3V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <span className="text-sm font-frankfurter">View Portfolio</span>
-              </a>
-
-              {/* Social links (icons) - clickable */}
-              {member.social && (
-                <div className="flex items-center gap-2">
-                  <SocialLinks
-                    github={member.social.github}
-                    linkedin={member.social.linkedin}
-                    email={member.social.email}
-                  />
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {member.skills.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 rounded-full text-xs font-frankfurter"
+                      style={{
+                        color: "#f181b6",
+                        backgroundColor: "rgba(241, 129, 182, 0.2)",
+                      }}
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-              )}
+              </div>
+
+              {/* Bottom actions */}
+              <div className="flex items-center gap-4 mt-auto">
+                <a
+                  href={member.social?.github ?? "#"}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-transparent text-[#f181b6] rounded-full shadow-md border-2 border-[#f181b6] transition-all hover:bg-[#eaf169] hover:border-[#eaf169] backdrop-blur-sm"
+                >
+                  <span className="text-sm font-frankfurter">View Portfolio</span>
+                </a>
+
+                {member.social && (
+                  <div className="flex items-center gap-2">
+                    <SocialLinks
+                      github={member.social.github}
+                      linkedin={member.social.linkedin}
+                      email={member.social.email}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
