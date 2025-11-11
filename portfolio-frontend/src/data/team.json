@@ -14,15 +14,15 @@
   },
   {
     "id": 2,
-    "name": "Heidilyn L. Caling",
-    "role": "UI/UX Designer, QA Tester and Content Manager",
-    "image": "/profile/heidi.jpeg",
-    "bio": "Heidilyn contributes to the site’s visual design and ensures functionality, responsiveness, and content accuracy across pages.",
-    "skills": ["Python", "HTML"],
+    "name": "Chariz Kyle A. Santos",
+    "role": "UI/UX and Frontend Lead",
+    "image": "/profile/chariz.jpg",
+    "bio": "Chariz leads the design direction and transforms creative mockups into responsive, user-friendly web interfaces.",
+    "skills": ["Python", "HTML", "CSS", "Canva"],
     "social": {
-      "github": "https://github.com/heidilyncaling",
-      "linkedin": "https://www.linkedin.com/in/heidilyn-caling-187134396/",
-      "email": "calingheidilyn@gmail.com"
+      "github": "https://github.com/charizkyle",
+      "linkedin": "https://www.linkedin.com/in/charizkylesantos/",
+      "email": "santoscharizkyle@gmail.com"
     }
   },
   {
@@ -70,7 +70,7 @@
     "role": "Deployment Specialist",
     "image": "/profile/Leonard.jpg",
     "bio": "Leonard manages the website’s hosting setup and domain deployment to ensure smooth and reliable access.",
-    "skills": ["Python", "Tkinter", "Canva", "Flask", "React", "Figma"],
+    "skills": ["Python", "Canva", "Flask", "React"],
     "social": {
       "github": "https://github.com/leonardmarkgalivo",
       "linkedin": "https://www.linkedin.com/in/leonard-mark-galivo-05343b333",
@@ -79,15 +79,15 @@
   },
   {
     "id": 7,
-    "name": "Chariz Kyle A. Santos",
-    "role": "UI/UX and Frontend Lead",
-    "image": "/profile/chariz.jpg",
-    "bio": "Chariz leads the design direction and transforms creative mockups into responsive, user-friendly web interfaces.",
-    "skills": ["Python", "HTML", "CSS", "Canva"],
+    "name": "Heidilyn L. Caling",
+    "role": "UI/UX Designer, QA Tester and Content Manager",
+    "image": "/profile/heidi.jpeg",
+    "bio": "Heidilyn contributes to the site’s visual design and ensures functionality, responsiveness, and content accuracy across pages.",
+    "skills": ["Python", "HTML"],
     "social": {
-      "github": "https://github.com/charizkyle",
-      "linkedin": "https://www.linkedin.com/in/charizkylesantos/",
-      "email": "santoscharizkyle@gmail.com"
+      "github": "https://github.com/heidilyncaling",
+      "linkedin": "https://www.linkedin.com/in/heidilyn-caling-187134396/",
+      "email": "calingheidilyn@gmail.com"
     }
   },
   {

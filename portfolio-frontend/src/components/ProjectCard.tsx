@@ -34,7 +34,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
       <div className="p-6">
         <p className="font-frankfurter text-xs text-accent mb-2">{project.category}</p>
         <h3 className="font-cubic text-xl text-foreground mb-2">{project.title}</h3>
-        <p className="font-frankfurter text-sm text-muted-foreground line-clamp-2">{project.description}</p>
+        <p className="font-frankfurter text-sm text-muted-primary line-clamp-2">{project.description}</p>
       </div>
     </div>
   );
