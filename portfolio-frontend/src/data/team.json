@@ -6,6 +6,7 @@
     "image": "/pfp.jpg",
     "bio": "Gillian oversees the project timeline and Git workflow while managing backend data organization and integration.",
     "skills": ["React", "Node.js", "TypeScript", "Javascript", "Figma"],
+    "portfolio": "https://gilrpunzal.dev", 
     "social": {
       "github": "https://github.com/theholyguacamolee",
       "linkedin": "https://www.linkedin.com/in/gillianrpunzal/",
@@ -19,6 +20,7 @@
     "image": "/profile/chariz.jpg",
     "bio": "Chariz leads the design direction and transforms creative mockups into responsive, user-friendly web interfaces.",
     "skills": ["Python", "HTML", "CSS", "Canva"],
+    "portfolio": "https://github.com/charizkyle/my_portfolio",
     "social": {
       "github": "https://github.com/charizkyle",
       "linkedin": "https://www.linkedin.com/in/charizkylesantos/",
@@ -32,6 +34,7 @@
     "image": "/profile/eunice.jpg",
     "bio": "Eunice tests performance and content accuracy while preparing clear documentation and assisting in project management.",
     "skills": ["Python", "CSS", "HTML"],
+    "portfolio": "https://github.com/Babbsrey22/personal_webfolio",
     "social": {
       "github": "https://github.com/Babbsrey22",
       "linkedin": "https://www.linkedin.com/in/eunice-reyes-27777a36a/",
@@ -45,6 +48,7 @@
     "image": "/profile/Iza.jpeg",
     "bio": "Iza focuses on implementing user interfaces and enhancing interactivity to bring the team’s designs to life.",
     "skills": ["Python", "CSS", "HTML"],
+    "portfolio": "https://github.com/IzaTomacruz/flask_web_application",
     "social": {
       "github": "https://github.com/IzaTomacruz",
       "linkedin": "https://www.linkedin.com/in/iza-marie-tomacruz-57004330b",
@@ -58,6 +62,7 @@
     "image": "/profile/rasmine.jpeg",
     "bio": "Rasmine ensures content quality and consistency while organizing technical documents and deployment notes.",
     "skills": ["Python", "VSCode"],
+    "portfolio": "https://github.com/rasmine-b/personal_portfolio",
     "social": {
       "github": "https://github.com/rasmine-b",
       "linkedin": "https://www.linkedin.com/in/rasmineblas",
@@ -71,6 +76,7 @@
     "image": "/profile/Leonard.jpg",
     "bio": "Leonard manages the website’s hosting setup and domain deployment to ensure smooth and reliable access.",
     "skills": ["Python", "Canva", "Flask", "React"],
+    "portfolio": "https://github.com/leonardmarkgalivo/flask_portfolio_website",
     "social": {
       "github": "https://github.com/leonardmarkgalivo",
       "linkedin": "https://www.linkedin.com/in/leonard-mark-galivo-05343b333",
@@ -84,6 +90,7 @@
     "image": "/profile/heidi.jpeg",
     "bio": "Heidilyn contributes to the site’s visual design and ensures functionality, responsiveness, and content accuracy across pages.",
     "skills": ["Python", "HTML"],
+    "portfolio": "https://github.com/heidilyncaling/caling_heidilyn_flask_site",
     "social": {
       "github": "https://github.com/heidilyncaling",
       "linkedin": "https://www.linkedin.com/in/heidilyn-caling-187134396/",
@@ -97,6 +104,7 @@
     "image": "/profile/erika.jpg",
     "bio": "Erika assists in developing and refining the site’s layout and interactive elements for a seamless user experience.",
     "skills": ["Python", "HTML", "React", "VSCode"],
+    "portfolio": "https://erikavillamin.dev",
     "social": {
       "github": "https://github.com/erikavillamin",
       "linkedin": "https://www.linkedin.com/in/erika-mae-villamin-5b23791b3",
