@@ -13,7 +13,7 @@ const Footer = () => {
               <span className="text-foreground">DEV</span>
               <span className="text-primary">SQUAD</span>
             </h3>
-            <p className="font-frankfurter text-accent mb-4">
+            <p className="font-frankfurter text-foreground mb-4">
               Empowering ideas through code and creativity
             </p>
 
