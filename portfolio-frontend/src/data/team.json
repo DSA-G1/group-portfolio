@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Gillian R. Punzal",
     "role": "Project Manager and Backend Developer",
-    "image": "/pfp.jpg",
+    "image": "/profile/gil.jpg",
     "bio": "Gillian oversees the project timeline and Git workflow while managing backend data organization and integration.",
     "skills": ["React", "Node.js", "TypeScript", "Javascript", "Figma"],
     "portfolio": "https://gilrpunzal.dev", 
