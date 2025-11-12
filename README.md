@@ -32,7 +32,7 @@ Our portfolio is a reflection of our creativity, collaboration, and dedication t
 | Galivo, Leonard Mark | Deployment/Hosting | Python, HTML, Tkinter, Flask, React, Figma, Canva, GitHub |
 | Punzal, Gillian | Project Manager, Git Master, Backend | Javascript, React, Typescript, Node.js, Springboot, Figma |
 | Reyes, Eunice | QA Tester, Content Manager, Documentations Lead | Python, CSS, HTML, GitHub |
-| Santos, Chariz Kyle | UI/UX Designer, Frontend | Python, HTML, CSS, Github, Canva |
+| Santos, Chariz Kyle | UI/UX Designer, Frontend | Python, HTML, CSS, TypeScript, Github, Canva |
 | Tomacruz, Iza Marie | Frontend | Python, HTML, CSS, Github |
 | Villamin, Erika | Frontend | Python, HTML, GitHub, VSCode, React |
 
@@ -44,9 +44,10 @@ Our portfolio is a reflection of our creativity, collaboration, and dedication t
 
 - Frontend: ReactJS  
 - Backend: Flask  
-- Design: Figma  
+- Design: Canva  
 - Version Control: Git & GitHub  
-- Hosting: GitHub Pages  
+- Hosting: GitHub Pages
+- Assets: (https://drive.google.com/drive/folders/1-0rTROqrK6RzVmDpVBaZRB3I9YyqtXHg?usp=drive_link)
 
 ---
 
@@ -87,3 +88,5 @@ npm start
 
 This project was created as part of our DSA Final Project.  
 It showcases our technical skills, teamwork, and creativity.
+
+

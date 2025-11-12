@@ -68,5 +68,44 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    /* Global site font: Frankfurter (fallbacks provided) */
+    font-family: "Frankfurter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+}
+
+@font-face {
+  font-family: "Cubic";
+  src: url("/fonts/Cubic-Normal.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Frankfurter";
+  src: url("/fonts/FrankfurterCom-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  /* Apply Cubic to header elements by default (Header component usually renders a <header>) */
+  header, .header, .site-header, h1 {
+    font-family: "Cubic", "Frankfurter", ui-sans-serif, system-ui;
+  }
+}
+
+/* index.css */
+.hero-bg {
+  background-image: url('/background/home-page-mobile.png');
+  background-size: contain;
+  background-position: center;
+}
+@media (min-width: 768px) {
+  .hero-bg {
+    background-image: url('/background/home-page-desktop.png');
+    background-size: cover;
+    background-position: center top;
   }
 }

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
+import SocialLinks from "@/components/SocialLinks";
 
 const Footer = () => {
   return (
@@ -7,14 +8,24 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Section */}
-          <div>
-            <h3 className="font-cubic text-3xl font-bold mb-4">
+          <div className="flex flex-col items-start md:items-start">
+            <h3 className="font-header text-5xl mb-2">
               <span className="text-foreground">DEV</span>
               <span className="text-primary">SQUAD</span>
             </h3>
-            <p className="font-frankfurter text-accent mb-4">
+            <p className="font-frankfurter text-foreground mb-4">
               Empowering ideas through code and creativity
             </p>
+
+            {/* Social Icons(GitHub, LinkedIn, Email) below the brand */}
+            <div className="flex items-center gap-4 mt-2">
+              <SocialLinks
+                github="https://github.com/DSA-G1"
+                linkedin="https://www.linkedin.com/in/gillianrpunzal/"
+                email="gilrpunzal@gmail.com"
+                className="flex gap-4"
+              />
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -30,9 +41,6 @@ const Footer = () => {
               <NavLink to="/works" className="font-frankfurter text-foreground hover:text-accent transition-colors">
                 Works
               </NavLink>
-             {/*<NavLink to="/contact" className="font-frankfurter text-foreground hover:text-accent transition-colors">
-                Contact
-              </NavLink> */}
             </div>
           </div>
 
@@ -40,9 +48,9 @@ const Footer = () => {
           <div>
             <h4 className="font-frankfurter text-xl text-accent mb-4">Get in Touch</h4>
             <div className="flex flex-col gap-3">
-              <a href="mailto:hello@devsquad.com" className="font-frankfurter text-foreground hover:text-accent transition-colors flex items-center gap-2">
+              <a href="mailto:gilrpunzal@gmail.com" className="font-frankfurter text-foreground hover:text-accent transition-colors flex items-center gap-2">
                 <Mail size={18} />
-                info@devsquad.com
+                gilrpunzal@gmail.com
               </a>
               <a href="tel:+1234567890" className="font-frankfurter text-foreground hover:text-accent transition-colors flex items-center gap-2">
                 <Phone size={18} />
@@ -50,7 +58,7 @@ const Footer = () => {
               </a>
               <div className="font-frankfurter text-foreground flex items-center gap-2">
                 <MapPin size={18} />
-                Manila, Philippines
+                PUP Sta. Mesa, Manila, Philippines
               </div>
             </div>
           </div>

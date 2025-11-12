@@ -1,5 +1,7 @@
 from app import db
 from datetime import datetime
+from sqlalchemy.ext.mutable import MutableList
+from sqlalchemy import PickleType
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,5 +19,16 @@ class Project(db.Model):
             'created_at': self.created_at.isoformat()
         }
 
-#SECRET_KEY=your-secret-key-here
-#DATABASE_URL=sqlite:///portfolio.db
+class QueueOperation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    queue_data = db.Column(MutableList.as_mutable(PickleType), default=[])
+    
+    def to_dict(self):
+        return {'id': self.id, 'queue_data': self.queue_data or []}
+
+class DequeOperation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    deque_data = db.Column(MutableList.as_mutable(PickleType), default=[])
+    
+    def to_dict(self):
+        return {'id': self.id, 'deque_data': self.deque_data or []}

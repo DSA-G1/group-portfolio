@@ -1,3 +1,5 @@
+/** @type {import('tailwindcss').Config} */
+
 export default {
   darkMode: ["class"],
   content: [
@@ -6,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        header: ['Cubic', 'sans-serif'],
+        body: ['Frankfurter', 'sans-serif']
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

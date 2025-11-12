@@ -56,7 +56,7 @@ const ProjectModal = ({ project, open, onOpenChange }: ProjectModalProps) => {
           </div>
 
           <Button
-            className="w-full bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-frankfurter"
+            className="bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-body text-lg px-8 py-6 border-4 border-white rounded-full"
             onClick={() => window.open(project.link, "_blank")}
           >
             <ExternalLink className="mr-2" size={20} />

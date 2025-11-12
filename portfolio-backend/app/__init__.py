@@ -12,7 +12,7 @@ def create_app():
     db.init_app(app)
     
     from app.routes import main
-    app.register_blueprint(main)
+    app.register_blueprint(main, url_prefix='/api')  # Add this prefix
     
     with app.app_context():
         db.create_all()

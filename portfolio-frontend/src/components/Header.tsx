@@ -13,10 +13,13 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-primary">
-      <nav className="container mx-auto px-4 py-4">
+    <header className="fixed top-4 left-0 right-0 z-50 pointer-events-none">
+      <nav className={`mx-8 sm:mx-12 md:mx-16 lg:mx-20 pointer-events-auto bg-primary/95 backdrop-blur-sm shadow-lg transition-all duration-300 ${isMenuOpen ? 'rounded-3xl px-6 py-6' : 'rounded-full px-6 py-2'}`}>
         <div className="flex items-center justify-between">
-          <NavLink to="/" className="font-cubic text-2xl md:text-3xl font-bold text-foreground hover:text-accent transition-colors">
+          <NavLink 
+            to="/" 
+            className="font-header text-2xl md:text-3xl text-foreground hover:text-accent transition-colors"
+          >
             DEVSQUAD
           </NavLink>
 
@@ -27,7 +30,7 @@ const Header = () => {
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `font-frankfurter text-lg transition-colors ${
+                  `font-body text-lg transition-colors ${
                     isActive ? "text-accent" : "text-foreground hover:text-accent"
                   }`
                 }
@@ -43,21 +46,21 @@ const Header = () => {
             className="md:hidden text-foreground hover:text-accent transition-colors"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <div className="flex flex-col gap-4">
+          <div className="md:hidden mt-8 pb-2">
+            <div className="flex flex-col gap-5 items-center">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.to}
                   to={link.to}
                   onClick={() => setIsMenuOpen(false)}
                   className={({ isActive }) =>
-                    `font-frankfurter text-lg transition-colors ${
+                    `font-body text-xl transition-colors ${
                       isActive ? "text-accent" : "text-foreground hover:text-accent"
                     }`
                   }
