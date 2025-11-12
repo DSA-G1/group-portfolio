@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Queue and Dequeue",
     "category": "Data Structures and Algorithms",
-    "image": "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=600&h=400&fit=crop",
+    "image": "public/projects/queue-dequeue.png",
     "description": "A data structure project implementing queue and dequeue functionalities.",
     "technologies": ["Python"],
   "link": "/works/queue"
