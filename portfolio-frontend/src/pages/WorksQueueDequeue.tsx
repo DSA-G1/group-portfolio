@@ -19,13 +19,17 @@ const WorksQueueDequeue = () => {
     });
   }, []);
 
-  const doOp = async (endpoint: string, val: string, setVal?: Function) => {
+  const doOp = async (endpoint: string, val: string, setVal?: Function, isQueue: boolean = true) => {
     try {
       const res = await api.post(endpoint, val ? { value: parseInt(val) } : {});
-      await Promise.all([api.get("/queue"), api.get("/deque")]).then(([q, d]) => {
+      // Only fetch the structure that was modified
+      if (isQueue) {
+        const q = await api.get("/queue");
         setQueueData(q.data.queue_data || []);
+      } else {
+        const d = await api.get("/deque");
         setDequeData(d.data.deque_data || []);
-      });
+      }
       setVal?.("");
       toast({ title: "Success", description: res.data.removed ? `Removed ${res.data.removed}` : "Done" });
     } catch (e: any) {
