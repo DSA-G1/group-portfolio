@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Globe,Server, Users, Folder, Send } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -30,7 +30,10 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div
+      className="min-h-screen bg-cover bg-top bg-no-repeat"
+      style={{ backgroundImage: "url('/public/background/about-page.png')" }}
+    >
       <Header />
       
       <section className="pt-32 pb-20 px-4">
@@ -42,9 +45,11 @@ const Contact = () => {
           <p className="font-frankfurter text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Have a project in mind? Let's discuss how we can help bring your ideas to life.
           </p>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
             {/* Contact Form */}
+            {/*
             <div className="bg-card p-8 rounded-xl">
               <h2 className="font-cubic text-2xl text-foreground mb-6">Send us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -111,6 +116,7 @@ const Contact = () => {
                 </Button>
               </form>
             </div>
+            */}
 
             {/* Contact Information */}
             <div className="space-y-8">
@@ -123,8 +129,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-cubic text-foreground mb-1">Email</h3>
-                      <a href="mailto:hello@devsquad.com" className="font-frankfurter text-muted-foreground hover:text-primary transition-colors">
-                        hello@devsquad.com
+                      <a href="mailto:gilrpunzal.com" className="font-frankfurter text-muted-foreground hover:text-primary transition-colors">
+                        gilrpunzal@gmail.com
                       </a>
                     </div>
                   </div>
@@ -146,13 +152,13 @@ const Contact = () => {
                     <div>
                       <h3 className="font-cubic text-foreground mb-1">Location</h3>
                       <p className="font-frankfurter text-muted-foreground">
-                        Your City, Country
+                        PUP Sta. Mesa, Manila, Philippines
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-
+              
               <div className="bg-primary p-8 rounded-xl text-center">
                 <h3 className="font-cubic text-3xl text-primary-foreground mb-4">
                   Let's Create Together!
@@ -162,12 +168,81 @@ const Contact = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          <div className="space-y-8">
+            <div className="bg-card p-8 rounded-xl">
+              <h2 className="font-cubic text-2xl text-foreground mb-6">FAQ</h2>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary p-3 rounded-lg">
+                    <Globe className="text-primary-foreground" size={24} />
+                  </div>
 
-      <Footer />
-    </div>
+                  <div>
+                    <h3 className="font-cubic text-foreground mb-1">What is this website about?</h3>
+                    <p className="font-frankfurter text-muted-foreground hover:text-primary transition-colors">
+                      This website shows our collection of projects in Data Structure and Algorithms and other future tech projects.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary p-3 rounded-lg">
+                      <Server className="text-primary-foreground" size={24} />
+                    </div>
+                          
+                    <div>
+                      <h3 className="font-cubic text-foreground mb-1">What type of projects can I find here?</h3>
+                      <p className="font-frankfurter text-muted-foreground hover:text-primary transition-colors">
+                        Basic and intermediate coding pojects such as Queue & Dequeue, and other upcoming DSA concepts.
+                      </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-4">
+                      <div className="bg-primary p-3 rounded-lg">
+                        <Users className="text-primary-foreground" size={24} />
+                      </div>
+                     <div>
+                      <h3 className="font-cubic text-foreground mb-1">Who is this website for?</h3>
+                      <p className="font-frankfurter text-muted-foreground">
+                        For students, beginners, and anyone who wants to explore simple coding projects.
+                      </p>
+                     </div>
+                    </div>
+
+                    <div className="flex items-start gap-4">
+                      <div className="bg-primary p-3 rounded-lg">
+                        <Folder className="text-primary-foreground" size={24} />
+                      </div>
+                     <div>
+                       <h3 className="font-cubic text-foreground mb-1">Will more projects be added?</h3>
+                       <p className="font-frankfurter text-muted-foreground">
+                         Yes, more DSA and programming projects will be uploaded soon.
+                       </p>
+                      </div>
+                     </div>
+
+                     <div className="flex items-start gap-4">
+                       <div className="bg-primary p-3 rounded-lg">
+                         <Mail className="text-primary-foreground" size={24} />
+                       </div>
+                      <div>
+                        <h3 className="font-cubic text-foreground mb-1">How can I contact you?</h3>
+                        <p className="font-frankfurter text-muted-foreground">
+                          You can reach us through our emails or social links provided on this page.
+                        </p>
+                      </div>
+                     </div>    
+                  </div>
+        
+                </div>
+              </div>
+           </div>
+        </section>
+        
+        <Footer />
+      </div>
   );
 };
 

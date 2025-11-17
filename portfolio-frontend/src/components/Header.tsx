@@ -9,7 +9,7 @@ const Header = () => {
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
     { to: "/works", label: "Works" },
-   /* { to: "/contact", label: "Contact" }, */
+    { to: "/contact", label: "Contact" }, 
   ];
 
   return (
