@@ -58,7 +58,7 @@ const WorksQueueDequeue = () => {
   }: any) => (
     <section className="pt-32 pb-20 px-4 relative z-10">
       <div className="container mx-auto">
-        <h1 className="font-cubic text-4xl md:text-6xl text-center mb-8">
+        <h1 className="font-cubic text-5xl md:text-7xl text-center mb-8">
           <span
             className={
               title === "QUEUE" ? "text-foreground" : "text-primary"
@@ -67,7 +67,7 @@ const WorksQueueDequeue = () => {
             {title}
           </span>
         </h1>
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center bg-[#0b0011] border-2 border-pink-500 rounded-xl p-8 relative z-20">
           <p className="font-frankfurter text-lg text-foreground mb-6">
             {desc}
           </p>
@@ -77,7 +77,7 @@ const WorksQueueDequeue = () => {
               placeholder="Enter number"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="border rounded px-4 py-2 text-lg text-accent-foreground"
+              className="border rounded px-4 py-2 text-lg text-accent-foreground w-80"
             />
             {buttons.map((b: any, i: number) => (
               <Button
