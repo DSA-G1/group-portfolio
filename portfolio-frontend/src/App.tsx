@@ -9,6 +9,7 @@ import Works from "./pages/Works";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import WorksQueueDequeue from "./pages/WorksQueueDequeue";
+import BinaryTree from "./pages/BinaryTree";
 
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/works" element={<Works />} />
           <Route path="/works/queue" element={<WorksQueueDequeue />} />
+          <Route path="/works/binarytree" element={<BinaryTree />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -3,19 +3,19 @@
     "id": 1,
     "title": "Queue and Dequeue",
     "category": "Data Structures and Algorithms",
-    "image": "public/projects/queue-dequeue.png",
+    "image": "public/projects/queue.png",
     "description": "A data structure project implementing queue and dequeue functionalities.",
     "technologies": ["Python"],
   "link": "/works/queue"
   },
   {
     "id": 2,
-    "title": "Coming Soon",
-    "category": "",
-    "image": "/public/projects/coming-soon.png",
-    "description": "",
-    "technologies": [""],
-    "link": ""
+    "title": "Binary Tree",
+    "category": "Data Structures and Algorithms",
+    "image": "/public/projects/binary.png",
+    "description": "A data structure project implementing binary tree functionalities through the use of a school record system.",
+    "technologies": ["Python"],
+    "link": "/works/binarytree"
   },
   {
     "id": 3,
