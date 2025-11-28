@@ -206,6 +206,12 @@ export default function BinaryTree() {
     );
   }
 
+  // Calculate SVG height based on the deepest node so the container can show a vertical scrollbar
+  const svgHeight = Math.max(
+    600,
+    Object.values(positions).reduce((max, p) => Math.max(max, p.y), 0) + 140
+  );
+
   return (
     <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/home-page.png')` }}>
       <style>{`
@@ -230,6 +236,17 @@ export default function BinaryTree() {
               <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
                 <h3 className="text-[#f181b6] font-header text-4xl mb-2">Control Panel</h3>
                 <p className="text-[#ffcaef] font-body text-m">Manage your binary tree</p>
+              </div>
+
+              {/* Quick Guide (small screens) - shown under Control Panel on small viewports */}
+              <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] block lg:hidden">
+                <h3 className="text-[#f181b6] font-header text-4xl mb-4">Quick Guide</h3>
+                <div className="text-white font-body text-xl space-y-3 leading-relaxed">
+                  <p><strong>1. Create Root</strong> - Enter a number and click "Create Root" to start your tree.</p>
+                  <p><strong>2. Add Nodes</strong> - Enter a parent node value and click search ( 🔎︎ ) to find it. Once highlighted, enter the new value, choose Left or Right direction, then click "Insert Node".</p>
+                  <p><strong>3. Delete Nodes</strong> - Search for the node you want to remove. When it's highlighted in blue, click "Delete Node".</p>
+                  <p><strong>4. Post-Order Traversal</strong> - The sequence below the tree updates automatically, showing the Left → Right → Root traversal order.</p>
+                </div>
               </div>
 
               {/* 3. Add Root Node */}
@@ -320,8 +337,8 @@ export default function BinaryTree() {
 
             {/* Right Column */}
             <div className="lg:col-span-2 space-y-6 lg:order-2">
-              {/* 2. Quick Guide */}
-              <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
+              {/* 2. Quick Guide (large screens) */}
+              <div className="hidden lg:block bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
                 <h3 className="text-[#f181b6] font-header text-4xl mb-4">Quick Guide</h3>
                 <div className="text-white font-body text-xl space-y-3 leading-relaxed">
                   <p><strong>1. Create Root</strong> - Enter a number and click "Create Root" to start your tree.</p>
@@ -334,8 +351,8 @@ export default function BinaryTree() {
               {/* 5. Binary Tree Visualization */}
               <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
                 <h3 className="text-white font-header text-4xl mb-4">Binary Tree Visualization</h3>
-                <div className="w-full overflow-auto custom-scrollbar rounded-[20px]">
-                  <svg ref={svgRef} width={900} height={600} viewBox="0 0 900 600" className="min-w-[900px]">
+                <div className="w-full max-h-[600px] overflow-y-auto overflow-x-auto custom-scrollbar rounded-[20px]">
+                  <svg ref={svgRef} width={900} height={svgHeight} viewBox={`0 0 900 ${svgHeight}`} className="min-w-[900px]">
                     <defs>
                       <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                         <feGaussianBlur stdDeviation="8" result="coloredBlur" />
@@ -345,7 +362,7 @@ export default function BinaryTree() {
                         </feMerge>
                       </filter>
                     </defs>
-                    <rect x={0} y={0} width={900} height={600} rx={20} fill="#a93579" />
+                    <rect x={0} y={0} width={900} height={svgHeight} rx={20} fill="#a93579" />
                     {root && renderLines(root)}
                     {root && renderNodes(root)}
                     {!root && (
@@ -358,9 +375,9 @@ export default function BinaryTree() {
                 </div>
               </div>
 
-              {/* 7. Post Order Sequence */}
+              {/* 7. Post Order Traversal */}
               <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
-                <h3 className="text-white font-header text-2xl mb-2">Post Order Sequence</h3>
+                <h3 className="text-white font-header text-2xl mb-2">Post Order Traversal</h3>
                 <p className="text-[#ffcaef] font-body text-sm mb-4">Left → Right → Root</p>
                 <div className="flex gap-3 overflow-auto custom-scrollbar py-2">
                   {postOrderSeq.length === 0 && (
