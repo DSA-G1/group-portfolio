@@ -6,7 +6,7 @@ from sqlalchemy import PickleType
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text)
     github_url = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
