@@ -15,7 +15,7 @@
     "image": "/public/projects/binary.png",
     "description": "A data structure project implementing binary tree functionalities through the use of a school record system.",
     "technologies": ["Python"],
-    "link": "/works/binary"
+    "link": "/works/binarytree"
   },
   {
     "id": 3,
