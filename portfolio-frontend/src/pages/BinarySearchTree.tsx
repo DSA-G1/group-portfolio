@@ -35,6 +35,7 @@ export default function BinarySearchTree() {
     setPositions(newPositions);
   }, [root]);
 
+  // ===================== API CALLS =====================
   async function fetchTree() {
     try {
       const res = await api.get("/binary-search-tree");
@@ -79,7 +80,7 @@ export default function BinarySearchTree() {
     }
   }
 
-  async function handleSearchParent() {
+  async function handleSearchNode() {
     const v = Number(parentSearch);
     if (isNaN(v)) {
       toast({ title: "Invalid Input", description: "Enter a valid number.", variant: "destructive" });
@@ -97,15 +98,9 @@ export default function BinarySearchTree() {
     }
   }
 
-  async function handleInsertNode() {
-    const v = Number(newNodeValue);
-    if (isNaN(v)) {
-      toast({ title: "Invalid Input", description: "Enter a valid number.", variant: "destructive" });
-      return;
-    }
-
+  async function handleInsertNode(value: number) {
     try {
-      await api.post("/binary-search-tree/insert", { value: v });
+      await api.post("/binary-search-tree/insert", { value });
 
       setNewNodeValue("");
       setParentSearch("");
@@ -113,7 +108,7 @@ export default function BinarySearchTree() {
 
       await fetchTree();
 
-      toast({ title: "Inserted", description: `Inserted ${v} into BST.` });
+      toast({ title: "Inserted", description: `Inserted ${value} into BST.` });
     } catch (error: any) {
       toast({
         title: "Error",
@@ -123,14 +118,14 @@ export default function BinarySearchTree() {
     }
   }
 
-  async function handleDeleteNode() {
-    if (foundNodeId == null) {
-      toast({ title: "Error", description: "Search for a node first.", variant: "destructive" });
-      return;
-    }
-
+  async function handleDeleteNode(value: number) {
     try {
-      await api.post("/binary-search-tree/delete", { node_id: foundNodeId });
+      const nodeToDelete = foundNodeId;
+      if (nodeToDelete == null) {
+        toast({ title: "Error", description: "Search for a node first.", variant: "destructive" });
+        return;
+      }
+      await api.post("/binary-search-tree/delete", { node_id: nodeToDelete });
       setFoundNodeId(null);
 
       await fetchTree();
@@ -146,7 +141,7 @@ export default function BinarySearchTree() {
     toast({ title: "Cleared", description: "Tree reset." });
   }
 
-  // BST layout
+  // ===================== BST LAYOUT =====================
   function computeLayout(
     n: TreeNode | null,
     xMin: number,
@@ -168,15 +163,13 @@ export default function BinarySearchTree() {
 
   function renderLines(n: TreeNode | null): JSX.Element[] {
     if (!n) return [];
-
     const pos = positions[n.id];
     if (!pos) return [];
-
     const lines: JSX.Element[] = [];
 
     if (n.left) {
       const p2 = positions[n.left.id];
-      if (p2) {
+      if (p2)
         lines.push(
           <line
             key={`${n.id}-${n.left.id}`}
@@ -188,13 +181,12 @@ export default function BinarySearchTree() {
             strokeWidth={4}
           />
         );
-      }
       lines.push(...renderLines(n.left));
     }
 
     if (n.right) {
       const p2 = positions[n.right.id];
-      if (p2) {
+      if (p2)
         lines.push(
           <line
             key={`${n.id}-${n.right.id}`}
@@ -206,7 +198,6 @@ export default function BinarySearchTree() {
             strokeWidth={4}
           />
         );
-      }
       lines.push(...renderLines(n.right));
     }
 
@@ -215,7 +206,6 @@ export default function BinarySearchTree() {
 
   function renderNodes(n: TreeNode | null): JSX.Element | null {
     if (!n) return null;
-
     const pos = positions[n.id];
     if (!pos) return null;
 
@@ -226,14 +216,7 @@ export default function BinarySearchTree() {
       <React.Fragment key={n.id}>
         <g filter={isFound ? "url(#glow)" : undefined}>
           <circle cx={pos.x} cy={pos.y} r={40} fill={fill} stroke="#fff" strokeWidth={5} />
-          <text
-            x={pos.x}
-            y={pos.y + 8}
-            textAnchor="middle"
-            fill="#fff"
-            fontSize={24}
-            fontWeight="bold"
-          >
+          <text x={pos.x} y={pos.y + 8} textAnchor="middle" fill="#fff" fontSize={24} fontWeight="bold">
             {n.value}
           </text>
         </g>
@@ -249,7 +232,6 @@ export default function BinarySearchTree() {
   return (
     <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/home-page.png')` }}>
       <Header />
-
       <main className="pt-24 pb-12 px-6">
         <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-12">
           <span className="text-white">BINARY SEARCH TREE </span>
@@ -258,8 +240,7 @@ export default function BinarySearchTree() {
 
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            {/* Left side – control panel */}
+            {/* Left – Control Panel */}
             <div className="space-y-6">
               <div className="block lg:hidden">
                 <QuickGuide />
@@ -269,36 +250,31 @@ export default function BinarySearchTree() {
                 root={root}
                 rootValue={rootValue}
                 setRootValue={setRootValue}
-                parentSearch={parentSearch}
-                setParentSearch={setParentSearch}
+                searchValue={parentSearch}
+                setSearchValue={setParentSearch}
                 newNodeValue={newNodeValue}
                 setNewNodeValue={setNewNodeValue}
                 onCreateRoot={handleCreateRoot}
-                onSearchParent={handleSearchParent}
+                onSearchNode={handleSearchNode}
                 onInsertNode={handleInsertNode}
                 onDeleteNode={handleDeleteNode}
                 onClearTree={handleClearTree}
+                onGetMax={async () => {}}
+                onGetHeight={async () => {}}
               />
             </div>
 
-            {/* Right side – visualization */}
+            {/* Right – Visualization */}
             <div className="lg:col-span-2 space-y-6">
               <div className="hidden lg:block">
                 <QuickGuide />
               </div>
 
-              <TreeVisualization
-                root={root}
-                svgHeight={svgHeight}
-                renderLines={renderLines}
-                renderNodes={renderNodes}
-              />
-
+              <TreeVisualization root={root} svgHeight={svgHeight} renderLines={renderLines} renderNodes={renderNodes} />
             </div>
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );
