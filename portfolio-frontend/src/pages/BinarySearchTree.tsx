@@ -40,7 +40,7 @@ export default function BinarySearchTree() {
     try {
       const res = await api.get("/binary-search-tree");
       setRoot(res.data.tree_data ? { ...res.data.tree_data } : null);
-      await fetchPostOrder();
+      // BST page does not use postorder endpoint
     } catch (error) {
       toast({
         title: "Error",
@@ -50,11 +50,9 @@ export default function BinarySearchTree() {
     }
   }
 
-  async function fetchPostOrder() {
-    try {
-      const res = await api.get("/binary-search-tree/postorder");
-      setPostOrderSeq(res.data.postorder || []);
-    } catch {}
+  // no-op postorder for BST page
+  function fetchPostOrder() {
+    setPostOrderSeq([]);
   }
 
   async function handleCreateRoot() {
@@ -139,6 +137,31 @@ export default function BinarySearchTree() {
     setFoundNodeId(null);
     await fetchTree();
     toast({ title: "Cleared", description: "Tree reset." });
+  }
+
+  async function handleGetMax() {
+    try {
+      const res = await api.get("/binary-search-tree/max");
+      const nodeId = res.data.node_id;
+      setFoundNodeId(nodeId);
+      toast({ title: "Max Value", description: `Max value is ${res.data.max_value}` });
+    } catch (error: any) {
+      toast({ title: "Error", description: error.response?.data?.error || "Failed to get max.", variant: "destructive" });
+    }
+  }
+
+  async function handleGetHeight() {
+    try {
+      if (foundNodeId == null) {
+        toast({ title: "Select Node", description: "Search/select a node first to get its height.", variant: "destructive" });
+        return;
+      }
+
+      const res = await api.post("/binary-search-tree/height", { node_id: foundNodeId });
+      toast({ title: "Height", description: `Height: ${res.data.height}` });
+    } catch (error: any) {
+      toast({ title: "Error", description: error.response?.data?.error || "Failed to get height.", variant: "destructive" });
+    }
   }
 
   // ===================== BST LAYOUT =====================
@@ -259,8 +282,8 @@ export default function BinarySearchTree() {
                 onInsertNode={handleInsertNode}
                 onDeleteNode={handleDeleteNode}
                 onClearTree={handleClearTree}
-                onGetMax={async () => {}}
-                onGetHeight={async () => {}}
+                onGetMax={handleGetMax}
+                onGetHeight={handleGetHeight}
               />
             </div>
 
