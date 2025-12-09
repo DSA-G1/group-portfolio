@@ -4,24 +4,31 @@ export default function QuickGuide() {
       <h3 className="text-[#f181b6] font-header text-4xl mb-4">Quick Guide</h3>
       <div className="text-white font-body text-xl space-y-3 leading-relaxed">
         <p>
-          <strong>1. Create Root</strong> - Enter a number and click "Create Root" to start your tree.
+          <strong>1. Add Root</strong> – Enter a value and click "Add Root" to create the root node.
         </p>
         <p>
-          <strong>2. Add Nodes</strong> - Enter a parent node value and click search ( 🔎︎ ) to find it. Once
-          highlighted, enter the new value, choose Left or Right direction, then click "Insert Node".
+          <strong>2. Node Operations</strong> – Click a button to enable input, enter value, press Enter:
         </p>
         <p>
-          <strong>3. Delete Nodes</strong> - Search for the node you want to remove. When it's highlighted, click
-          "Delete Node".
+          <strong>• Search</strong> – Find a node in the tree
         </p>
         <p>
-          <strong>4. BST Search</strong> - Enter a value and click "Search" to find the node in the tree. The node will be highlighted if found.
+          <strong>• Insert</strong> – Add a new node (placed by BST rules)
         </p>
         <p>
-          <strong>5. Get Max Value</strong> - Click "Get Max Value" to find the node with the highest value in the tree.
+          <strong>• Delete</strong> – Remove a node from the tree
         </p>
         <p>
-          <strong>6. Height of a Node</strong> - Select a node and click "Get Height" to calculate its height (the number of edges on the longest path from that node to a leaf).
+          <strong>3. Tree Operations:</strong>
+        </p>
+        <p>
+          <strong>• Get Max</strong> – Display the highest value in the tree
+        </p>
+        <p>
+          <strong>• Get Height</strong> – Click button, enter node value, press Enter to see its height
+        </p>
+        <p>
+          <strong>• Clear Tree</strong> – Remove all nodes and reset
         </p>
       </div>
     </div>

@@ -25,7 +25,7 @@ def find_node_by_id(node, node_id):
 def insert_bst_node(node, value, next_id):
     """Insert a value into BST following BST rules.
 
-    Returns (updated_node, next_id_after_insertion).
+    Returns (updated_node, next_id_after_insertion, success).
     """
     if not node:
         return {
@@ -33,19 +33,20 @@ def insert_bst_node(node, value, next_id):
             "value": value,
             "left": None,
             "right": None
-        }, next_id + 1
+        }, next_id + 1, True
 
     if value < node["value"]:
-        new_left, new_next = insert_bst_node(node["left"], value, next_id)
+        new_left, new_next, success = insert_bst_node(node["left"], value, next_id)
         node["left"] = new_left
-        return node, new_next
+        return node, new_next, success
 
     elif value > node["value"]:
-        new_right, new_next = insert_bst_node(node["right"], value, next_id)
+        new_right, new_next, success = insert_bst_node(node["right"], value, next_id)
         node["right"] = new_right
-        return node, new_next
+        return node, new_next, success
 
-    return node, next_id
+    # Duplicate value - reject insertion
+    return node, next_id, False
 
 
 def find_max(node):
@@ -53,6 +54,14 @@ def find_max(node):
     current = node
     while current and current.get("right"):
         current = current["right"]
+    return current
+
+
+def find_min(node):
+    """Return leftmost (minimum value) node in BST."""
+    current = node
+    while current and current.get("left"):
+        current = current["left"]
     return current
 
 
@@ -108,8 +117,9 @@ def delete_bst_node(node, value):
         if not node["right"]:
             return node["left"], True
 
-        # Case 4: Two children → replace with inorder successor
-        successor = find_max(node["right"])
-        node["value"] = successor["value"]  
+        # Case 4: Two children → replace with inorder successor (minimum in right subtree)
+        successor = find_min(node["right"])
+        node["value"] = successor["value"]
+        node["id"] = successor["id"]  # Also copy the successor's ID to maintain structure
         node["right"], _ = delete_bst_node(node["right"], successor["value"])
         return node, True

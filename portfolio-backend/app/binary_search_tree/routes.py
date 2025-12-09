@@ -34,7 +34,15 @@ def create_root():
     if value is None:
         return jsonify({"error": "value is required"}), 400
 
+    try:
+        value = float(value)
+    except (ValueError, TypeError):
+        return jsonify({"error": "value must be a number"}), 400
+
     bt = get_or_create()
+
+    if bt.tree_data:
+        return jsonify({"error": "Root already exists. Clear tree first."}), 400
 
     bt.tree_data = {
         "id": bt.next_id,
@@ -54,6 +62,11 @@ def search_node():
 
     if value is None:
         return jsonify({"error": "value is required"}), 400
+
+    try:
+        value = float(value)
+    except (ValueError, TypeError):
+        return jsonify({"error": "value must be a number"}), 400
 
     bt = get_or_create()
 
@@ -75,6 +88,11 @@ def insert_node():
     if value is None:
         return jsonify({"error": "value is required"}), 400
 
+    try:
+        value = float(value)
+    except (ValueError, TypeError):
+        return jsonify({"error": "value must be a number"}), 400
+
     bt = get_or_create()
 
     if not bt.tree_data:
@@ -90,7 +108,10 @@ def insert_node():
 
     tree_copy = copy.deepcopy(bt.tree_data)
 
-    updated_tree, new_next_id = insert_bst_node(tree_copy, value, bt.next_id)
+    updated_tree, new_next_id, success = insert_bst_node(tree_copy, value, bt.next_id)
+
+    if not success:
+        return jsonify({"error": "Duplicate value. BST cannot contain duplicate values."}), 400
 
     bt.tree_data = updated_tree
     bt.next_id = new_next_id
@@ -103,27 +124,21 @@ def insert_node():
 @bst_bp.route("/delete", methods=["POST"])
 def delete_node():
     data = request.get_json()
-    node_id = data.get("node_id")
+    value = data.get("value")
 
-    if node_id is None:
-        return jsonify({"error": "node_id is required"}), 400
+    if value is None:
+        return jsonify({"error": "value is required"}), 400
 
     bt = get_or_create()
 
     if not bt.tree_data:
         return jsonify({"error": "Tree is empty"}), 404
 
-    target_node = find_node_by_id(bt.tree_data, node_id)
-    if not target_node:
-        return jsonify({"error": "Node not found"}), 404
-
-    value_to_delete = target_node["value"]
-
     tree_copy = copy.deepcopy(bt.tree_data)
-    updated_tree, deleted = delete_bst_node(tree_copy, value_to_delete)
+    updated_tree, deleted = delete_bst_node(tree_copy, value)
 
     if not deleted:
-        return jsonify({"error": "Delete failed"}), 400
+        return jsonify({"error": "Node not found"}), 404
 
     bt.tree_data = updated_tree
     db.session.commit()

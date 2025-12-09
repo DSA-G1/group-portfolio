@@ -118,18 +118,19 @@ export default function BinarySearchTree() {
 
   async function handleDeleteNode(value: number) {
     try {
-      const nodeToDelete = foundNodeId;
-      if (nodeToDelete == null) {
-        toast({ title: "Error", description: "Search for a node first.", variant: "destructive" });
-        return;
-      }
-      await api.post("/binary-search-tree/delete", { node_id: nodeToDelete });
+      await api.post("/binary-search-tree/delete", { value });
       setFoundNodeId(null);
 
       await fetchTree();
 
-      toast({ title: "Deleted", description: "Node removed." });
-    } catch {}
+      toast({ title: "Deleted", description: `Node with value ${value} removed.` });
+    } catch (error: any) {
+      toast({ 
+        title: "Error", 
+        description: error.response?.data?.error || "Failed to delete node.", 
+        variant: "destructive" 
+      });
+    }
   }
 
   async function handleClearTree() {
@@ -152,15 +153,27 @@ export default function BinarySearchTree() {
 
   async function handleGetHeight() {
     try {
-      if (foundNodeId == null) {
-        toast({ title: "Select Node", description: "Search/select a node first to get its height.", variant: "destructive" });
+      const v = Number(parentSearch);
+      if (isNaN(v)) {
+        toast({ title: "Invalid Input", description: "Enter a valid number.", variant: "destructive" });
         return;
       }
 
-      const res = await api.post("/binary-search-tree/height", { node_id: foundNodeId });
-      toast({ title: "Height", description: `Height: ${res.data.height}` });
+      // First search for the node
+      const searchRes = await api.post("/binary-search-tree/search", { value: v });
+      const nodeId = searchRes.data.node_id;
+      setFoundNodeId(nodeId);
+
+      // Then get its height
+      const res = await api.post("/binary-search-tree/height", { node_id: nodeId });
+      toast({ title: "Node Height", description: `Height of node ${v}: ${res.data.height}` });
+      setParentSearch("");
     } catch (error: any) {
-      toast({ title: "Error", description: error.response?.data?.error || "Failed to get height.", variant: "destructive" });
+      toast({ 
+        title: "Node Not Found", 
+        description: error.response?.data?.error || "Failed to get height.", 
+        variant: "destructive" 
+      });
     }
   }
 
