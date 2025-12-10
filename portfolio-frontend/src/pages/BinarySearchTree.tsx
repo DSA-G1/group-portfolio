@@ -20,10 +20,9 @@ export default function BinarySearchTree() {
 
   const [root, setRoot] = useState<TreeNode | null>(null);
   const [rootValue, setRootValue] = useState("");
-  const [parentSearch, setParentSearch] = useState("");
-  const [newNodeValue, setNewNodeValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [heightValue, setHeightValue] = useState("");
   const [foundNodeId, setFoundNodeId] = useState<number | null>(null);
-  const [postOrderSeq, setPostOrderSeq] = useState<number[]>([]);
   const [positions, setPositions] = useState<Record<number, { x: number; y: number }>>({});
 
   useEffect(() => {
@@ -50,11 +49,6 @@ export default function BinarySearchTree() {
     }
   }
 
-  // no-op postorder for BST page
-  function fetchPostOrder() {
-    setPostOrderSeq([]);
-  }
-
   async function handleCreateRoot() {
     const v = Number(rootValue);
     if (isNaN(v)) {
@@ -79,7 +73,7 @@ export default function BinarySearchTree() {
   }
 
   async function handleSearchNode() {
-    const v = Number(parentSearch);
+    const v = Number(searchValue);
     if (isNaN(v)) {
       toast({ title: "Invalid Input", description: "Enter a valid number.", variant: "destructive" });
       return;
@@ -100,8 +94,7 @@ export default function BinarySearchTree() {
     try {
       await api.post("/binary-search-tree/insert", { value });
 
-      setNewNodeValue("");
-      setParentSearch("");
+      setSearchValue("");
       setFoundNodeId(null);
 
       await fetchTree();
@@ -153,27 +146,28 @@ export default function BinarySearchTree() {
 
   async function handleGetHeight() {
     try {
-      const v = Number(parentSearch);
+      const v = Number(heightValue);
       if (isNaN(v)) {
         toast({ title: "Invalid Input", description: "Enter a valid number.", variant: "destructive" });
         return;
       }
 
-      // First search for the node
-      const searchRes = await api.post("/binary-search-tree/search", { value: v });
-      const nodeId = searchRes.data.node_id;
-      setFoundNodeId(nodeId);
-
-      // Then get its height
-      const res = await api.post("/binary-search-tree/height", { node_id: nodeId });
+      // Search by value and get height in one call
+      const res = await api.post("/binary-search-tree/height-by-value", { value: v });
+      
+      // Highlight the found node
+      setFoundNodeId(res.data.node_id);
+      
+      // Show height result
       toast({ title: "Node Height", description: `Height of node ${v}: ${res.data.height}` });
-      setParentSearch("");
     } catch (error: any) {
       toast({ 
         title: "Node Not Found", 
         description: error.response?.data?.error || "Failed to get height.", 
         variant: "destructive" 
       });
+    } finally {
+      setHeightValue("");
     }
   }
 
@@ -267,6 +261,11 @@ export default function BinarySearchTree() {
 
   return (
     <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/home-page.png')` }}>
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { height: 12px; width: 12px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ffcaef; border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #493463ff; border-radius: 999px; }
+      `}</style>
       <Header />
       <main className="pt-24 pb-12 px-6">
         <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-12">
@@ -286,10 +285,10 @@ export default function BinarySearchTree() {
                 root={root}
                 rootValue={rootValue}
                 setRootValue={setRootValue}
-                searchValue={parentSearch}
-                setSearchValue={setParentSearch}
-                newNodeValue={newNodeValue}
-                setNewNodeValue={setNewNodeValue}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                newNodeValue={heightValue}
+                setNewNodeValue={setHeightValue}
                 onCreateRoot={handleCreateRoot}
                 onSearchNode={handleSearchNode}
                 onInsertNode={handleInsertNode}

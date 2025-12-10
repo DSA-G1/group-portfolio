@@ -191,3 +191,44 @@ def get_node_height():
         "node_id": node_id,
         "height": height
     })
+
+@bst_bp.route("/debug", methods=["GET"])
+def debug_tree():
+    """Debug endpoint to see what's in the tree."""
+    bt = get_or_create()
+    return jsonify({
+        "tree_data": bt.tree_data,
+        "next_id": bt.next_id
+    })
+@bst_bp.route("/height-by-value", methods=["POST"])
+def get_node_height_by_value():
+    """Search for a node by value and return its height in one call."""
+    data = request.get_json()
+    value = data.get("value")
+
+    if value is None:
+        return jsonify({"error": "value is required"}), 400
+
+    try:
+        value = float(value)
+    except (ValueError, TypeError):
+        return jsonify({"error": "value must be a number"}), 400
+
+    bt = get_or_create()
+
+    if not bt.tree_data:
+        return jsonify({"error": "Tree is empty"}), 404
+
+    # Search for the node by value
+    target = find_node_by_value(bt.tree_data, value)
+    if not target:
+        return jsonify({"error": f"Node with value {value} not found"}), 404
+
+    # Calculate height of that node
+    height = compute_height(target)
+
+    return jsonify({
+        "node_id": target["id"],
+        "value": target["value"],
+        "height": height
+    })

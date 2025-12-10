@@ -5,12 +5,16 @@ def find_node_by_value(node, value):
     if not node:
         return None
 
-    if node["value"] == value:
+    # Ensure comparison is between same types (floats)
+    node_val = float(node["value"]) if node["value"] is not None else None
+    search_val = float(value) if value is not None else None
+
+    if node_val == search_val:
         return node
-    elif value < node["value"]:
-        return find_node_by_value(node.get("left"), value)
+    elif search_val < node_val:
+        return find_node_by_value(node.get("left"), search_val)
     else:
-        return find_node_by_value(node.get("right"), value)
+        return find_node_by_value(node.get("right"), search_val)
 
 
 def find_node_by_id(node, node_id):
@@ -27,6 +31,9 @@ def insert_bst_node(node, value, next_id):
 
     Returns (updated_node, next_id_after_insertion, success).
     """
+    # Ensure value is float
+    value = float(value)
+    
     if not node:
         return {
             "id": next_id,
@@ -35,12 +42,14 @@ def insert_bst_node(node, value, next_id):
             "right": None
         }, next_id + 1, True
 
-    if value < node["value"]:
+    node_val = float(node["value"])
+    
+    if value < node_val:
         new_left, new_next, success = insert_bst_node(node["left"], value, next_id)
         node["left"] = new_left
         return node, new_next, success
 
-    elif value > node["value"]:
+    elif value > node_val:
         new_right, new_next, success = insert_bst_node(node["right"], value, next_id)
         node["right"] = new_right
         return node, new_next, success
@@ -95,11 +104,14 @@ def delete_bst_node(node, value):
     if not node:
         return None, False
 
-    if value < node["value"]:
+    value = float(value)
+    node_val = float(node["value"])
+
+    if value < node_val:
         node["left"], deleted = delete_bst_node(node["left"], value)
         return node, deleted
 
-    elif value > node["value"]:
+    elif value > node_val:
         node["right"], deleted = delete_bst_node(node["right"], value)
         return node, deleted
 
@@ -117,9 +129,9 @@ def delete_bst_node(node, value):
         if not node["right"]:
             return node["left"], True
 
-        # Case 4: Two children → replace with inorder successor (minimum in right subtree)
+        # Case 4: Two children → replace value with inorder successor (minimum in right subtree)
         successor = find_min(node["right"])
         node["value"] = successor["value"]
-        node["id"] = successor["id"]  # Also copy the successor's ID to maintain structure
+        # Keep the current node's id to avoid duplicate ids in the tree
         node["right"], _ = delete_bst_node(node["right"], successor["value"])
         return node, True

@@ -87,78 +87,85 @@ export default function ControlPanel({
         </button>
       </div>
 
-      {/* Insert Node */}
-      <div className={`bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] mt-6 ${!root ? "opacity-40 pointer-events-none" : ""}`}>
+      {/* Node Operations */}
+      <div className={`bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] mt-6 transition-all duration-300 ${
+        !root ? "opacity-20 pointer-events-none" : "opacity-100"
+      }`}>
         <h4 className="text-white font-header text-2xl mb-4">2. Node Operations</h4>
         
-        {/* Input field - always visible but disabled/transparent when no operation selected */}
+        {/* Input field with inline search button */}
         <div className="mb-4">
           <label className="text-[#ffcaef] font-body text-sm mb-2 block">Enter Node Value</label>
-          <input
-            className={`w-full p-3 rounded-[17px] font-body mb-4 border-[4px] border-white ${
-              activeOperation
-                ? "bg-[#1f1131] border-[#ffcaef] text-white"
-                : "bg-[#1f1131] border-[#666] text-[#999] opacity-50 cursor-not-allowed"
-            }`}
-            placeholder="Enter value"
-            value={activeOperation ? searchValue : ""}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter" && searchValue && activeOperation) {
-                if (activeOperation === "search") handleSearch();
-                else if (activeOperation === "insert") handleInsert();
-                else if (activeOperation === "delete") handleDelete();
-              }
-            }}
-            disabled={!activeOperation}
-          />
+          <div className="flex gap-2 items-center mb-4">
+            <input
+              className="flex-1 p-3 rounded-[17px] font-body border-[4px] border-[#ffcaef] bg-[#1f1131] text-white"
+              placeholder="Enter value"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter" && searchValue) {
+                  handleSearch();
+                }
+              }}
+            />
+            <button
+              className={`p-3 rounded-[17px] border-[4px] border-white transition-all ${
+                !searchValue 
+                  ? "bg-[#f181b6] text-white opacity-30 cursor-not-allowed" 
+                  : "bg-[#f181b6] text-white hover:opacity-90"
+              }`}
+              onClick={() => {
+                if (searchValue) {
+                  handleSearch();
+                }
+              }}
+              disabled={!searchValue}
+              title="Search Node"
+            >
+              🔎︎
+            </button>
+          </div>
         </div>
 
         {/* Action Buttons */}
         <div className="space-y-2">
           <button
-            className={`w-full border-[4px] border-white px-4 py-3 rounded-[44px] font-body font-semibold hover:opacity-90 ${
-              activeOperation === "search" ? "bg-[#ffcaef] text-[#1f1131]" : "bg-[#f181b6] text-white"
+            className={`w-full border-[4px] border-white px-4 py-3 rounded-[44px] font-body font-semibold transition-all ${
+              !searchValue 
+                ? "bg-[#f181b6] text-white opacity-30 cursor-not-allowed" 
+                : "bg-[#f181b6] text-white hover:opacity-90"
             }`}
-            onClick={() => setActiveOperation(activeOperation === "search" ? null : "search")}
-          >
-            Search Node
-          </button>
-          <button
-            className={`w-full border-[4px] border-white px-4 py-3 rounded-[44px] font-body font-semibold hover:opacity-90 ${
-              activeOperation === "insert" ? "bg-[#ffcaef] text-[#1f1131]" : "bg-[#f181b6] text-white"
-            }`}
-            onClick={() => setActiveOperation(activeOperation === "insert" ? null : "insert")}
+            onClick={() => {
+              if (searchValue) {
+                handleInsert();
+              }
+            }}
+            disabled={!searchValue}
           >
             Insert Node
           </button>
           <button
-            className={`w-full border-[4px] border-white px-4 py-3 rounded-[44px] font-body font-semibold hover:opacity-90 ${
-              activeOperation === "delete" ? "bg-[#ffcaef] text-[#1f1131]" : "bg-[#f181b6] text-white"
+            className={`w-full border-[4px] border-white px-4 py-3 rounded-[44px] font-body font-semibold transition-all ${
+              !searchValue 
+                ? "bg-[#f181b6] text-white opacity-30 cursor-not-allowed" 
+                : "bg-[#f181b6] text-white hover:opacity-90"
             }`}
-            onClick={() => setActiveOperation(activeOperation === "delete" ? null : "delete")}
+            onClick={() => {
+              if (searchValue) {
+                handleDelete();
+              }
+            }}
+            disabled={!searchValue}
           >
             Delete Node
           </button>
         </div>
-
-        {/* Confirm button appears when value is entered */}
-        {activeOperation && searchValue && (
-          <button
-            className="w-full bg-[#f181b6] text-black border-[4px] border-white px-4 py-3 rounded-[44px] font-body font-semibold hover:opacity-90 mt-4"
-            onClick={() => {
-              if (activeOperation === "search") handleSearch();
-              else if (activeOperation === "insert") handleInsert();
-              else if (activeOperation === "delete") handleDelete();
-            }}
-          >
-            ✓ Execute
-          </button>
-        )}
       </div>
 
       {/* Tree Operations */}
-      <div className={`bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] mt-6 ${!root ? "opacity-40 pointer-events-none" : ""}`}>
+      <div className={`bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] mt-6 transition-all duration-300 ${
+        !root ? "opacity-20 pointer-events-none" : "opacity-100"
+      }`}>
         <h4 className="text-white font-header text-2xl mb-4">3. Tree Operations</h4>
         
         {/* Get Max Value */}
@@ -176,44 +183,34 @@ export default function ControlPanel({
         <div className="mb-4">
           <p className="text-[#ffcaef] font-body text-sm mb-2">• Height of a Node</p>
           
-          {/* Input field - always visible but disabled/transparent when not active */}
-          <div className="mb-3">
+          <div className="flex gap-2 items-center">
             <input
-              className={`w-full p-3 rounded-[17px] font-body mb-3 border-[4px] border-white ${
-                activeOperation === "height"
-                  ? "bg-[#1f1131] border-[#ffcaef] text-white"
-                  : "bg-[#1f1131] border-[#666] text-[#999] opacity-50 cursor-not-allowed"
-              }`}
+              className="flex-1 p-3 rounded-[17px] font-body border-[4px] border-[#ffcaef] bg-[#1f1131] text-white"
               placeholder="Enter node value"
-              value={activeOperation === "height" ? searchValue : ""}
-              onChange={(e) => setSearchValue(e.target.value)}
+              value={newNodeValue}
+              onChange={(e) => setNewNodeValue(e.target.value)}
               onKeyPress={(e) => {
-                if (e.key === "Enter" && searchValue && activeOperation === "height") {
+                if (e.key === "Enter" && newNodeValue) {
                   onGetHeight();
-                  setSearchValue("");
-                  setActiveOperation(null);
                 }
               }}
-              disabled={activeOperation !== "height"}
             />
+            <button
+              className={`px-6 py-3 rounded-[17px] border-[4px] border-white font-body font-semibold transition-all whitespace-nowrap ${
+                !newNodeValue 
+                  ? "bg-[#f181b6] text-white opacity-30 cursor-not-allowed" 
+                  : "bg-[#f181b6] text-white hover:opacity-90"
+              }`}
+              onClick={() => {
+                if (newNodeValue) {
+                  onGetHeight();
+                }
+              }}
+              disabled={!newNodeValue}
+            >
+              Get Height
+            </button>
           </div>
-          
-          <button
-            className={`w-full border-[4px] border-white px-6 py-3 rounded-[44px] font-body font-semibold hover:opacity-90 ${
-              activeOperation === "height" ? "bg-[#ffcaef] text-[#1f1131]" : "bg-[#f181b6] text-white"
-            }`}
-            onClick={() => {
-              if (activeOperation === "height" && searchValue) {
-                onGetHeight();
-                setSearchValue("");
-                setActiveOperation(null);
-              } else {
-                setActiveOperation(activeOperation === "height" ? null : "height");
-              }
-            }}
-          >
-            {activeOperation === "height" && searchValue ? "✓ Get Height" : "Get Height"}
-          </button>
         </div>
 
         {/* Clear Tree */}
