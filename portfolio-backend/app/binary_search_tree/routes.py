@@ -185,7 +185,8 @@ def get_node_height():
     if not target:
         return jsonify({"error": "Node not found"}), 404
 
-    height = compute_height(target)
+    # Return the height of this node's subtree
+    height = compute_height(target, bt.tree_data)
 
     return jsonify({
         "node_id": node_id,
@@ -224,8 +225,8 @@ def get_node_height_by_value():
     if not target:
         return jsonify({"error": f"Node with value {value} not found"}), 404
 
-    # Calculate height of that node
-    height = compute_height(target)
+    # Return the height of this node's subtree
+    height = compute_height(target, bt.tree_data)
 
     return jsonify({
         "node_id": target["id"],

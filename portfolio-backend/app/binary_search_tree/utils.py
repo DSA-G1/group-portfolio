@@ -88,12 +88,63 @@ def compute_subtree_height(node):
     return 1 + max(left_h, right_h)
 
 
-def compute_height(node):
-    """Compatibility alias for compute_subtree_height.
-
-    Other modules may import `compute_height` — keep that name supported.
+def get_max_depth_from_node(node):
+    """Get the maximum depth from this node to any leaf in the tree.
+    
+    This is the distance to the deepest leaf below this node.
+    Leaf nodes return 0, nodes with children return max depth below them.
     """
-    return compute_subtree_height(node)
+    if not node:
+        return -1
+    
+    left_depth = get_max_depth_from_node(node.get("left"))
+    right_depth = get_max_depth_from_node(node.get("right"))
+    
+    return 1 + max(left_depth, right_depth)
+
+
+def get_tree_max_depth(node):
+    """Get the maximum depth from root to any leaf in the entire tree."""
+    if not node:
+        return -1
+    
+    left_depth = get_tree_max_depth(node.get("left"))
+    right_depth = get_tree_max_depth(node.get("right"))
+    
+    return 1 + max(left_depth, right_depth)
+
+
+def compute_height(node, tree_root):
+    """Get height as distance from this node to the deepest leaf in the entire tree.
+    
+    The deepest leaf in the tree has height 0.
+    Each ancestor is 1 level higher.
+    """
+    if not node:
+        return -1
+    
+    # Get max depth in entire tree
+    max_tree_depth = get_tree_max_depth(tree_root)
+    
+    # Get depth of this specific node from root
+    def get_node_depth(current, target, depth=0):
+        if not current:
+            return None
+        if current["id"] == target["id"]:
+            return depth
+        
+        left_result = get_node_depth(current.get("left"), target, depth + 1)
+        if left_result is not None:
+            return left_result
+        
+        return get_node_depth(current.get("right"), target, depth + 1)
+    
+    node_depth = get_node_depth(tree_root, node)
+    if node_depth is None:
+        return -1
+    
+    # Height = max_depth - node_depth
+    return max_tree_depth - node_depth
 
 
 def delete_bst_node(node, value):

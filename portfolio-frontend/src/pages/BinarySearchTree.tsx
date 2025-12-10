@@ -21,7 +21,7 @@ export default function BinarySearchTree() {
   const [root, setRoot] = useState<TreeNode | null>(null);
   const [rootValue, setRootValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [heightValue, setHeightValue] = useState("");
+  const [newNodeValue, setNewNodeValue] = useState("");
   const [foundNodeId, setFoundNodeId] = useState<number | null>(null);
   const [positions, setPositions] = useState<Record<number, { x: number; y: number }>>({});
 
@@ -146,7 +146,7 @@ export default function BinarySearchTree() {
 
   async function handleGetHeight() {
     try {
-      const v = Number(heightValue);
+      const v = Number(newNodeValue);
       if (isNaN(v)) {
         toast({ title: "Invalid Input", description: "Enter a valid number.", variant: "destructive" });
         return;
@@ -167,7 +167,7 @@ export default function BinarySearchTree() {
         variant: "destructive" 
       });
     } finally {
-      setHeightValue("");
+      setNewNodeValue("");
     }
   }
 
@@ -287,8 +287,8 @@ export default function BinarySearchTree() {
                 setRootValue={setRootValue}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
-                newNodeValue={heightValue}
-                setNewNodeValue={setHeightValue}
+                newNodeValue={newNodeValue}
+                setNewNodeValue={setNewNodeValue}
                 onCreateRoot={handleCreateRoot}
                 onSearchNode={handleSearchNode}
                 onInsertNode={handleInsertNode}
