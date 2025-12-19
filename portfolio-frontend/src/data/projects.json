@@ -15,15 +15,15 @@
     "image": "/public/projects/binary.png",
     "description": "A data structure project implementing binary tree functionalities through the use of a school record system.",
     "technologies": ["Python"],
-    "link": "/works/binary"
+    "link": "/works/binarytree"
   },
   {
     "id": 3,
-    "title": "Coming Soon",
-    "category": "",
-    "image": "/public/projects/coming-soon.png",
-    "description": "",
-    "technologies": [""],
-    "link": ""
+    "title": "Binary Search Tree",
+    "category": "Data Structures and Algorithms",
+    "image": "/public/projects/bst.png",
+    "description": "A data structure project implementing binary search tree functionalities.",
+    "technologies": ["Python"],
+    "link": "/works/binarysearchtree"
   }
 ]
