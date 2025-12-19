@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "title": "Breadth-First Search)",
+    "title": "Breadth-First Search",
     "category": "Data Structures and Algorithms",
     "image": "/public/projects/coming-soon.png",
     "description": "A data structure project implementing breadth-first search algorithm.",
