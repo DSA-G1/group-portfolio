@@ -21,7 +21,7 @@ export default function GraphVisualization({ currentNode, renderLines, renderNod
                             </feMerge>
                         </filter>
                     </defs>
-                    <rect x={0} y={0} width={900} height={600} rx={20} fill="#a93579" />
+                    <rect x={0} y={0} width={900} height={600} rx={20} fill="#1f1131" />
                     {currentNode && renderLines(currentNode)}
                     {currentNode && renderNodes(currentNode)}
                     {!currentNode && (

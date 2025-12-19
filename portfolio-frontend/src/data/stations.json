@@ -1,0 +1,186 @@
+[
+    {
+        "id": 1,
+        "title": "Taft Station - MRT 3"
+    },
+    {
+        "id": 2,
+        "title": "Magallanes Station - MRT 3"
+    },
+    {
+        "id": 3,
+        "title": "Ayala Station - MRT 3"
+    },
+    {
+        "id": 4,
+        "title": "Buendia Station - MRT 3"
+    },
+    {
+        "id": 5,
+        "title": "Guadalupe Station - MRT 3"
+    },
+    {
+        "id": 6,
+        "title": "Boni Station - MRT 3"
+    },
+    {
+        "id": 7,
+        "title": "Shaw Boulevard Station - MRT 3"
+    },
+    {
+        "id": 8,
+        "title": "Ortigas Station - MRT 3"
+    },
+    {
+        "id": 9,
+        "title": "Santolan-Annapolis Station - MRT 3"
+    },
+    {
+        "id": 10,
+        "title": "Araneta Center-Cubao Station - MRT 3"
+    },
+    {
+        "id": 11,
+        "title": "Kamuning Station - MRT 3"
+    },
+    {
+        "id": 12,
+        "title": "Quezon Avenue Station - MRT 3"
+    },
+    {
+        "id": 13,
+        "title": "North Avenue Station - MRT 3"
+    },
+    {
+        "id": 14,
+        "title": "Baclaran Station - LRT 1"
+    },
+    {
+        "id": 15,
+        "title": "EDSA Station - LRT 1"
+    },
+    {
+        "id": 16,
+        "title": "Libertad Station - LRT 1"
+    },
+    {
+        "id": 17,
+        "title": "Gil Puyat Station - LRT 1"
+    },
+    {
+        "id": 18,
+        "title": "Vito Cruz Station - LRT 1"
+    },
+    {
+        "id": 19,
+        "title": "Quirino Station - LRT 1"
+    },
+    {
+        "id": 20,
+        "title": "Pedro Gil Station - LRT 1"
+    },
+    {
+        "id": 21,
+        "title": "United Nations Station - LRT 1"
+    },
+    {
+        "id": 22,
+        "title": "Central Station - LRT 1"
+    },
+    {
+        "id": 23,
+        "title": "Carriedo Station - LRT 1"
+    },
+    {
+        "id": 24,
+        "title": "Doroteo Jose Station - LRT 1"
+    },
+    {
+        "id": 25,
+        "title": "Bambang Station - LRT 1"
+    },
+    {
+        "id": 26,
+        "title": "Tayuman Station - LRT 1"
+    },
+    {
+        "id": 27,
+        "title": "Blumentritt Station - LRT 1"
+    },
+    {
+        "id": 28,
+        "title": "Abad Santos Station - LRT 1"
+    },
+    {
+        "id": 29,
+        "title": "R. Papa Station - LRT 1"
+    },
+    {
+        "id": 30,
+        "title": "5th Avenue Station - LRT 1"
+    },
+    {
+        "id": 31,
+        "title": "Monumento Station - LRT 1"
+    },
+    {
+        "id": 32,
+        "title": "Balintawak Station - LRT 1"
+    },
+    {
+        "id": 33,
+        "title": "Roosevelt Station - LRT 1"
+    },
+    {
+        "id": 34,
+        "title": "Recto Station - LRT 2"
+    },
+    {
+        "id": 35,
+        "title": "Legarda Station - LRT 2"
+    },
+    {
+        "id": 36,
+        "title": "Pureza Station - LRT 2"
+    },
+    {
+        "id": 37,
+        "title": "V. Mapa Station - LRT 2"
+    },
+    {
+        "id": 38,
+        "title": "J. Ruiz Station - LRT 2"
+    },
+    {
+        "id": 39,
+        "title": "Gilmore Station - LRT 2"
+    },
+    {
+        "id": 40,
+        "title": "Betty Go-Belmonte Station - LRT 2"
+    },
+    {
+        "id": 41,
+        "title": "Cubao Station - LRT 2"
+    },
+    {
+        "id": 42,
+        "title": "Anonas Station - LRT 2"
+    },
+    {
+        "id": 43,
+        "title": "Katipunan Station - LRT 2"
+    },
+    {
+        "id": 44,
+        "title": "Santolan Station - LRT 2"
+    },
+    {
+        "id": 45,
+        "title": "Marikina-Pasig Station - LRT 2"
+    },
+    {
+        "id": 46,
+        "title": "Antipolo Station - LRT 2"
+    }
+]
