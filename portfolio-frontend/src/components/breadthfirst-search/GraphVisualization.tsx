@@ -45,7 +45,7 @@ const POS: Record<string, [number, number]> = {
   "J. Ruiz": [420, 340],
   Gilmore: [460, 300],
   "Betty Go-Belmonte": [520, 250],
-  Cubao: [585, 210],         // moved slightly up
+  "Araneta Center Cubao (LRT2)": [585, 210],
   Anonas: [620, 185],
   Katipunan: [680, 185],
   Santolan: [740, 185],
@@ -56,7 +56,7 @@ const POS: Record<string, [number, number]> = {
   "North Avenue": [460, 130],
   "Quezon Avenue": [510, 160],
   Kamuning: [540, 190],
-  "Araneta Center-Cubao": [585, 255],
+  "Araneta Center Cubao (MRT)": [585, 255],
   "Santolan-Annapolis": [610, 315],
   Ortigas: [620, 362],  
   "Shaw Boulevard": [600, 430],
@@ -87,7 +87,7 @@ const WALK: [string, string][] = [
   ["Doroteo Jose", "Recto"],
   ["EDSA", "Taft"],
   ["Roosevelt", "North Avenue"],
-  ["Cubao", "Araneta Center-Cubao"]
+  ["Araneta Center Cubao (LRT2)", "Araneta Center Cubao (MRT)"]
 ];
 
 const poly = (arr: string[]) =>
@@ -103,6 +103,7 @@ export default function GraphVisualization() {
 
       <div className="flex justify-center items-center">
         <svg width="1080" height="880" viewBox="0 0 960 820">
+          {/* LINES */}
           <polyline points={poly(LRT1)} stroke={COLORS.lrt1} strokeWidth="4" fill="none" />
           <polyline points={poly(LRT2)} stroke={COLORS.lrt2} strokeWidth="4" fill="none" />
           <polyline points={poly(MRT3)} stroke={COLORS.mrt3} strokeWidth="4" fill="none" />
@@ -130,8 +131,20 @@ export default function GraphVisualization() {
             let textY = y + 4;
             let anchor: "start" | "end" | "middle" = isLRT1 ? "end" : "start";
 
+            // Adjusted labels for Balintawak and Roosevelt
+            if (name === "Balintawak") {
+              textX = x + 25; // move label right
+              textY = y - 10; // higher
+              anchor = "middle";
+            }
+            if (name === "Roosevelt") {
+              textX = x;        // centered
+              textY = y - 20;   // slightly lower than before
+              anchor = "middle";
+            }
+
             if (
-              ["Balintawak","Roosevelt","Anonas","Katipunan","Santolan","Marikina-Pasig","Antipolo"].includes(name)
+              ["Anonas","Katipunan","Santolan","Marikina-Pasig","Antipolo"].includes(name)
             ) {
               textX = x;
               textY = y - 12;
@@ -176,33 +189,37 @@ export default function GraphVisualization() {
         </svg>
       </div>
 
-      {/* LEGEND */}
+      {/* LEGEND - BIGGER */}
       <div
-        className="absolute bottom-6 right-6 rounded-xl p-4 text-sm text-white space-y-2"
+        className="absolute bottom-6 right-6 rounded-2xl p-6 text-base text-white space-y-3"
         style={{
           background: "#1a0f2f",
-          border: `2px solid ${COLORS.neon}`,
+          border: `3px solid ${COLORS.neon}`,
           boxShadow: `
-            0 0 8px ${COLORS.neon},
-            0 0 18px rgba(255,95,162,0.7),
-            inset 0 0 10px rgba(255,95,162,0.4)
+            0 0 12px ${COLORS.neon},
+            0 0 28px rgba(255,95,162,0.8),
+            inset 0 0 14px rgba(255,95,162,0.4)
           `
         }}
       >
-        <div className="flex items-center gap-2">
-          <span className="w-8 h-1 rounded bg-[#c9ff1a]" />
-          <span>LRT-1</span>
+        <div className="flex items-center gap-3">
+          <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt1 }} />
+          <span>LRT-1 LINE</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-8 h-1 rounded bg-[#7fd1ff]" />
-          <span>LRT-2</span>
+        <div className="flex items-center gap-3">
+          <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt2 }} />
+          <span>LRT-2 LINE</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-8 h-1 rounded bg-[#ff5fa2]" />
-          <span>MRT-3</span>
+        <div className="flex items-center gap-3">
+          <span className="w-10 h-1 rounded" style={{ background: COLORS.mrt3 }} />
+          <span>MRT-3 LINE</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-8 h-1 border-t-2 border-dashed border-white" />
+        <div className="flex items-center gap-3">
+          <span className="w-3 h-3 rounded-full bg-white" />
+          <span>STATION</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="w-10 border-t-2 border-dashed border-white" />
           <span>WALK TRANSFER</span>
         </div>
       </div>
