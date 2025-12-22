@@ -1,29 +1,71 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useToast } from "@/hooks/use-toast";
+import api from "@/services/api";
 
 import ControlPanel from "@/components/breadthfirst-search/ControlPanel";
 import GraphVisualization from "@/components/breadthfirst-search/GraphVisualization";
-import stations from '@/data/stations.json';
-
 
 const BreadthFirstSearch = () => {
+    const { toast } = useToast();
     const [currentNode, setCurrentNode] = useState(null);
     const [searchValue, setSearchValue] = useState("");
     const [startValue, setStartValue] = useState("");
+    const [pathResult, setPathResult] = useState(null);
 
-    const handleSearch = () => {
-        // The GraphVisualization component handles the BFS internally
-        console.log('Finding path from', startValue, 'to', searchValue);
+    const handleSearch = async () => {
+        if (!startValue || !searchValue) {
+            toast({
+                title: "Error",
+                description: "Please enter both start and end stations",
+                variant: "destructive",
+            });
+            return;
+        }
+
+        try {
+            const response = await api.post('/bfs/search', {
+                start: startValue,
+                end: searchValue,
+            });
+            
+            setPathResult(response.data);
+            setCurrentNode(startValue);
+            
+            toast({
+                title: "Path Found!",
+                description: `Found path with ${response.data.path.length} stations`,
+            });
+        } catch (error: any) {
+            toast({
+                title: "Error",
+                description: error.response?.data?.error || "Failed to find path",
+                variant: "destructive",
+            });
+            setPathResult(null);
+        }
+    };
+
+    const handleReset = async () => {
+        try {
+            await api.post('/bfs/reset');
+            setPathResult(null);
+            setStartValue("");
+            setSearchValue("");
+            setCurrentNode(null);
+            
+            toast({
+                title: "Reset",
+                description: "Path cleared successfully",
+            });
+        } catch (error) {
+            console.error("Reset failed:", error);
+        }
     };
 
     return (
         <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/lab4-bg.png')` }}>
-            <style>{`
-                .custom-scrollbar::-webkit-scrollbar { height: 12px; width: 12px; }
-                .custom-scrollbar::-webkit-scrollbar-thumb { background: #ffcaef; border-radius: 999px; }
-                .custom-scrollbar::-webkit-scrollbar-track { background: #493463ff; border-radius: 999px; }
-            `}</style>
             <Header />
             <main className="pt-24 pb-12 px-6">
                 <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-12">
@@ -40,22 +82,17 @@ const BreadthFirstSearch = () => {
                         startValue={startValue}
                         setStartValue={setStartValue}
                         onSearch={handleSearch}
+                        onReset={handleReset}
                     />
                     
-                    {/* Graph Visualization */}
-                    <div className="bg-[#1f1131]">
+                    <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
                         <GraphVisualization 
                             start={startValue} 
                             end={searchValue} 
-                            currentNode={currentNode} 
+                            currentNode={currentNode}
+                            pathResult={pathResult}
                         />
                     </div>
-
-                    <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
-                        <h3 className="text-white font-header text-4xl mb-4">LRT/MRT STATION ROUTE</h3>
-                        <p className="text-[#ffcaef] font-body text-m">Current Station → Destination</p>
-                    </div>
-
                 </div>
             </main>
             <Footer />
