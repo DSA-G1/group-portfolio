@@ -15,6 +15,36 @@ def get_graph():
         _graph_cache = build_graph(stations_data)
     return _graph_cache
 
+def get_stations_by_line():
+    """Return stations organized by line (LRT-1, LRT-2, MRT-3, Transfers)"""
+    stations_data = load_stations_data()
+    
+    result = {
+        "lrt1": [],
+        "lrt2": [],
+        "mrt3": [],
+        "transfers": []
+    }
+    
+    for line_name, line_data in stations_data.items():
+        segments = line_data.get('segments', [])
+        stations_set = set()
+        
+        for segment in segments:
+            stations_set.add(segment['from'])
+            stations_set.add(segment['to'])
+        
+        if line_name == "lrt1":
+            result["lrt1"] = sorted(list(stations_set))
+        elif line_name == "lrt2":
+            result["lrt2"] = sorted(list(stations_set))
+        elif line_name == "mrt3":
+            result["mrt3"] = sorted(list(stations_set))
+        elif line_name == "transfers":
+            result["transfers"] = sorted(list(stations_set))
+    
+    return result
+
 @bfs_bp.route('/search', methods=['POST'])
 def search_path():
     global _current_path_state
@@ -68,8 +98,19 @@ def get_current():
 
 @bfs_bp.route('/stations', methods=['GET'])
 def get_stations():
-    graph = get_graph()
-    return jsonify({'stations': sorted(list(graph.keys()))})
+    stations_by_line = get_stations_by_line()
+    
+    # Flatten into single array but preserve line order
+    all_stations = (
+        stations_by_line["lrt1"] + 
+        stations_by_line["lrt2"] + 
+        stations_by_line["mrt3"]
+    )
+    
+    return jsonify({
+        'stations': all_stations,
+        'by_line': stations_by_line
+    })
 
 @bfs_bp.route('/history', methods=['GET'])
 def get_history():
