@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "@/services/api";
+import stationsData from "@/data/stations_data.json";
 import {
   Select,
   SelectContent,
@@ -38,14 +39,32 @@ export default function ControlPanel({
     }>({ lrt1: [], lrt2: [], mrt3: [] });
 
     useEffect(() => {
+        const buildFromLocal = () => {
+            const byLine = { lrt1: [] as string[], lrt2: [] as string[], mrt3: [] as string[] };
+            (Object.entries(stationsData) as [string, { segments?: { from: string; to: string }[] }][])?.forEach(([line, data]) => {
+                const set = new Set<string>();
+                (data.segments ?? []).forEach(seg => {
+                    set.add(seg.from);
+                    set.add(seg.to);
+                });
+                if (line === "lrt1") byLine.lrt1 = Array.from(set).sort();
+                if (line === "lrt2") byLine.lrt2 = Array.from(set).sort();
+                if (line === "mrt3") byLine.mrt3 = Array.from(set).sort();
+            });
+            setStationsByLine(byLine);
+        };
+
         const fetchStations = async () => {
             try {
                 const response = await api.get('/bfs/stations');
                 if (response.data.by_line) {
                     setStationsByLine(response.data.by_line);
+                    return;
                 }
+                buildFromLocal();
             } catch (error) {
-                console.error("Failed to load stations:", error);
+                console.error("Failed to load stations, using local data:", error);
+                buildFromLocal();
             }
         };
         fetchStations();

@@ -38,9 +38,10 @@ const BreadthFirstSearch = () => {
                 description: `Found path with ${response.data.path.length} stations`,
             });
         } catch (error: any) {
+            const isNetwork = !error.response;
             toast({
-                title: "Error",
-                description: error.response?.data?.error || "Failed to find path",
+                title: isNetwork ? "Backend Unreachable" : "Error",
+                description: isNetwork ? "Cannot reach API. Is the backend running on :5000?" : (error.response?.data?.error || "Failed to find path"),
                 variant: "destructive",
             });
             setPathResult(null);
