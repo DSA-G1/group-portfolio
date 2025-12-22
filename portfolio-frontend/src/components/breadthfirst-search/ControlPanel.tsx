@@ -1,3 +1,8 @@
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import api from "@/services/api";
+
 interface ControlPanelProps {
     currentNode: any;
     setCurrentNode: (v: any) => void;
@@ -9,9 +14,8 @@ interface ControlPanelProps {
     setStartValue: (v: any) => void;
 
     onSearch: () => void;
+    onReset: () => void;
 }
-
-import stations from '@/data/stations.json';
 
 export default function ControlPanel({
     currentNode,
@@ -21,83 +25,80 @@ export default function ControlPanel({
     startValue,
     setStartValue,
     onSearch,
+    onReset,
 }: ControlPanelProps) {
+    const [allStations, setAllStations] = useState<string[]>([]);
 
-    const handleSearch = () => {
-        onSearch();
-    };
-
-    const handleReset = () => {
-        setSearchValue("");
-        setStartValue("");
-        setCurrentNode(null);
-    };
+    useEffect(() => {
+        const fetchStations = async () => {
+            try {
+                const response = await api.get('/bfs/stations');
+                setAllStations(response.data.stations || []);
+            } catch (error) {
+                console.error("Failed to load stations:", error);
+            }
+        };
+        fetchStations();
+    }, []);
 
     return (
-        <>
-            {/* Header */}
-            <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]"> 
-                <h3 className="text-[#f181b6] font-header text-4xl mb-2">Control Panel</h3>
-                <p className="text-[#ffcaef] font-body text-m">Select your Destination</p>
-                
-                {/* Search Inputs */}
-                <div className="mt-4">
-                    <div className="flex flex-row space-x-4 mb-4">
-                        <div className="flex-1">
-                            <label className="text-[#ffcaef] font-body block mb-2">Start Station</label>
-                            <select 
-                                value={startValue}
-                                onChange={(e) => setStartValue(e.target.value)}
-                                className="w-full px-3 py-2 bg-[#2a1a3a] border border-white rounded-lg text-white font-body focus:outline-none focus:ring-2 focus:ring-[#f181b6]"
-                            >
-                                <option value="" disabled>Select a station</option>
-                                {stations.map((station: any) => {
-                                    const stationName = station.title.split(' - ')[0].replace(' Station', '');
-                                    return (
-                                        <option key={station.id} value={stationName}>
-                                            {station.title}
-                                        </option>
-                                    );
-                                })}
-                            </select>
-                        </div>
+        <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
+            <h3 className="text-[#f181b6] font-header text-4xl mb-6">ROUTE FINDER</h3>
+            
+            <div className="space-y-6">
+                <div>
+                    <label className="text-white font-body text-xl block mb-2">Start Station</label>
+                    <input
+                        list="start-stations"
+                        value={startValue}
+                        onChange={(e) => setStartValue(e.target.value)}
+                        placeholder="e.g., Taft"
+                        className="w-full bg-[#493463] text-white border-[2px] border-white rounded-[20px] px-4 py-3 font-body text-lg"
+                    />
+                    <datalist id="start-stations">
+                        {allStations.map((station) => (
+                            <option key={station} value={station} />
+                        ))}
+                    </datalist>
+                </div>
 
-                        <div className="flex-1">
-                            <label className="text-[#ffcaef] font-body block mb-2">Destination Station</label>
-                            <select 
-                                value={searchValue}
-                                onChange={(e) => setSearchValue(e.target.value)}
-                                className="w-full px-3 py-2 bg-[#2a1a3a] border border-white rounded-lg text-white font-body focus:outline-none focus:ring-2 focus:ring-[#f181b6]"
-                            >
-                                <option value="" disabled>Select a station</option>
-                                {stations.map((station: any) => {
-                                    const stationName = station.title.split(' - ')[0].replace(' Station', '');
-                                    return (
-                                        <option key={station.id} value={stationName}>
-                                            {station.title}
-                                        </option>
-                                    );
-                                })}
-                            </select>
-                        </div>
-                    </div>
+                <div>
+                    <label className="text-white font-body text-xl block mb-2">Destination Station</label>
+                    <input
+                        list="end-stations"
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        placeholder="e.g., Antipolo"
+                        className="w-full bg-[#493463] text-white border-[2px] border-white rounded-[20px] px-4 py-3 font-body text-lg"
+                    />
+                    <datalist id="end-stations">
+                        {allStations.map((station) => (
+                            <option key={station} value={station} />
+                        ))}
+                    </datalist>
+                </div>
 
-                    <div className="flex gap-3 justify-center">
-                        <button
-                            onClick={handleSearch}
-                            className="w-48 px-4 py-2 bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-body text-m border-4 border-white rounded-full"
-                        >
-                            Find Shortest Path
-                        </button>
-                        <button
-                            onClick={handleReset}
-                            className="w-48 px-4 py-2 bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground font-body text-m border-4 border-white rounded-full"
-                        >
-                            Reset
-                        </button>
-                    </div>
+                <div className="flex gap-3">
+                    <button
+                        onClick={onSearch}
+                        className="flex-1 bg-[#f181b6] hover:bg-[#d16a9e] text-white border-[4px] border-white px-6 py-3 rounded-[50px] font-body text-xl"
+                    >
+                        🔍 Find Route
+                    </button>
+                    <button
+                        onClick={onReset}
+                        className="bg-[#493463] text-white border-[4px] border-white px-6 py-3 rounded-[50px] font-body text-xl hover:bg-[#5a4073]"
+                    >
+                        Reset
+                    </button>
+                </div>
+
+                <div className="pt-4 border-t-2 border-[#ffcaef]">
+                    <p className="text-[#ffcaef] font-body text-lg">
+                        Total Stations: <span className="text-white font-bold text-xl">{allStations.length}</span>
+                    </p>
                 </div>
             </div>
-        </>
+        </div>
     );
 }

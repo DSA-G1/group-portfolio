@@ -8,7 +8,9 @@ const COLORS = {
   lrt2: "#7fd1ff",
   mrt3: "#ff5fa2",
   walk: "#ffffff",
-  neon: "#ff5fa2"
+  neon: "#ff5fa2",
+  pathHighlight: "#00ff88",
+  pathGlow: "rgba(0, 255, 136, 0.8)"
 };
 
 /* ===============================
@@ -93,7 +95,51 @@ const WALK: [string, string][] = [
 const poly = (arr: string[]) =>
   arr.map((s) => POS[s].join(",")).join(" ");
 
-export default function GraphVisualization() {
+interface GraphVisualizationProps {
+    start: string;
+    end: string;
+    currentNode: string | null;
+    pathResult: { path: string[]; segments: { from: string; to: string }[] } | null;
+}
+
+export default function GraphVisualization({ start, end, currentNode, pathResult }: GraphVisualizationProps) {
+  const isInPath = (station: string) => {
+    return pathResult?.path.includes(station) ?? false;
+  };
+
+  const isSegmentInPath = (from: string, to: string) => {
+    if (!pathResult?.segments) return false;
+    return pathResult.segments.some(
+      seg => (seg.from === from && seg.to === to) || (seg.from === to && seg.to === from)
+    );
+  };
+
+  const renderPathSegments = () => {
+    if (!pathResult?.segments) return null;
+    
+    return pathResult.segments.map((seg, idx) => {
+      const fromPos = POS[seg.from];
+      const toPos = POS[seg.to];
+      if (!fromPos || !toPos) return null;
+      
+      return (
+        <line
+          key={`path-${idx}`}
+          x1={fromPos[0]}
+          y1={fromPos[1]}
+          x2={toPos[0]}
+          y2={toPos[1]}
+          stroke={COLORS.pathHighlight}
+          strokeWidth="6"
+          strokeLinecap="round"
+          style={{
+            filter: `drop-shadow(0 0 8px ${COLORS.pathGlow}) drop-shadow(0 0 16px ${COLORS.pathGlow})`
+          }}
+        />
+      );
+    });
+  };
+
   return (
     <div className="bg-[#12091f] rounded-[40px] p-6 border-[4px] border-[#ff5fa2] relative">
       {/* TITLE */}
@@ -122,10 +168,16 @@ export default function GraphVisualization() {
             />
           ))}
 
+          {/* HIGHLIGHT PATH SEGMENTS (rendered on top) */}
+          {renderPathSegments()}
+
           {/* Stations */}
           {Object.entries(POS).map(([name, [x, y]]) => {
             const isTransfer = WALK.flat().includes(name);
             const isLRT1 = LRT1.includes(name);
+            const inPath = isInPath(name);
+            const isStart = pathResult?.path[0] === name;
+            const isEnd = pathResult?.path[pathResult.path.length - 1] === name;
 
             let textX = isLRT1 ? x - 12 : x + 8;
             let textY = y + 4;
@@ -133,13 +185,13 @@ export default function GraphVisualization() {
 
             // Adjusted labels for Balintawak and Roosevelt
             if (name === "Balintawak") {
-              textX = x + 25; // move label right
-              textY = y - 10; // higher
+              textX = x + 25;
+              textY = y - 10;
               anchor = "middle";
             }
             if (name === "Roosevelt") {
-              textX = x;        // centered
-              textY = y - 20;   // slightly lower than before
+              textX = x;
+              textY = y - 20;
               anchor = "middle";
             }
 
@@ -168,18 +220,60 @@ export default function GraphVisualization() {
               anchor = "end";
             }
 
+            // Determine station color and size
+            let stationFill = "#fff";
+            let stationRadius = 4;
+            let stationStroke = "none";
+            let stationStrokeWidth = 0;
+            let glowFilter = "";
+
+            if (isStart) {
+              stationFill = "#00ff00"; // Green for start
+              stationRadius = 8;
+              stationStroke = "#fff";
+              stationStrokeWidth = 3;
+              glowFilter = "drop-shadow(0 0 10px rgba(0, 255, 0, 0.8))";
+            } else if (isEnd) {
+              stationFill = "#ff0000"; // Red for end
+              stationRadius = 8;
+              stationStroke = "#fff";
+              stationStrokeWidth = 3;
+              glowFilter = "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))";
+            } else if (inPath) {
+              stationFill = COLORS.pathHighlight; // Neon green for path
+              stationRadius = 7;
+              stationStroke = "#fff";
+              stationStrokeWidth = 2;
+              glowFilter = `drop-shadow(0 0 8px ${COLORS.pathGlow})`;
+            }
+
             return (
               <g key={name}>
-                {isTransfer && (
+                {isTransfer && !inPath && (
                   <circle cx={x} cy={y} r={9} fill="none" stroke="#fff" strokeWidth="2" />
                 )}
-                <circle cx={x} cy={y} r={4} fill="#fff" />
+                <circle 
+                  cx={x} 
+                  cy={y} 
+                  r={stationRadius} 
+                  fill={stationFill}
+                  stroke={stationStroke}
+                  strokeWidth={stationStrokeWidth}
+                  style={{
+                    filter: glowFilter,
+                    transition: "all 0.3s ease"
+                  }}
+                />
                 <text
                   x={textX}
                   y={textY}
                   fontSize="11"
-                  fill={COLORS.text}
+                  fill={inPath ? COLORS.pathHighlight : COLORS.text}
                   textAnchor={anchor}
+                  fontWeight={inPath ? "bold" : "normal"}
+                  style={{
+                    textShadow: inPath ? `0 0 8px ${COLORS.pathGlow}` : "none"
+                  }}
                 >
                   {name.toUpperCase()}
                 </text>
@@ -222,6 +316,66 @@ export default function GraphVisualization() {
           <span className="w-10 border-t-2 border-dashed border-white" />
           <span>WALK TRANSFER</span>
         </div>
+        {pathResult && (
+          <>
+            <div className="flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full" style={{ background: COLORS.pathHighlight }} />
+              <span>PATH STATIONS</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full bg-green-500" />
+              <span>START</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full bg-red-500" />
+              <span>END</span>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* PATH RESULT - NEW SECTION */}
+      <div className="mt-8">
+        {pathResult ? (
+          <div className="space-y-6">
+            <h3 className="text-white font-header text-3xl mb-4">Path Found</h3>
+            <div className="space-y-3">
+              {pathResult.path.map((station, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white">
+                    {index + 1}
+                  </div>
+                  <div
+                    className={`flex-1 p-3 rounded font-body text-lg ${
+                      index === 0
+                          ? 'bg-green-600 font-bold text-white'
+                          : index === pathResult.path.length - 1
+                          ? 'bg-red-600 font-bold text-white'
+                          : 'bg-blue-600 text-white'
+                    }`}
+                  >
+                    {station}
+                    {index === 0 && ' (Start)'}
+                    {index === pathResult.path.length - 1 && ' (End)'}
+                  </div>
+                  {index < pathResult.path.length - 1 && (
+                    <div className="text-[#f181b6] text-3xl font-bold">→</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">🗺️</div>
+            <p className="text-white font-body text-xl mb-2">
+              Enter start and destination to find the shortest route
+            </p>
+            <p className="text-[#ffcaef] font-body text-lg">
+              Using Breadth-First Search (BFS) Algorithm
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
