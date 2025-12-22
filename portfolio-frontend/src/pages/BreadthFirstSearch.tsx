@@ -68,13 +68,13 @@ const BreadthFirstSearch = () => {
     return (
         <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/lab4-bg.png')` }}>
             <Header />
-            <main className="pt-24 pb-12 px-6">
-                <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-12">
+            <main className="pt-16 pb-8 px-4 md:px-6">
+                <h1 className="font-header text-4xl md:text-5xl lg:text-6xl text-center mb-8">
                     <span className="text-white">SHORTEST PATH </span>
                     <span className="text-[#f181b6]">VISUALIZER</span>
                 </h1>
 
-                <div className="max-w-[1400px] mx-auto space-y-6">
+                <div className="max-w-6xl mx-auto space-y-4">
                     <ControlPanel 
                         currentNode={currentNode}
                         setCurrentNode={setCurrentNode}
@@ -86,7 +86,7 @@ const BreadthFirstSearch = () => {
                         onReset={handleReset}
                     />
                     
-                    <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
+                    <div className="bg-[#1f1131] rounded-2xl md:rounded-[40px] p-4 md:p-6 border-2 md:border-[4px] border-[#ffcaef] overflow-hidden">
                         <GraphVisualization 
                             start={startValue} 
                             end={searchValue} 
