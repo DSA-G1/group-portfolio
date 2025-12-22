@@ -3,11 +3,18 @@ import json
 import os
 
 def load_stations_data():
+    # Get the backend root directory (portfolio-backend/)
+    backend_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    # Navigate to the frontend data folder
     json_path = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-        '..', 'portfolio-frontend', 'src', 'data', 'stations_data.json'
+        backend_root, '..', 'portfolio-frontend', 'src', 'data', 'stations_data.json'
     )
-    with open(json_path, 'r') as f:
+    json_path = os.path.abspath(json_path)
+    
+    if not os.path.exists(json_path):
+        raise FileNotFoundError(f"stations_data.json not found at: {json_path}")
+    
+    with open(json_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 def build_graph(stations_data):
