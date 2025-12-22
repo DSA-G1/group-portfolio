@@ -18,8 +18,10 @@ def create_app(config_class=Config):
     with app.app_context():
         from app import models
         from app.binary_tree import models as binary_models
+        from app.binary_search_tree import models as bst_models
         print("✅ Main models imported")
         print("✅ Binary tree models imported")
+        print("✅ Binary search tree models imported")
     
     migrate.init_app(app, db)
     
@@ -39,11 +41,17 @@ def create_app(config_class=Config):
         
         from app.binary_tree import binary_tree_bp
         print("✅ Binary tree blueprint imported")
+
+        from app.binary_search_tree.routes import bst_bp
+        print("✅ Binary search tree blueprint imported")
+
         
         # Register blueprints with full paths
         app.register_blueprint(main, url_prefix='/api')
         app.register_blueprint(binary_tree_bp, url_prefix='/api/binary-tree')
+        app.register_blueprint(bst_bp, url_prefix="/api/binary-search-tree")
         print("✅ Blueprints registered")
+
         
     except Exception as e:
         print(f"❌ ERROR: {e}")
@@ -56,5 +64,14 @@ def create_app(config_class=Config):
         for rule in app.url_map.iter_rules():
             print(f"{rule.endpoint}: {rule.methods} {rule.rule}")
         print("========================\n")
+
+    # In development, ensure tables exist so endpoints can be used without running migrations.
+    # This is a convenience for local dev; for production prefer Alembic migrations.
+    with app.app_context():
+        try:
+            db.create_all()
+            print("✅ Ensured database tables exist (db.create_all())")
+        except Exception as e:
+            print(f"⚠️ Could not run db.create_all(): {e}")
     
     return app
