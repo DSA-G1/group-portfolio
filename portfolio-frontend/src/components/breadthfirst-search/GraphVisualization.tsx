@@ -1,36 +1,228 @@
-import React from 'react';
+import React from "react";
+import stations from "@/data/stations.json";
 
-interface GraphVisualizationProps {
-    currentNode: any;
-    renderLines: (node: any) => JSX.Element[];
-    renderNodes: (node: any) => JSX.Element | null;
-}
+const COLORS = {
+  bg: "#12091f",
+  text: "#f3e8ff",
+  lrt1: "#c9ff1a",
+  lrt2: "#7fd1ff",
+  mrt3: "#ff5fa2",
+  walk: "#ffffff",
+  neon: "#ff5fa2"
+};
 
-export default function GraphVisualization({ currentNode, renderLines, renderNodes }: GraphVisualizationProps) {
-    return (
-        <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
-            <h3 className="text-white font-header text-4xl mb-4">MRT and LRT stations map</h3>
-            <div className="w-full max-h-[600px] overflow-y-auto overflow-x-auto custom-scrollbar rounded-[20px]">
-                <svg width={900} height={600} viewBox={`0 0 900 600`} className="min-w-[900px]">
-                    <defs>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation={8} result="coloredBlur" />
-                            <feMerge>
-                                <feMergeNode in="coloredBlur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    <rect x={0} y={0} width={900} height={600} rx={20} fill="#1f1131" />
-                    {currentNode && renderLines(currentNode)}
-                    {currentNode && renderNodes(currentNode)}
-                    {!currentNode && (
-                        <text x={450} y={300} textAnchor="middle" fill="#fff" fontSize={24} fontWeight="bold" className="font-body">
-                            <tspan x={450} dy={0}>Insert MRT and LRT Graphs</tspan>
-                        </text>
-                    )}
-                </svg>
-            </div>
+/* ===============================
+   STATION POSITIONS
+================================ */
+const POS: Record<string, [number, number]> = {
+  // LRT-1
+  Baclaran: [140, 740],
+  EDSA: [140, 705],
+  Libertad: [140, 670],
+  "Gil Puyat": [140, 635],
+  "Vito Cruz": [140, 600],
+  Quirino: [140, 565],
+  "Pedro Gil": [140, 530],
+  "United Nations": [140, 495],
+  Central: [140, 460],
+  Carriedo: [140, 425],
+  "Doroteo Jose": [140, 390],
+  Bambang: [140, 355],
+  Tayuman: [140, 320],
+  Blumentritt: [140, 285],
+  "Abad Santos": [140, 250],
+  "R. Papa": [140, 215],
+  "5th Avenue": [140, 180],
+  Monumento: [140, 135],
+  Balintawak: [210, 120],
+  Roosevelt: [320, 120],
+
+  // LRT-2
+  Recto: [180, 390],
+  Legarda: [240, 390],
+  Pureza: [300, 390],
+  "V. Mapa": [360, 380],
+  "J. Ruiz": [420, 340],
+  Gilmore: [460, 300],
+  "Betty Go-Belmonte": [520, 250],
+  "Araneta Center Cubao (LRT2)": [585, 210],
+  Anonas: [620, 185],
+  Katipunan: [680, 185],
+  Santolan: [740, 185],
+  "Marikina-Pasig": [820, 185],
+  Antipolo: [905, 185],
+
+  // MRT-3
+  "North Avenue": [460, 130],
+  "Quezon Avenue": [510, 160],
+  Kamuning: [540, 190],
+  "Araneta Center Cubao (MRT)": [585, 255],
+  "Santolan-Annapolis": [610, 315],
+  Ortigas: [620, 362],  
+  "Shaw Boulevard": [600, 430],
+  Boni: [580, 495],
+  Guadalupe: [540, 565],
+  Buendia: [450, 640],
+  Ayala: [360, 690],
+  Magallanes: [270, 705],
+  Taft: [190, 705]
+};
+
+/* ===============================
+   BUILD LINES
+================================ */
+const LRT1: string[] = [];
+const LRT2: string[] = [];
+const MRT3: string[] = [];
+
+stations.forEach((s) => {
+  const [name, line] = s.title.replace(" Station", "").split(" - ");
+  if (!POS[name]) return;
+  if (line === "LRT 1") LRT1.push(name);
+  if (line === "LRT 2") LRT2.push(name);
+  if (line === "MRT 3") MRT3.push(name);
+});
+
+const WALK: [string, string][] = [
+  ["Doroteo Jose", "Recto"],
+  ["EDSA", "Taft"],
+  ["Roosevelt", "North Avenue"],
+  ["Araneta Center Cubao (LRT2)", "Araneta Center Cubao (MRT)"]
+];
+
+const poly = (arr: string[]) =>
+  arr.map((s) => POS[s].join(",")).join(" ");
+
+export default function GraphVisualization() {
+  return (
+    <div className="bg-[#12091f] rounded-[40px] p-6 border-[4px] border-[#ff5fa2] relative">
+      {/* TITLE */}
+      <h3 className="text-[#f181b6] font-header text-4xl mb-2 text-left">
+        MRT AND LRT STATIONS MAP
+      </h3>
+
+      <div className="flex justify-center items-center">
+        <svg width="1080" height="880" viewBox="0 0 960 820">
+          {/* LINES */}
+          <polyline points={poly(LRT1)} stroke={COLORS.lrt1} strokeWidth="4" fill="none" />
+          <polyline points={poly(LRT2)} stroke={COLORS.lrt2} strokeWidth="4" fill="none" />
+          <polyline points={poly(MRT3)} stroke={COLORS.mrt3} strokeWidth="4" fill="none" />
+
+          {/* Walk Transfers */}
+          {WALK.map(([a, b]) => (
+            <line
+              key={a + b}
+              x1={POS[a][0]}
+              y1={POS[a][1]}
+              x2={POS[b][0]}
+              y2={POS[b][1]}
+              stroke={COLORS.walk}
+              strokeDasharray="6 6"
+              strokeWidth="2"
+            />
+          ))}
+
+          {/* Stations */}
+          {Object.entries(POS).map(([name, [x, y]]) => {
+            const isTransfer = WALK.flat().includes(name);
+            const isLRT1 = LRT1.includes(name);
+
+            let textX = isLRT1 ? x - 12 : x + 8;
+            let textY = y + 4;
+            let anchor: "start" | "end" | "middle" = isLRT1 ? "end" : "start";
+
+            // Adjusted labels for Balintawak and Roosevelt
+            if (name === "Balintawak") {
+              textX = x + 25; // move label right
+              textY = y - 10; // higher
+              anchor = "middle";
+            }
+            if (name === "Roosevelt") {
+              textX = x;        // centered
+              textY = y - 20;   // slightly lower than before
+              anchor = "middle";
+            }
+
+            if (
+              ["Anonas","Katipunan","Santolan","Marikina-Pasig","Antipolo"].includes(name)
+            ) {
+              textX = x;
+              textY = y - 12;
+              anchor = "middle";
+            }
+
+            if (["Legarda","Pureza","Recto","Taft","Magallanes"].includes(name)) {
+              textX = x;
+              textY = y + 18;
+              anchor = "middle";
+            }
+
+            if (["North Avenue","Quezon Avenue","Kamuning"].includes(name)) {
+              textX = x - 12;
+              textY = y + 12;
+              anchor = "end";
+            }
+
+            if (name === "Betty Go-Belmonte") {
+              textX = x - 12;
+              anchor = "end";
+            }
+
+            return (
+              <g key={name}>
+                {isTransfer && (
+                  <circle cx={x} cy={y} r={9} fill="none" stroke="#fff" strokeWidth="2" />
+                )}
+                <circle cx={x} cy={y} r={4} fill="#fff" />
+                <text
+                  x={textX}
+                  y={textY}
+                  fontSize="11"
+                  fill={COLORS.text}
+                  textAnchor={anchor}
+                >
+                  {name.toUpperCase()}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      {/* LEGEND - BIGGER */}
+      <div
+        className="absolute bottom-6 right-6 rounded-2xl p-6 text-base text-white space-y-3"
+        style={{
+          background: "#1a0f2f",
+          border: `3px solid ${COLORS.neon}`,
+          boxShadow: `
+            0 0 12px ${COLORS.neon},
+            0 0 28px rgba(255,95,162,0.8),
+            inset 0 0 14px rgba(255,95,162,0.4)
+          `
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt1 }} />
+          <span>LRT-1 LINE</span>
         </div>
-    );
+        <div className="flex items-center gap-3">
+          <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt2 }} />
+          <span>LRT-2 LINE</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="w-10 h-1 rounded" style={{ background: COLORS.mrt3 }} />
+          <span>MRT-3 LINE</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="w-3 h-3 rounded-full bg-white" />
+          <span>STATION</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="w-10 border-t-2 border-dashed border-white" />
+          <span>WALK TRANSFER</span>
+        </div>
+      </div>
+    </div>
+  );
 }

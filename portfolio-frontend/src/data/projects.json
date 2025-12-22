@@ -30,7 +30,7 @@
     "id": 4,
     "title": "Breadth-First Search",
     "category": "Data Structures and Algorithms",
-    "image": "/public/projects/coming-soon.png",
+    "image": "/public/projects/breadthfirst.png",
     "description": "A data structure project implementing breadth-first search algorithm using an MRT/LRT network graph simulator.",
     "technologies": ["Python"],
     "link": "/works/breadthfirstsearch"

@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import ControlPanel from "@/components/breadthfirst-search/ControlPanel";
-import { Network } from 'react-vis-network';
+import GraphVisualization from "@/components/breadthfirst-search/GraphVisualization";
 import stations from '@/data/stations.json';
 
 
@@ -11,59 +11,12 @@ const BreadthFirstSearch = () => {
     const [currentNode, setCurrentNode] = useState(null);
     const [searchValue, setSearchValue] = useState("");
     const [startValue, setStartValue] = useState("");
-    const networkRef = useRef<any>(null);
 
     const handleSearch = () => {
-        if (networkRef.current && searchValue && startValue) {
-            const network = networkRef.current;
-            const path = network.getShortestPath(startValue, searchValue);
-            if (path) {
-                setCurrentNode(searchValue);
-                console.log('Shortest path:', path);
-                // Highlight path (you can update node/edge colors here)
-            }
-        }
+        // The GraphVisualization component handles the BFS internally
+        console.log('Finding path from', startValue, 'to', searchValue);
     };
 
-    // Sample MRT/LRT graph data CHANGE THIS LATERRRR
-    const graphData = {
-        nodes: stations.map((station: any) => {
-            const stationName = station.title.split(' - ')[0].replace(' Station', '');
-            return {
-                id: stationName,
-                label: stationName,
-                color: '#f181b6',
-                font: { color: '#fff' }
-            };
-        }),
-        edges: [
-            // For demo, connect first 5 stations in sequence
-            { from: 'Taft', to: 'Magallanes' },
-            { from: 'Magallanes', to: 'Ayala' },
-            { from: 'Ayala', to: 'Buendia' },
-            { from: 'Buendia', to: 'Guadalupe' },
-            // Add more connections as needed
-        ]
-    };
-
-    const options = {
-        layout: { hierarchical: false },
-        physics: { enabled: true, stabilization: { iterations: 100 } },
-        nodes: { 
-            shape: 'circle',
-            size: 25,
-            borderWidth: 2,
-            borderColor: '#ffcaef'
-        },
-        edges: { 
-            arrows: 'to',
-            color: '#ffcaef',
-            width: 2
-        },
-        interaction: { hover: true },
-        height: '400px'
-    };
-    
     return (
         <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/lab4-bg.png')` }}>
             <style>{`
@@ -90,21 +43,19 @@ const BreadthFirstSearch = () => {
                     />
                     
                     {/* Graph Visualization */}
-                    <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
-                        <h3 className="text-[#f181b6] font-header text-4xl mb-4">MRT and LRT Stations Map</h3>
-                        <div className="w-full bg-[#1f1131] rounded-[20px] overflow-hidden">
-                            <Network 
-                                data={graphData} 
-                                options={options}
-                                getNetwork={(network) => networkRef.current = network}
-                            />
-                        </div>
+                    <div className="bg-[#1f1131]">
+                        <GraphVisualization 
+                            start={startValue} 
+                            end={searchValue} 
+                            currentNode={currentNode} 
+                        />
                     </div>
 
                     <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
                         <h3 className="text-white font-header text-4xl mb-4">LRT/MRT STATION ROUTE</h3>
                         <p className="text-[#ffcaef] font-body text-m">Current Station → Destination</p>
                     </div>
+
                 </div>
             </main>
             <Footer />
