@@ -1,0 +1,69 @@
+{
+  "mrt3": {
+    "direction": "Taft Avenue to North Avenue",
+    "segments": [
+      { "from": "Taft", "to": "Magallanes", "distance_km": 1.2 },
+      { "from": "Magallanes", "to": "Ayala", "distance_km": 0.95 },
+      { "from": "Ayala", "to": "Buendia", "distance_km": 2.0 },
+      { "from": "Buendia", "to": "Guadalupe", "distance_km": 1.5 },
+      { "from": "Guadalupe", "to": "Boni", "distance_km": 1.3 },
+      { "from": "Boni", "to": "Shaw Boulevard", "distance_km": 1.2 },
+      { "from": "Shaw Boulevard", "to": "Ortigas", "distance_km": 1.4 },
+      { "from": "Ortigas", "to": "Santolan-Annapolis", "distance_km": 1.1 },
+      { "from": "Santolan-Annapolis", "to": "Araneta Center Cubao (MRT)", "distance_km": 1.3 },
+      { "from": "Araneta Center Cubao (MRT)", "to": "Kamuning", "distance_km": 1.0 },
+      { "from": "Kamuning", "to": "Quezon Avenue", "distance_km": 1.2 },
+      { "from": "Quezon Avenue", "to": "North Avenue", "distance_km": 1.5 }
+    ]
+  },
+
+  "lrt1": {
+    "segments": [
+      { "from": "Baclaran", "to": "EDSA", "distance_km": 1.0 },
+      { "from": "EDSA", "to": "Libertad", "distance_km": 0.9 },
+      { "from": "Libertad", "to": "Gil Puyat", "distance_km": 1.0 },
+      { "from": "Gil Puyat", "to": "Vito Cruz", "distance_km": 0.8 },
+      { "from": "Vito Cruz", "to": "Quirino", "distance_km": 0.9 },
+      { "from": "Quirino", "to": "Pedro Gil", "distance_km": 0.8 },
+      { "from": "Pedro Gil", "to": "United Nations", "distance_km": 0.7 },
+      { "from": "United Nations", "to": "Central", "distance_km": 0.8 },
+      { "from": "Central", "to": "Carriedo", "distance_km": 0.9 },
+      { "from": "Carriedo", "to": "Doroteo Jose", "distance_km": 0.8 },
+      { "from": "Doroteo Jose", "to": "Bambang", "distance_km": 0.9 },
+      { "from": "Bambang", "to": "Tayuman", "distance_km": 0.8 },
+      { "from": "Tayuman", "to": "Blumentritt", "distance_km": 0.9 },
+      { "from": "Blumentritt", "to": "Abad Santos", "distance_km": 0.8 },
+      { "from": "Abad Santos", "to": "R. Papa", "distance_km": 0.7 },
+      { "from": "R. Papa", "to": "5th Avenue", "distance_km": 0.8 },
+      { "from": "5th Avenue", "to": "Monumento", "distance_km": 1.0 },
+      { "from": "Monumento", "to": "Balintawak", "distance_km": 1.2 },
+      { "from": "Balintawak", "to": "Roosevelt", "distance_km": 1.5 }
+    ]
+  },
+
+  "lrt2": {
+    "segments": [
+      { "from": "Recto", "to": "Legarda", "distance_km": 0.8 },
+      { "from": "Legarda", "to": "Pureza", "distance_km": 0.9 },
+      { "from": "Pureza", "to": "V. Mapa", "distance_km": 1.0 },
+      { "from": "V. Mapa", "to": "J. Ruiz", "distance_km": 0.9 },
+      { "from": "J. Ruiz", "to": "Gilmore", "distance_km": 0.8 },
+      { "from": "Gilmore", "to": "Betty Go-Belmonte", "distance_km": 1.0 },
+      { "from": "Betty Go-Belmonte", "to": "Araneta Center Cubao (LRT2)", "distance_km": 1.2 },
+      { "from": "Araneta Center Cubao (LRT2)", "to": "Anonas", "distance_km": 0.7 },
+      { "from": "Anonas", "to": "Katipunan", "distance_km": 1.0 },
+      { "from": "Katipunan", "to": "Santolan", "distance_km": 0.9 },
+      { "from": "Santolan", "to": "Marikina-Pasig", "distance_km": 1.3 },
+      { "from": "Marikina-Pasig", "to": "Antipolo", "distance_km": 1.5 }
+    ]
+  },
+
+  "transfers": {
+    "segments": [
+      { "from": "EDSA", "to": "Taft", "distance_km": 0.3 },
+      { "from": "Doroteo Jose", "to": "Recto", "distance_km": 0.2 },
+      { "from": "Araneta Center Cubao (LRT2)", "to": "Araneta Center Cubao (MRT)", "distance_km": 0.1 },
+      { "from": "Roosevelt", "to": "North Avenue", "distance_km": 0.4 }
+    ]
+  }
+}

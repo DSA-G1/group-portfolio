@@ -109,3 +109,24 @@ All colors MUST be HSL.
     background-position: center top;
   }
 }
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 202, 239, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff5fa2 0%, #f181b6 100%);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 202, 239, 0.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f181b6 0%, #ffcaef 100%);
+}

@@ -13,7 +13,7 @@
     "title": "Binary Tree",
     "category": "Data Structures and Algorithms",
     "image": "/public/projects/binary.png",
-    "description": "A data structure project implementing binary tree functionalities through the use of a school record system.",
+    "description": "A data structure project implementing binary tree functionalities.",
     "technologies": ["Python"],
     "link": "/works/binarytree"
   },
@@ -28,10 +28,10 @@
   },
   {
     "id": 4,
-    "title": "Breadth-First Search)",
+    "title": "Breadth-First Search",
     "category": "Data Structures and Algorithms",
-    "image": "/public/projects/coming-soon.png",
-    "description": "A data structure project implementing breadth-first search algorithm.",
+    "image": "/public/projects/breadthfirst.png",
+    "description": "A data structure project implementing breadth-first search algorithm using an MRT/LRT network graph simulator.",
     "technologies": ["Python"],
     "link": "/works/breadthfirstsearch"
   }
