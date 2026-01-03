@@ -68,8 +68,8 @@ const BreadthFirstSearch = () => {
     return (
         <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/lab4-bg.png')` }}>
             <Header />
-            <main className="pt-16 pb-8 px-4 md:px-6">
-                <h1 className="font-header text-4xl md:text-5xl lg:text-6xl text-center mb-8">
+            <main className="pt-32 md:pt-40 pb-12 px-6">
+                <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-12">
                     <span className="text-white">SHORTEST PATH </span>
                     <span className="text-[#f181b6]">VISUALIZER</span>
                 </h1>
