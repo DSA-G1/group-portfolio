@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import stations from "@/data/stations.json";
 
 const COLORS = {
-  bg: "#12091f",
+  bg: "#1f1131",
   text: "#f3e8ff",
-  lrt1: "#c9ff1a",
-  lrt2: "#7fd1ff",
-  mrt3: "#ff5fa2",
+  lrt1: "#8a910a",
+  lrt2: "#4050be",
+  mrt3: "#902d67",
   walk: "#ffffff",
   neon: "#ff5fa2",
   pathHighlight: "#00ff88",
@@ -161,11 +161,11 @@ export default function GraphVisualization({ start, end, currentNode, pathResult
           y1={fromPos[1]}
           x2={toPos[0]}
           y2={toPos[1]}
-          stroke={COLORS.pathHighlight}
+          stroke="url(#pathGradient)"
           strokeWidth="6"
           strokeLinecap="round"
           style={{
-            filter: `drop-shadow(0 0 8px ${COLORS.pathGlow}) drop-shadow(0 0 16px ${COLORS.pathGlow})`
+            filter: `drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 16px rgba(148, 185, 255, 0.6))`
           }}
         />
       );
@@ -173,14 +173,19 @@ export default function GraphVisualization({ start, end, currentNode, pathResult
   };
 
   return (
-    <div className="bg-[#12091f] rounded-[40px] p-6 border-[4px] border-[#ff5fa2] relative">
+    <div className="rounded-[40px] p-6 relative">
       {/* TITLE */}
-      <h3 className="text-[#f181b6] font-header text-4xl mb-2 text-left">
-        MRT AND LRT STATIONS MAP
-      </h3>
+      <h3 className="text-white font-header text-2xl md:text-4xl">LRT AND MRT STATIONS MAP</h3>
 
       <div className="flex justify-center items-center relative">
         <svg width="1080" height="880" viewBox="0 0 960 820">
+          {/* GRADIENT DEFINITION */}
+          <defs>
+            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{ stopColor: "#cdffd8", stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: "#94b9ff", stopOpacity: 1 }} />
+            </linearGradient>
+          </defs>
           {/* LINES */}
           <polyline points={poly(LRT1)} stroke={COLORS.lrt1} strokeWidth="4" fill="none" />
           <polyline points={poly(LRT2)} stroke={COLORS.lrt2} strokeWidth="4" fill="none" />
@@ -211,19 +216,19 @@ export default function GraphVisualization({ start, end, currentNode, pathResult
             const isStart = pathResult?.path[0] === name;
             const isEnd = pathResult?.path[pathResult.path.length - 1] === name;
 
-            let textX = isLRT1 ? x - 12 : x + 8;
-            let textY = y + 4;
+            let textX = isLRT1 ? x - 20 : x + 16;
+            let textY = y + 5;
             let anchor: "start" | "end" | "middle" = isLRT1 ? "end" : "start";
 
             // Adjusted labels for Balintawak and Roosevelt
             if (name === "Balintawak") {
-              textX = x + 25;
-              textY = y - 10;
+              textX = x + 35;
+              textY = y - 14;
               anchor = "middle";
             }
             if (name === "Roosevelt") {
               textX = x;
-              textY = y - 20;
+              textY = y - 28;
               anchor = "middle";
             }
 
@@ -231,59 +236,70 @@ export default function GraphVisualization({ start, end, currentNode, pathResult
               ["Anonas","Katipunan","Santolan","Marikina-Pasig","Antipolo"].includes(name)
             ) {
               textX = x;
-              textY = y - 12;
+              textY = y - 20;
               anchor = "middle";
             }
 
             if (["Legarda","Pureza","Recto","Taft","Magallanes"].includes(name)) {
               textX = x;
-              textY = y + 18;
+              textY = y + 26;
               anchor = "middle";
             }
 
             if (["North Avenue","Quezon Avenue","Kamuning"].includes(name)) {
-              textX = x - 12;
-              textY = y + 12;
+              textX = x - 20;
+              textY = y + 16;
               anchor = "end";
             }
 
             if (name === "Betty Go-Belmonte") {
-              textX = x - 12;
+              textX = x - 20;
               anchor = "end";
             }
 
-            // Determine station color and size
-            let stationFill = "#fff";
-            let stationRadius = 4;
-            let stationStroke = "none";
-            let stationStrokeWidth = 0;
+            // Determine station line color
+            let lineColor = "#fff";
+            if (isLRT1) lineColor = COLORS.lrt1;
+            else if (LRT2.includes(name)) lineColor = COLORS.lrt2;
+            else if (MRT3.includes(name)) lineColor = COLORS.mrt3;
+
+            // Determine station appearance
+            let stationFill = "none";
+            let stationRadius = 6;
+            let stationStroke = lineColor;
+            let stationStrokeWidth = 3;
             let glowFilter = "";
 
             if (isStart) {
-              stationFill = "#00ff00"; // Green for start
-              stationRadius = 8;
-              stationStroke = "#fff";
-              stationStrokeWidth = 3;
-              glowFilter = "drop-shadow(0 0 10px rgba(0, 255, 0, 0.8))";
-            } else if (isEnd) {
-              stationFill = "#ff0000"; // Red for end
-              stationRadius = 8;
-              stationStroke = "#fff";
-              stationStrokeWidth = 3;
-              glowFilter = "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))";
-            } else if (inPath) {
-              stationFill = COLORS.pathHighlight; // Neon green for path
+              stationFill = "url(#pathGradient)";
               stationRadius = 7;
-              stationStroke = "#fff";
+              stationStroke = "url(#pathGradient)";
               stationStrokeWidth = 2;
-              glowFilter = `drop-shadow(0 0 8px ${COLORS.pathGlow})`;
+              glowFilter = "drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 12px rgba(148, 185, 255, 0.6))";
+            } else if (isEnd) {
+              stationFill = "url(#pathGradient)";
+              stationRadius = 7;
+              stationStroke = "url(#pathGradient)";
+              stationStrokeWidth = 2;
+              glowFilter = "drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 12px rgba(148, 185, 255, 0.6))";
+            } else if (inPath) {
+              stationFill = "url(#pathGradient)";
+              stationRadius = 7;
+              stationStroke = "url(#pathGradient)";
+              stationStrokeWidth = 2;
+              glowFilter = `drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 12px rgba(148, 185, 255, 0.6))`;
             }
 
             return (
               <g key={name}>
-                {isTransfer && !inPath && (
-                  <circle cx={x} cy={y} r={9} fill="none" stroke="#fff" strokeWidth="2" />
-                )}
+                {/* Background circle to hide the line */}
+                <circle 
+                  cx={x} 
+                  cy={y} 
+                  r={stationRadius + 1} 
+                  fill={COLORS.bg}
+                />
+                {/* Station circle */}
                 <circle 
                   cx={x} 
                   cy={y} 
@@ -300,12 +316,9 @@ export default function GraphVisualization({ start, end, currentNode, pathResult
                   x={textX}
                   y={textY}
                   fontSize="11"
-                  fill={inPath ? COLORS.pathHighlight : COLORS.text}
+                  fill={COLORS.text}
                   textAnchor={anchor}
-                  fontWeight={inPath ? "bold" : "normal"}
-                  style={{
-                    textShadow: inPath ? `0 0 8px ${COLORS.pathGlow}` : "none"
-                  }}
+                  fontWeight="normal"
                 >
                   {name.toUpperCase()}
                 </text>
@@ -316,133 +329,34 @@ export default function GraphVisualization({ start, end, currentNode, pathResult
 
         {/* LEGEND - positioned at lower right of graph */}
         <div
-          className="absolute bottom-6 right-6 rounded-2xl p-6 text-base text-white space-y-3"
+          className="absolute bottom-2 right-2 md:bottom-4 lg:bottom-6 md:right-4 lg:right-6 rounded-lg md:rounded-xl lg:rounded-2xl p-2 md:p-3 lg:p-6 text-xs md:text-sm lg:text-base text-white space-y-1 md:space-y-2 lg:space-y-3"
           style={{
-            background: "#1a0f2f",
-            border: `3px solid ${COLORS.neon}`,
+            background: "#1f1131",
+            border: `3px solid #ffcaef`,
             boxShadow: `
-              0 0 12px ${COLORS.neon},
-              0 0 28px rgba(255,95,162,0.8),
-              inset 0 0 14px rgba(255,95,162,0.4)
+              0 0 12px #ffcaef,
+              0 0 28px rgba(255,202,239,0.8),
+              inset 0 0 14px rgba(255,202,239,0.4)
             `
           }}
         >
-          <div className="flex items-center gap-3">
-            <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt1 }} />
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 h-1 rounded" style={{ background: COLORS.lrt1 }} />
             <span>LRT-1 LINE</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt2 }} />
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 h-1 rounded" style={{ background: COLORS.lrt2 }} />
             <span>LRT-2 LINE</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="w-10 h-1 rounded" style={{ background: COLORS.mrt3 }} />
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 h-1 rounded" style={{ background: COLORS.mrt3 }} />
             <span>MRT-3 LINE</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-white" />
-            <span>STATION</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="w-10 border-t-2 border-dashed border-white" />
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 border-t-2 border-dashed border-white" />
             <span>WALK TRANSFER</span>
           </div>
-          {pathResult && (
-            <>
-              <div className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full" style={{ background: COLORS.pathHighlight }} />
-                <span>PATH STATIONS</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-green-500" />
-                <span>START</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-red-500" />
-                <span>END</span>
-              </div>
-            </>
-          )}
         </div>
-      </div>
-
-      {/* PATH RESULT - HORIZONTAL LAYOUT */}
-      <div className="mt-4">
-        {pathResult ? (
-          <div
-            ref={pathContainerRef}
-            className="rounded-2xl p-6 space-y-6"
-            style={{
-              background: "#1a0f2f",
-              border: `3px solid ${COLORS.neon}`
-            }}
-          >
-            <h3 className="text-white font-header text-3xl mb-4">Path Found</h3>
-            <div className="flex items-center justify-start gap-4 overflow-x-auto custom-scrollbar pb-4">
-              {pathResult.path.map((station, index) => (
-                <React.Fragment key={index}>
-                  <div className={`flex flex-col items-center gap-2 flex-shrink-0 ${isVisible ? 'animate-fadeIn' : 'opacity-0'}`}
-                    style={{
-                      animationDelay: isVisible ? `${index * 0.1}s` : '0s',
-                      animationFillMode: 'both'
-                    }}
-                  >
-                    <div
-                      className={`w-16 h-16 rounded-full flex items-center justify-center font-bold text-white border-4 transition-all duration-300 hover:scale-110 ${
-                        index === 0
-                          ? 'bg-green-500 border-green-300 animate-pulse'
-                          : index === pathResult.path.length - 1
-                          ? 'bg-red-500 border-red-300 animate-pulse'
-                          : 'bg-[#00ff88] border-[#00ff88]/50'
-                      }`}
-                      style={{
-                        boxShadow: index === 0 
-                          ? '0 0 20px rgba(34,197,94,0.8), 0 0 40px rgba(34,197,94,0.5), inset 0 0 20px rgba(34,197,94,0.3)'
-                          : index === pathResult.path.length - 1
-                          ? '0 0 20px rgba(239,68,68,0.8), 0 0 40px rgba(239,68,68,0.5), inset 0 0 20px rgba(239,68,68,0.3)'
-                          : '0 0 20px rgba(0,255,136,0.8), 0 0 40px rgba(0,255,136,0.5), inset 0 0 20px rgba(0,255,136,0.3)'
-                      }}
-                    >
-                      <span className="text-lg">{index + 1}</span>
-                    </div>
-                    <div
-                      className={`px-3 py-2 rounded-lg text-center font-body text-sm min-w-[120px] transition-all duration-300 ${
-                        index === 0
-                          ? 'bg-green-500/20 text-green-300 border border-green-500'
-                          : index === pathResult.path.length - 1
-                          ? 'bg-red-500/20 text-red-300 border border-red-500'
-                          : 'bg-[#00ff88]/20 text-[#00ff88] border border-[#00ff88]'
-                      }`}
-                    >
-                      <div className="font-bold">{station}</div>
-                      {index === 0 && <div className="text-xs mt-1">START</div>}
-                      {index === pathResult.path.length - 1 && <div className="text-xs mt-1">END</div>}
-                    </div>
-                  </div>
-                  {index < pathResult.path.length - 1 && (
-                    <div 
-                      className={`text-[#f181b6] text-4xl font-bold flex-shrink-0 pb-12 ${isVisible ? 'animate-fadeIn' : 'opacity-0'}`}
-                      style={{
-                        animationDelay: isVisible ? `${index * 0.1 + 0.05}s` : '0s',
-                        animationFillMode: 'both'
-                      }}
-                    >→</div>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">🗺️</div>
-            <p className="text-white font-body text-xl mb-2">
-              Enter start and destination to find the shortest route
-            </p>
-            <p className="text-[#ffcaef] font-body text-lg">
-              Using Breadth-First Search (BFS) Algorithm
-            </p>
-          </div>
-        )}
       </div>
     </div>
   );

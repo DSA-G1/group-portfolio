@@ -8,6 +8,16 @@ import ControlPanel from "@/components/breadthfirst-search/ControlPanel";
 import GraphVisualization from "@/components/breadthfirst-search/GraphVisualization";
 
 const BreadthFirstSearch = () => {
+    const WALK_SEGMENTS = new Set([
+      "Doroteo Jose|Recto",
+      "Recto|Doroteo Jose",
+      "EDSA|Taft",
+      "Taft|EDSA",
+      "Roosevelt|North Avenue",
+      "North Avenue|Roosevelt",
+      "Araneta Center Cubao (LRT2)|Araneta Center Cubao (MRT)",
+      "Araneta Center Cubao (MRT)|Araneta Center Cubao (LRT2)"
+    ]);
     const { toast } = useToast();
     const [currentNode, setCurrentNode] = useState(null);
     const [searchValue, setSearchValue] = useState("");
@@ -86,13 +96,142 @@ const BreadthFirstSearch = () => {
                         onReset={handleReset}
                     />
                     
-                    <div className="bg-[#1f1131] rounded-2xl md:rounded-[40px] p-4 md:p-6 border-2 md:border-[4px] border-[#ffcaef] overflow-hidden">
+                    <div className="bg-[#1f1131] rounded-2xl md:rounded-[40px] p-4 md:p-6 overflow-hidden border-[4px] border-[#ffcaef]">
                         <GraphVisualization 
                             start={startValue} 
                             end={searchValue} 
                             currentNode={currentNode}
                             pathResult={pathResult}
                         />
+                    </div>
+
+                    {/* LRT / MRT STATION ROUTE CARD - Always visible */}
+                    <div 
+                      className="bg-[#1f1131] rounded-2xl md:rounded-[40px] p-4 md:p-6 overflow-hidden border-[4px] border-[#ffcaef]"
+                    >
+                      <h3 className="text-white font-body text-xl md:text-2xl">LRT/MRT STATION ROUTE</h3>
+                      <p className="text-[#ffcaef] font-body text-sm md:text-md md:mb-6">Current Station ⟶ Destination</p>
+                      {pathResult ? (
+                        <div className="overflow-x-auto custom-scrollbar pb-4">
+                          <svg 
+                            width={Math.max(pathResult.path.length * 140 + 140, 800)} 
+                            height="140" 
+                            style={{ minWidth: '100%' }}
+                          >
+                            <defs>
+                              <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style={{ stopColor: "#cdffd8", stopOpacity: 1 }} />
+                                <stop offset="100%" style={{ stopColor: "#94b9ff", stopOpacity: 1 }} />
+                              </linearGradient>
+                            </defs>
+                            {pathResult.path.map((station, index) => {
+                              const isStart = index === 0;
+                              const isEnd = index === pathResult.path.length - 1;
+                              const nextStation = pathResult.path[index + 1];
+                              const prevStation = pathResult.path[index - 1];
+                              const isWalk = nextStation ? WALK_SEGMENTS.has(`${station}|${nextStation}`) : false;
+                              const isAfterWalk = prevStation ? WALK_SEGMENTS.has(`${prevStation}|${station}`) : false;
+                              
+                              const spacing = 140;
+                              const x = 70 + (index * spacing);
+                              const y = 50;
+                              
+                              let stationFill = "none";
+                              let stationRadius = 13;
+                              let stationStroke = "#ffcaef";
+                              let stationStrokeWidth = 7;
+                              let glowFilter = "";
+
+                              // Fill logic: start, end, before walk, or after walk
+                              if (isStart || isEnd || isWalk || isAfterWalk) {
+                                stationFill = "#ffcaef";
+                                stationStrokeWidth = 3;
+                              }
+
+                              if (isEnd) {
+                                glowFilter = "drop-shadow(0 0 10px rgba(255, 202, 239, 0.9)) drop-shadow(0 0 18px rgba(255, 202, 239, 0.7))";
+                              }
+
+                              // Split long station names
+                              const stationName = station.toUpperCase();
+                              const words = stationName.split(' ');
+                              const lines: string[] = [];
+                              let currentLine = '';
+                              
+                              words.forEach((word, i) => {
+                                const testLine = currentLine ? `${currentLine} ${word}` : word;
+                                if (testLine.length > 12 && currentLine) {
+                                  lines.push(currentLine);
+                                  currentLine = word;
+                                } else {
+                                  currentLine = testLine;
+                                }
+                                if (i === words.length - 1) {
+                                  lines.push(currentLine);
+                                }
+                              });
+
+                              return (
+                                <g key={station}>
+                                  {/* Connection line to next station */}
+                                  {index < pathResult.path.length - 1 && (
+                                    <line
+                                      x1={x}
+                                      y1={y}
+                                      x2={x + spacing}
+                                      y2={y}
+                                      stroke={isWalk ? "#ffffff" : "#ffcaef"}
+                                      strokeWidth="7"
+                                      strokeDasharray={isWalk ? "10 10" : "0"}
+                                      strokeLinecap="round"
+                                    />
+                                  )}
+                                  
+                                  {/* Background circle to hide the line */}
+                                  <circle 
+                                    cx={x} 
+                                    cy={y} 
+                                    r={stationRadius + 3} 
+                                    fill="#1f1131"
+                                  />
+                                  
+                                  {/* Station circle */}
+                                  <circle 
+                                    cx={x} 
+                                    cy={y} 
+                                    r={stationRadius} 
+                                    fill={stationFill}
+                                    stroke={stationStroke}
+                                    strokeWidth={stationStrokeWidth}
+                                    style={{
+                                      filter: glowFilter,
+                                      transition: "all 0.3s ease"
+                                    }}
+                                  />
+                                  
+                                  {/* Station label */}
+                                  <text
+                                    x={x}
+                                    y={y + 35}
+                                    fontSize="12"
+                                    fill="#f3e8ff"
+                                    textAnchor="middle"
+                                    fontWeight="600"
+                                  >
+                                    {lines.map((line, i) => (
+                                      <tspan key={i} x={x} dy={i === 0 ? 0 : 14}>
+                                        {line}
+                                      </tspan>
+                                    ))}
+                                  </text>
+                                </g>
+                              );
+                            })}
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className="h-24"></div>
+                      )}
                     </div>
                 </div>
             </main>
