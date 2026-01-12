@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
@@ -23,6 +23,24 @@ const BreadthFirstSearch = () => {
     const [searchValue, setSearchValue] = useState("");
     const [startValue, setStartValue] = useState("");
     const [pathResult, setPathResult] = useState(null);
+    // NEW: animated index for station highlight
+    const [animatedIndex, setAnimatedIndex] = useState<number | null>(null);
+
+    // NEW: loop through stations when a path exists
+    useEffect(() => {
+      if (!pathResult?.path?.length) {
+        setAnimatedIndex(null);
+        return;
+      }
+      let i = 0;
+      setAnimatedIndex(0);
+      const ANIMATION_MS = 700; // speed per station
+      const interval = setInterval(() => {
+        i = (i + 1) % pathResult.path.length;
+        setAnimatedIndex(i);
+      }, ANIMATION_MS);
+      return () => clearInterval(interval);
+    }, [pathResult]);
 
     const handleSearch = async () => {
         if (!startValue || !searchValue) {
@@ -109,6 +127,17 @@ const BreadthFirstSearch = () => {
                     <div 
                       className="bg-[#1f1131] rounded-2xl md:rounded-[40px] p-4 md:p-6 overflow-hidden border-[4px] border-[#ffcaef]"
                     >
+                      {/* NEW: pulse keyframes for glow ring */}
+                      <style>
+                        {`
+                          @keyframes routePulse {
+                            0% { transform: scale(1); opacity: 0.9; }
+                            60% { transform: scale(1.6); opacity: 0; }
+                            100% { transform: scale(1.6); opacity: 0; }
+                          }
+                        `}
+                      </style>
+
                       <h3 className="text-white font-body text-xl md:text-2xl">LRT/MRT STATION ROUTE</h3>
                       <p className="text-[#ffcaef] font-body text-sm md:text-md md:mb-6">Current Station ⟶ Destination</p>
                       {pathResult ? (
@@ -131,6 +160,9 @@ const BreadthFirstSearch = () => {
                               const prevStation = pathResult.path[index - 1];
                               const isWalk = nextStation ? WALK_SEGMENTS.has(`${station}|${nextStation}`) : false;
                               const isAfterWalk = prevStation ? WALK_SEGMENTS.has(`${prevStation}|${station}`) : false;
+
+                              // NEW: whether this station is currently highlighted
+                              const isAnimated = animatedIndex === index;
                               
                               const spacing = 140;
                               const x = 70 + (index * spacing);
@@ -142,14 +174,22 @@ const BreadthFirstSearch = () => {
                               let stationStrokeWidth = 7;
                               let glowFilter = "";
 
-                              // Fill logic: start, end, before walk, or after walk
+                              // Base fill logic: start, end, before/after walk
                               if (isStart || isEnd || isWalk || isAfterWalk) {
                                 stationFill = "#ffcaef";
                                 stationStrokeWidth = 3;
                               }
 
+                              // End station glow
                               if (isEnd) {
                                 glowFilter = "drop-shadow(0 0 10px rgba(255, 202, 239, 0.9)) drop-shadow(0 0 18px rgba(255, 202, 239, 0.7))";
+                              }
+
+                              // NEW: temporary highlight & glow while animated
+                              if (isAnimated) {
+                                stationFill = "#ffcaef";
+                                stationStrokeWidth = 3;
+                                glowFilter = "drop-shadow(0 0 12px rgba(255, 202, 239, 0.95)) drop-shadow(0 0 22px rgba(255, 202, 239, 0.75))";
                               }
 
                               // Split long station names
@@ -194,6 +234,24 @@ const BreadthFirstSearch = () => {
                                     r={stationRadius + 3} 
                                     fill="#1f1131"
                                   />
+
+                                  {/* NEW: pulse ring when highlighted */}
+                                  {isAnimated && (
+                                    <circle
+                                      cx={x}
+                                      cy={y}
+                                      r={stationRadius + 6}
+                                      fill="none"
+                                      stroke="#ffcaef"
+                                      strokeWidth="7"
+                                      style={{
+                                        filter: "drop-shadow(0 0 14px rgba(255, 202, 239, 0.85))",
+                                        animation: "routePulse 1.4s ease-out infinite",
+                                        transformBox: "fill-box",
+                                        transformOrigin: "center"
+                                      }}
+                                    />
+                                  )}
                                   
                                   {/* Station circle */}
                                   <circle 
