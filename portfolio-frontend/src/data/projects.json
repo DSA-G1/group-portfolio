@@ -39,7 +39,7 @@
     "id": 5,
     "title": "Sorting Algorithms",
     "category": "Data Structures and Algorithms",
-    "image": "/public/projects/coming-soon.png",
+    "image": "/public/projects/sorting.png",
     "description": "A data structure project implementing various sorting algorithms.",
     "technologies": ["Python"],
     "link": "/works/sortingalgorithms"
