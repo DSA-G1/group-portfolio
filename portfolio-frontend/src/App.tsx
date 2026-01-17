@@ -12,6 +12,7 @@ import WorksQueueDequeue from "./pages/WorksQueueDequeue";
 import BinaryTree from "./pages/BinaryTree";
 import BinarySearchTree from "./pages/BinarySearchTree";
 import BreadthFirstSearch from "./pages/BreadthFirstSearch";
+import SortingAlgorithms from "./pages/SortingAlgorithms";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/works/binarytree" element={<BinaryTree />} />
           <Route path="/works/binarysearchtree" element={<BinarySearchTree />} />
           <Route path="/works/breadthfirstsearch" element={<BreadthFirstSearch />} />
+          <Route path="/works/sortingalgorithms" element={<SortingAlgorithms />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
