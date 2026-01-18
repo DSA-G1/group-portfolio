@@ -21,7 +21,7 @@ export default function ControlPanel({ inputValue, setInputValue, algo, setAlgo,
       </div>
 
       <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] mt-6">
-        <h4 className="text-white font-header text-2xl mb-4">1. Add Array List</h4>
+        <h4 className="text-white font-body text-3xl mb-4">Add Array List</h4>
         <p className="text-[#ffcaef] font-body text-sm mb-2">List of Numbers <span className="text-white font-semibold">e.g. 5, 6, 1, 4, 9</span></p>
         <input
           className="w-full bg-[#1f1131] border-[4px] border-[#ffcaef] text-white p-3 rounded-[17px] font-body mb-4"

@@ -143,7 +143,7 @@ export default function SortingAlgorithmVisualizer() {
                 restart={restart}
               />
               <div className={`transition-opacity ${arr.length === 0 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
-                <Ranking arr={arr} speed={speed} />
+                <Ranking arr={arr} algo={algo} speed={speed} />
               </div>
             </div>
           </div>
