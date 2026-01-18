@@ -56,9 +56,9 @@ const WorksQueueDequeue = () => {
     buttons,
     data,
   }: any) => (
-    <section className="pt-32 pb-20 px-4 relative z-10">
+    <section className="pt-10 pb-10 px-4 relative z-10">
       <div className="container mx-auto">
-        <h1 className="font-cubic text-5xl md:text-7xl text-center mb-8">
+        <h1 className="font-body text-5xl md:text-7xl text-center mb-8">
           <span
             className={
               title === "QUEUE" ? "text-foreground" : "text-primary"
@@ -67,35 +67,38 @@ const WorksQueueDequeue = () => {
             {title}
           </span>
         </h1>
-        <div className="max-w-4xl mx-auto text-center bg-[#0b0011] border-2 border-pink-500 rounded-xl p-8 relative z-20">
+        <div className="max-w-4xl mx-auto text-center bg-[#1f1131] rounded-[40px] border-[4px] border-[#ffcaef] p-6 relative z-20">
           <p className="font-frankfurter text-lg text-foreground mb-6">
             {desc}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <input
-              type="number"
-              placeholder="Enter number"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="border rounded px-4 py-2 text-lg text-accent-foreground w-80"
-            />
-            {buttons.map((b: any, i: number) => (
-              <Button
-                key={i}
-                onClick={b.onClick}
-                className={
-                  b.accent
-                    ? "bg-accent hover:bg-primary text-accent-foreground font-frankfurter px-6 py-2"
-                    : "bg-primary hover:bg-accent text-primary-foreground font-frankfurter px-6 py-2"
-                }
-              >
-                {b.label}
-              </Button>
-            ))}
+          <div className="bg-[#1f1131] rounded-[40px] pb-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center">
+              <input
+                className="w-[300px] px-4 bg-[#1f1131] border-[4px] border-[#ffcaef] text-white p-3 rounded-[17px] font-body placeholder:text-gray-400 pb-4 mx-auto sm:mx-0"
+                placeholder="Enter number"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+              />
+              <div className="flex gap-4 flex-wrap justify-center sm:justify-start ml-4">
+                {buttons.map((b: any, i: number) => (
+                  <Button
+                    key={i}
+                    onClick={b.onClick}
+                    className={
+                      b.accent
+                        ? "bg-accent hover:bg-primary text-accent-foreground font-frankfurter px-auto py-2 border-[4px] border-white"
+                        : "bg-primary hover:bg-accent text-primary-foreground font-frankfurter px-auto py-2 border-[4px] border-white"
+                    }
+                  >
+                    {b.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="flex gap-4 justify-center flex-wrap">
             {data.length === 0 ? (
-              <p className="text-foreground font-frankfurter">{title} is empty</p>
+              <p className="text-foreground font-body">{title} is empty</p>
             ) : (
               data.map((item: number, i: number) => (
                 <div
@@ -113,65 +116,68 @@ const WorksQueueDequeue = () => {
   );
 
   return (
-    <div className="relative min-h-screen">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/background/about-page.png')" }}
-      ></div>
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
-      {/* Main content */}
-      <div className="relative z-10 min-h-screen">
-        <Header />
-        <Section
-          title="QUEUE"
-          desc="Add numbers to the rear and remove numbers from the front."
-          input={queueInput}
-          setInput={setQueueInput}
-          buttons={[
-            {
-              label: "Enqueue",
-              onClick: () => doOp("/queue/enqueue", queueInput, setQueueInput),
-            },
-            {
-              label: "Dequeue",
-              onClick: () => doOp("/queue/dequeue", ""),
-              accent: true,
-            },
-          ]}
-          data={queueData}
-        />
-        <Section
-          title="DEQUE"
-          desc="Add numbers to the rear and remove numbers from the front and rear."
-          input={dequeInput}
-          setInput={setDequeInput}
-          buttons={[
-            {
-              label: "Enqueue",
-              onClick: () => doOp("/deque/enqueue", dequeInput, setDequeInput),
-            },
-            {
-              label: "Dequeue",
-              onClick: () => doOp("/deque/dequeue", ""),
-            },
-            {
-              label: "Enqueue Head",
-              onClick: () =>
-                doOp("/deque/enqueue-head", dequeInput, setDequeInput),
-              accent: true,
-            },
-            {
-              label: "Dequeue Tail",
-              onClick: () => doOp("/deque/dequeue-tail", ""),
-              accent: true,
-            },
-          ]}
-          data={dequeData}
-        />
-        <Footer />
-      </div>
+    <div className="min-h-screen bg-cover bg-no-repeat" style={{ backgroundImage: `url('/background/home-page.png')` }}>
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { height: 12px; width: 12px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ffcaef; border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #493463ff; border-radius: 999px; }
+      `}</style>
+      <Header />
+      <main className="pt-24 pb-12 px-6">
+        <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-12">
+          <span className="text-white">QUEUE & DEQUE </span>
+          <span className="text-[#f181b6]">VISUALIZER</span>
+        </h1>
+        <div className="max-w-[1400px] mx-auto">
+          <Section
+            title="QUEUE"
+            desc="Add numbers to the rear and remove numbers from the front."
+            input={queueInput}
+            setInput={setQueueInput}
+            buttons={[
+              {
+                label: "Enqueue",
+                onClick: () => doOp("/queue/enqueue", queueInput, setQueueInput),
+              },
+              {
+                label: "Dequeue",
+                onClick: () => doOp("/queue/dequeue", ""),
+                accent: true,
+              },
+            ]}
+            data={queueData}
+          />
+          <Section
+            title="DEQUE"
+            desc="Add numbers to the rear and remove numbers from the front and rear."
+            input={dequeInput}
+            setInput={setDequeInput}
+            buttons={[
+              {
+                label: "Enqueue",
+                onClick: () => doOp("/deque/enqueue", dequeInput, setDequeInput),
+              },
+              {
+                label: "Dequeue",
+                onClick: () => doOp("/deque/dequeue", ""),
+              },
+              {
+                label: "Enqueue Head",
+                onClick: () =>
+                  doOp("/deque/enqueue-head", dequeInput, setDequeInput),
+                accent: true,
+              },
+              {
+                label: "Dequeue Tail",
+                onClick: () => doOp("/deque/dequeue-tail", ""),
+                accent: true,
+              },
+            ]}
+            data={dequeData}
+          />
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };
