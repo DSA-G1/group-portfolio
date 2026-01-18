@@ -16,11 +16,11 @@ export const algoLabels: Record<AlgoKey, string> = {
 };
 
 export const algoInfo: Record<AlgoKey, { best: string; average: string; worst: string; space: string }> = {
-  bubble: { best: "-", average: "-", worst: "-", space: "-" },
-  selection: { best: "-", average: "-", worst: "-", space: "-" },
-  insertion: { best: "-", average: "-", worst: "-", space: "-" },
-  merge: { best: "-", average: "-", worst: "-", space: "-" },
-  quick: { best: "-", average: "-", worst: "-", space: "-" },
+  bubble: { best: "O(n)", average: "O(n²)", worst: "O(n²)", space: "O(1)" },
+  selection: { best: "O(n²)", average: "O(n²)", worst: "O(n²)", space: "O(1)" },
+  insertion: { best: "O(n)", average: "O(n²)", worst: "O(n²)", space: "O(1)" },
+  merge: { best: "O(n log n)", average: "O(n log n)", worst: "O(n log n)", space: "O(n)" },
+  quick: { best: "O(n log n)", average: "O(n log n)", worst: "O(n²)", space: "O(log n)" },
 };
 
 export function bubbleSortFrames(input: number[]): Frame[] {

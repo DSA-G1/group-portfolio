@@ -6,6 +6,7 @@ import Visualization from "@/components/sorting-algorithms/Visualization";
 import SortInfo from "@/components/sorting-algorithms/SortInfo";
 import Ranking from "@/components/sorting-algorithms/Ranking";
 import { generators, parseCsv, AlgoKey } from "@/components/sorting-algorithms/utils";
+import api from "@/services/api";
 
 export default function SortingAlgorithmVisualizer() {
   const [inputValue, setInputValue] = useState("");
@@ -14,21 +15,43 @@ export default function SortingAlgorithmVisualizer() {
   const [speed, setSpeed] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [idx, setIdx] = useState(0);
+  const [loading, setLoading] = useState(false);
   const timerRef = useRef<number | null>(null);
 
   const frames = useMemo(() => {
     if (!algo || !generators[algo]) return [{ array: arr }];
     return generators[algo](arr);
   }, [arr, algo]);
-  useEffect(() => { setIdx(0); setIsPlaying(false); }, [frames.length]);
+
+  useEffect(() => { 
+    setIdx(0); 
+    setIsPlaying(false); 
+  }, [frames.length]);
 
   useEffect(() => {
-    if (!isPlaying) { if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } return; }
+    if (!isPlaying) { 
+      if (timerRef.current) { 
+        window.clearInterval(timerRef.current); 
+        timerRef.current = null; 
+      } 
+      return; 
+    }
     const interval = Math.max(150, 600 / speed);
     timerRef.current = window.setInterval(() => {
-      setIdx((i) => { if (i + 1 >= frames.length) { setIsPlaying(false); return i; } return i + 1; });
+      setIdx((i) => { 
+        if (i + 1 >= frames.length) { 
+          setIsPlaying(false); 
+          return i; 
+        } 
+        return i + 1; 
+      });
     }, interval);
-    return () => { if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } };
+    return () => { 
+      if (timerRef.current) { 
+        window.clearInterval(timerRef.current); 
+        timerRef.current = null; 
+      } 
+    };
   }, [isPlaying, speed, frames.length]);
 
   function handleAddArrayList() {
@@ -36,8 +59,49 @@ export default function SortingAlgorithmVisualizer() {
     setArr(parsed);
     setInputValue("");
   }
-  function clearArray() { setArr([]); setIdx(0); setIsPlaying(false); }
-  function restart() { setIdx(0); setIsPlaying(false); }
+  
+  function clearArray() { 
+    setArr([]); 
+    setIdx(0); 
+    setIsPlaying(false); 
+  }
+  
+  function restart() { 
+    setIdx(0); 
+    setIsPlaying(false); 
+  }
+
+  // Optional: Send data to backend when array is set and algo is selected
+  useEffect(() => {
+    if (arr.length > 0 && algo) {
+      sendToBackend(arr, algo);
+    }
+  }, [arr, algo]);
+
+  async function sendToBackend(array: number[], algorithm: AlgoKey) {
+    try {
+      setLoading(true);
+      const algoMap: Record<AlgoKey, string> = {
+        bubble: "bubble-sort",
+        selection: "selection-sort",
+        insertion: "insertion-sort",
+        merge: "merge-sort",
+        quick: "quick-sort",
+      };
+      
+      const response = await api.post(`/sorting-algorithms/${algoMap[algorithm]}`, {
+        array: array,
+      });
+      
+      console.log("Backend response:", response.data);
+      // Data is saved on the backend for tracking
+    } catch (error) {
+      console.warn("Backend call failed, using local implementation", error);
+      // Silently fall back to local implementation
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const frame = frames[idx] ?? { array: arr };
 
