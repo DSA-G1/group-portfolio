@@ -14,7 +14,7 @@ export default function Ranking({ arr, speed }: Props) {
 
   return (
     <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] min-h-[140px]">
-      <h3 className="text-[#f181b6] font-header text-4xl mb-2">Speed Sort Ranking</h3>
+      <h3 className="text-white font-body text-4xl mb-2">Speed Sort Ranking</h3>
       {arr.length > 0 && (
         <>
           <p className="text-[#ffcaef] font-body text-m mb-4">Time = frames / speed</p>

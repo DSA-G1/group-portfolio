@@ -23,19 +23,27 @@ export const algoInfo: Record<AlgoKey, { best: string; average: string; worst: s
   quick: { best: "O(n log n)", average: "O(n log n)", worst: "O(n²)", space: "O(log n)" },
 };
 
+export const algoDescriptions: Record<AlgoKey, string> = {
+  bubble: "Bubble Sort works by repeatedly comparing and swapping adjacent elements until the list is sorted. It is best used for very small or nearly sorted arrays because it is simple but inefficient for large datasets.",
+  selection: "Selection Sort sorts by repeatedly selecting the smallest element from the unsorted part of the array and placing it in its correct position. It is best for small lists and situations where minimizing swaps is important, but it performs poorly on large datasets.",
+  insertion: "Insertion Sort builds the sorted array one element at a time by inserting each element into its proper position among previously sorted elements. It is best for small or nearly sorted arrays and performs efficiently in such cases.",
+  merge: "Merge Sort divides the array into smaller subarrays, sorts them, and then merges them back together in order. It is best for large datasets and when stable sorting is required, though it needs extra memory.",
+  quick: "Quick Sort sorts by choosing a pivot element, partitioning the array around it, and recursively sorting the partitions. It is best for large datasets and is generally the fastest sorting algorithm in practice.",
+};
+
 export function bubbleSortFrames(input: number[]): Frame[] {
   const a = [...input];
   const frames: Frame[] = [{ array: [...a] }];
   const n = a.length;
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n - i - 1; j++) {
-      frames.push({ array: [...a], highlight: { type: "compare", indices: [j, j + 1] }, sortedUntil: n - 1 - i });
+      frames.push({ array: [...a], highlight: { type: "compare", indices: [j, j + 1] }, sortedRange: [n - i, n - 1] });
       if (a[j] > a[j + 1]) {
         [a[j], a[j + 1]] = [a[j + 1], a[j]];
-        frames.push({ array: [...a], highlight: { type: "swap", indices: [j, j + 1] }, sortedUntil: n - 1 - i });
+        frames.push({ array: [...a], highlight: { type: "swap", indices: [j, j + 1] }, sortedRange: [n - i, n - 1] });
       }
     }
-    frames.push({ array: [...a], sortedUntil: n - 1 - i });
+    frames.push({ array: [...a], sortedRange: [n - 1 - i, n - 1] });
   }
   return frames;
 }

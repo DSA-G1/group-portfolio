@@ -42,28 +42,38 @@ export default function Visualization({ frame, framesCount, idx, setIdx, isPlayi
   const progress = framesCount > 1 ? idx / (framesCount - 1) : 0;
   return (
     <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
-      <h2 className="text-white font-header text-4xl mb-4">Sorting Algorithm Visualization</h2>
-      <div className="relative rounded-[22px] border-[3px] border-[#ffcaef] bg-[#1f1131] h-[380px] overflow-hidden flex items-end justify-center">
-        {/* Decorative right scrollbar track (vertical) */}
-        <div className="absolute right-3 top-6 bottom-6 w-2 rounded-full bg-white/10">
-          <div className="w-2 rounded-full bg-[#ffcaef]" style={{ height: frame.array.length ? `${Math.max(18, 60 / (frame.array.length || 1))}%` : "28%", marginTop: frame.array.length ? `${progress * 100}%` : "0%" }} />
-        </div>
-        <div className="absolute left-6 right-6 bottom-3 h-2 rounded-full bg-white/10">
-          <div 
-            className="h-2 rounded-full bg-[#ffcaef]" 
-            style={{ 
-              width: '20%',
-              marginLeft: `${progress * 100}%`
-            }} 
-          />
-        </div>
+      <h2 className="text-white font-body text-4xl mb-4">Sorting Algorithm Visualization</h2>
+      <style>{`
+        .bars-container::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+        .bars-container::-webkit-scrollbar-track {
+          background: transparent;
+          margin-top: 16px;
+          margin-bottom: 16px;
+          margin-right: 12px;
+        }
+        .bars-container::-webkit-scrollbar-thumb {
+          background: #ffcaef;
+          border-radius: 4px;
+          min-height: 40px;
+        }
+        .bars-container::-webkit-scrollbar-thumb:hover {
+          background: #ffb3e6;
+        }
+        .bars-container::-webkit-scrollbar-corner {
+          background: transparent;
+        }
+      `}</style>
+      <div className="bars-container rounded-[22px] border-[3px] border-[#ffcaef] bg-[#1f1131] h-[380px] overflow-auto">
         {frame.array.length === 0 ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+          <div className="w-full h-full flex flex-col items-center justify-center text-center">
             <p className="text-white font-semibold text-lg">No Array List Yet</p>
             <p className="text-[#f181b6] text-sm">Add List of Numbers</p>
           </div>
         ) : (
-          <div className="flex items-end justify-center gap-1 w-full max-w-4xl h-full pb-16">
+          <div className="inline-flex items-end justify-center gap-1 h-full pb-6 px-4 py-4 min-h-full">
             {frame.array.map((val, i) => {
               const barColorClass = getBarColorClass(frame, i);
               // Responsive bar height based on value
@@ -79,13 +89,13 @@ export default function Visualization({ frame, framesCount, idx, setIdx, isPlayi
               const barWidth = Math.max(16, Math.min(100, baseBarWidth));
               
               return (
-                <div key={i} className="m-0 p-0">
+                <div key={i} className="m-0 p-0 flex-shrink-0">
                   <div 
                     style={{ 
                       height, 
                       width: barWidth
                     }} 
-                    className={`relative flex items-center justify-center rounded-2xl border-4 border-white/30 shadow-lg transition-all ${barColorClass}`}
+                    className={`relative flex items-center justify-center rounded-2xl shadow-lg transition-all ${barColorClass}`}
                     title={`index ${i}: ${val}`} 
                   >
                     <span className="text-white font-semibold text-lg drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]">{val}</span>
@@ -95,32 +105,6 @@ export default function Visualization({ frame, framesCount, idx, setIdx, isPlayi
             })}
           </div>
         )}
-        <div className="absolute left-1/2 bottom-6 transform -translate-x-1/2 w-[260px] h-[22px] rounded-full bg-[#1b0f2b]/70 border border-white/15 flex items-center justify-between px-2">
-          <button 
-            className="text-[#f181b6] hover:text-[#f181b6] transition text-sm"
-            onClick={() => setIdx((i: number) => Math.max(0, i - 1))}
-          >
-            ◀
-          </button>
-          
-          <div className="flex-1 mx-2 h-2 bg-white/10 rounded-full relative">
-            <div 
-              className="h-2 w-14 bg-[#f181b6] rounded-full shadow-lg transition-all"
-              style={{ 
-                marginLeft: framesCount > 1 
-                  ? `calc(${(idx / (framesCount - 1)) * 100}% - 28px)`
-                  : '0'
-              }}
-            />
-          </div>
-          
-          <button 
-            className="text-[#f181b6] hover:text-[#f181b6] transition text-sm"
-            onClick={() => setIdx((i: number) => Math.min(framesCount - 1, i + 1))}
-          >
-            ▶
-          </button>
-        </div>
       </div>
 
       <div className="mt-5 flex flex-wrap items-center justify-center gap-6">
@@ -178,7 +162,7 @@ function LegendChip({ label, color }: { label: string; color: string }) {
   return (
     <div className="flex items-center gap-2">
       <span className="h-2.5 w-10 rounded-full" style={{ background: color }} />
-      <span className="text-[#ffcaef] font-body text-sm">{label}</span>
+      <span className="font-body text-sm" style={{ color }}>{label}</span>
     </div>
   );
 }
