@@ -42,7 +42,7 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
             <div className="flex-1 flex flex-col justify-between">
               <div>
                 <h3 className="font-cubic text-xl md:text-2xl text-white">{member.name}</h3>
-                <p className="font-body text-sm text-primary/90 mt-1">{member.role}</p>
+                <p className="font-body text-md text-primary/90 mt-1">{member.role}</p>
 
                 <p className="font-body text-sm text-white/80 mt-4 mb-4">
                   {member.bio}

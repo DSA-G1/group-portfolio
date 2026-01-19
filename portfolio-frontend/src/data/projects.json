@@ -34,5 +34,14 @@
     "description": "A data structure project implementing breadth-first search algorithm using an MRT/LRT network graph simulator.",
     "technologies": ["Python"],
     "link": "/works/breadthfirstsearch"
+  },
+  {
+    "id": 5,
+    "title": "Sorting Algorithms",
+    "category": "Data Structures and Algorithms",
+    "image": "/public/projects/sorting.png",
+    "description": "A data structure project implementing various sorting algorithms.",
+    "technologies": ["Python"],
+    "link": "/works/sortingalgorithms"
   }
 ]
