@@ -6,7 +6,7 @@
     "image": "/profile/gil.jpg",
     "bio": "Passionate about building scalable web applications with modern technologies.",
     "skills": ["React", "Node.js", "TypeScript", "Javascript", "Figma"],
-    "portfolio": "https://github.com/theholyguacamolee/my_portfolio", 
+    "portfolio": "https://punzalgilliandev.netlify.app/", 
     "social": {
       "github": "https://github.com/theholyguacamolee",
       "linkedin": "https://www.linkedin.com/in/gillianrpunzal/",
@@ -20,7 +20,7 @@
     "image": "/profile/chariz.jpg",
     "bio": "Lead UI/UX Designer and Front-End Developer, responsible for creating easy-to-use and attractive interfaces while making sure the website runs smoothly. With a keen eye for design, Chariz bridges creativity and functionality to bring the team's ideas to life on the web.",
     "skills": ["Python", "HTML", "CSS", "Canva"],
-    "portfolio": "https://github.com/charizkyle/my_portfolio",
+    "portfolio": "https://kycha06.pythonanywhere.com/",
     "social": {
       "github": "https://github.com/charizkyle",
       "linkedin": "https://www.linkedin.com/in/charizkylesantos/",
@@ -48,7 +48,7 @@
     "image": "/profile/Iza.jpeg",
     "bio": "An aspiring software developer with interests in technology, programming, and embedded systems, and has practical experience with Python, HTML, CSS, and GitHub. Aims to strengthen skills in hardware and software development through academic and hands-on projects.",
     "skills": ["Python", "CSS", "HTML"],
-    "portfolio": "https://github.com/IzaTomacruz/flask_web_application",
+    "portfolio": "https://izatomacruz.pythonanywhere.com",
     "social": {
       "github": "https://github.com/IzaTomacruz",
       "linkedin": "https://www.linkedin.com/in/iza-marie-tomacruz-57004330b",
@@ -76,7 +76,7 @@
     "image": "/profile/Leonard.jpg",
     "bio": "Just another programmer who talks to his computer more than people, and somehow, it listens.",
     "skills": ["Python", "Canva", "Flask", "React"],
-    "portfolio": "https://github.com/leonardmarkgalivo/flask_portfolio_website",
+    "portfolio": "https://leonardmarkgalivo.pythonanywhere.com/",
     "social": {
       "github": "https://github.com/leonardmarkgalivo",
       "linkedin": "https://www.linkedin.com/in/leonard-mark-galivo-05343b333",
