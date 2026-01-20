@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Queue and Dequeue",
     "category": "Data Structures and Algorithms",
-    "image": "public/projects/queue.png",
+    "image": "/projects/queue.png",
     "description": "A data structure project implementing queue and dequeue functionalities.",
     "technologies": ["Python"],
   "link": "/works/queue"
@@ -12,7 +12,7 @@
     "id": 2,
     "title": "Binary Tree",
     "category": "Data Structures and Algorithms",
-    "image": "/public/projects/binary.png",
+    "image": "/projects/binary.png",
     "description": "A data structure project implementing binary tree functionalities.",
     "technologies": ["Python"],
     "link": "/works/binarytree"
@@ -21,7 +21,7 @@
     "id": 3,
     "title": "Binary Search Tree",
     "category": "Data Structures and Algorithms",
-    "image": "/public/projects/bst.png",
+    "image": "/projects/bst.png",
     "description": "A data structure project implementing binary search tree functionalities.",
     "technologies": ["Python"],
     "link": "/works/binarysearchtree"
@@ -30,7 +30,7 @@
     "id": 4,
     "title": "Breadth-First Search",
     "category": "Data Structures and Algorithms",
-    "image": "/public/projects/breadthfirst.png",
+    "image": "/projects/breadthfirst.png",
     "description": "A data structure project implementing breadth-first search algorithm using an MRT/LRT network graph simulator.",
     "technologies": ["Python"],
     "link": "/works/breadthfirstsearch"
@@ -39,7 +39,7 @@
     "id": 5,
     "title": "Sorting Algorithms",
     "category": "Data Structures and Algorithms",
-    "image": "/public/projects/sorting.png",
+    "image": "/projects/sorting.png",
     "description": "A data structure project implementing various sorting algorithms.",
     "technologies": ["Python"],
     "link": "/works/sortingalgorithms"
