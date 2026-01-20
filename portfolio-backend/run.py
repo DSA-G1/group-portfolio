@@ -1,7 +1,20 @@
-from app import create_app
+from app import create_app, db
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = create_app()
 
 if __name__ == '__main__':
-    # Disable the reloader to avoid Windows/OneDrive spawn-exit behavior
-    app.run(host='127.0.0.1', port=5000, debug=True, use_reloader=False)
+    with app.app_context():
+        db.create_all()
+    
+    # Bind to 0.0.0.0 and use PORT environment variable (required for Render)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(
+        host='0.0.0.0',
+        port=port,
+        debug=os.environ.get('FLASK_ENV') != 'production'
+    )
