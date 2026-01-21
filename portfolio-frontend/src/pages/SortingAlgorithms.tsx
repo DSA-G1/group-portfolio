@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import ControlPanel from "@/components/sorting-algorithms/ControlPanel";
 import Visualization from "@/components/sorting-algorithms/Visualization";
 import SortInfo from "@/components/sorting-algorithms/SortInfo";
-import Ranking from "@/components/sorting-algorithms/Ranking";
 import { generators, parseCsv, AlgoKey } from "@/components/sorting-algorithms/utils";
 import api from "@/services/api";
 
@@ -23,34 +22,36 @@ export default function SortingAlgorithmVisualizer() {
     return generators[algo](arr);
   }, [arr, algo]);
 
-  useEffect(() => { 
-    setIdx(0); 
-    setIsPlaying(false); 
+  useEffect(() => {
+    setIdx(0);
+    setIsPlaying(false);
   }, [frames.length]);
 
   useEffect(() => {
-    if (!isPlaying) { 
-      if (timerRef.current) { 
-        window.clearInterval(timerRef.current); 
-        timerRef.current = null; 
-      } 
-      return; 
+    if (!isPlaying) {
+      if (timerRef.current) {
+        window.clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      return;
     }
+
     const interval = Math.max(150, 600 / speed);
     timerRef.current = window.setInterval(() => {
-      setIdx((i) => { 
-        if (i + 1 >= frames.length) { 
-          setIsPlaying(false); 
-          return i; 
-        } 
-        return i + 1; 
+      setIdx((i) => {
+        if (i + 1 >= frames.length) {
+          setIsPlaying(false);
+          return i;
+        }
+        return i + 1;
       });
     }, interval);
-    return () => { 
-      if (timerRef.current) { 
-        window.clearInterval(timerRef.current); 
-        timerRef.current = null; 
-      } 
+
+    return () => {
+      if (timerRef.current) {
+        window.clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
     };
   }, [isPlaying, speed, frames.length]);
 
@@ -59,19 +60,18 @@ export default function SortingAlgorithmVisualizer() {
     setArr(parsed);
     setInputValue("");
   }
-  
-  function clearArray() { 
-    setArr([]); 
-    setIdx(0); 
-    setIsPlaying(false); 
-  }
-  
-  function restart() { 
-    setIdx(0); 
-    setIsPlaying(false); 
+
+  function clearArray() {
+    setArr([]);
+    setIdx(0);
+    setIsPlaying(false);
   }
 
-  // Optional: Send data to backend when array is set and algo is selected
+  function restart() {
+    setIdx(0);
+    setIsPlaying(false);
+  }
+
   useEffect(() => {
     if (arr.length > 0 && algo) {
       sendToBackend(arr, algo);
@@ -88,16 +88,12 @@ export default function SortingAlgorithmVisualizer() {
         merge: "merge-sort",
         quick: "quick-sort",
       };
-      
-      const response = await api.post(`/sorting-algorithms/${algoMap[algorithm]}`, {
-        array: array,
+
+      await api.post(`/sorting-algorithms/${algoMap[algorithm]}`, {
+        array,
       });
-      
-      console.log("Backend response:", response.data);
-      // Data is saved on the backend for tracking
     } catch (error) {
       console.warn("Backend call failed, using local implementation", error);
-      // Silently fall back to local implementation
     } finally {
       setLoading(false);
     }
@@ -106,13 +102,18 @@ export default function SortingAlgorithmVisualizer() {
   const frame = frames[idx] ?? { array: arr };
 
   return (
-    <div className="min-h-screen bg-cover bg-top bg-no-repeat" style={{ backgroundImage: `url('/background/home-page.png')` }}>
+    <div
+      className="min-h-screen bg-cover bg-top bg-no-repeat"
+      style={{ backgroundImage: `url('/background/home-page.png')` }}
+    >
       <Header />
+
       <main className="pt-32 md:pt-40 pb-12 px-6">
         <h1 className="font-header text-6xl md:text-7xl lg:text-8xl text-center mb-12">
           <span className="text-white">SORTING ALGORITHM </span>
           <span className="text-[#f181b6]">VISUALIZER</span>
         </h1>
+
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             <div className="space-y-6">
@@ -125,7 +126,14 @@ export default function SortingAlgorithmVisualizer() {
                 clearArray={clearArray}
                 hasArray={arr.length > 0}
               />
-              <div className={`transition-opacity ${arr.length === 0 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
+
+              <div
+                className={`transition-opacity ${
+                  arr.length === 0
+                    ? "opacity-40 pointer-events-none"
+                    : "opacity-100"
+                }`}
+              >
                 <SortInfo algo={algo} />
               </div>
             </div>
@@ -142,13 +150,11 @@ export default function SortingAlgorithmVisualizer() {
                 setSpeed={setSpeed}
                 restart={restart}
               />
-              <div className={`transition-opacity ${arr.length === 0 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
-                <Ranking arr={arr} algo={algo} speed={speed} />
-              </div>
             </div>
           </div>
         </div>
       </main>
+
       <Footer />
     </div>
   );
