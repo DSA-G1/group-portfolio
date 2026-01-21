@@ -149,7 +149,7 @@ const WorksQueueDequeue = () => {
           />
           <Section
             title="DEQUE"
-            desc="Add numbers to the rear and remove numbers from the front and rear."
+            desc="Add numbers to the front and rear, and remove numbers from the front and rear."
             input={dequeInput}
             setInput={setDequeInput}
             buttons={[
