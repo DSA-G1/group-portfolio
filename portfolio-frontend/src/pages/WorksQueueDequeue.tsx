@@ -137,11 +137,11 @@ const WorksQueueDequeue = () => {
             buttons={[
               {
                 label: "Enqueue",
-                onClick: () => doOp("/queue/enqueue", queueInput, setQueueInput),
+                onClick: () => doOp("/queue/enqueue", queueInput, setQueueInput, true),
               },
               {
                 label: "Dequeue",
-                onClick: () => doOp("/queue/dequeue", ""),
+                onClick: () => doOp("/queue/dequeue", "", undefined, true),
                 accent: true,
               },
             ]}
@@ -155,21 +155,20 @@ const WorksQueueDequeue = () => {
             buttons={[
               {
                 label: "Enqueue",
-                onClick: () => doOp("/deque/enqueue", dequeInput, setDequeInput),
+                onClick: () => doOp("/deque/enqueue", dequeInput, setDequeInput, false),
               },
               {
                 label: "Dequeue",
-                onClick: () => doOp("/deque/dequeue", ""),
+                onClick: () => doOp("/deque/dequeue", "", undefined, false),
               },
               {
                 label: "Enqueue Head",
-                onClick: () =>
-                  doOp("/deque/enqueue-head", dequeInput, setDequeInput),
+                onClick: () => doOp("/deque/enqueue-head", dequeInput, setDequeInput, false),
                 accent: true,
               },
               {
                 label: "Dequeue Tail",
-                onClick: () => doOp("/deque/dequeue-tail", ""),
+                onClick: () => doOp("/deque/dequeue-tail", "", undefined, false),
                 accent: true,
               },
             ]}
