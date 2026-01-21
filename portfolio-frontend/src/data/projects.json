@@ -43,5 +43,14 @@
     "description": "A data structure project implementing various sorting algorithms.",
     "technologies": ["Python"],
     "link": "/works/sortingalgorithms"
+  },
+  {
+    "id": 6,
+    "title": "Coming Soon",
+    "category": "Data Structures and Algorithms",
+    "image": "/projects/coming-soon.png",
+    "description": "This project is coming soon.",
+    "technologies": ["Python"],
+    "link": ""
   }
 ]
