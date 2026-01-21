@@ -2,11 +2,11 @@
   {
     "id": 1,
     "name": "Gillian R. Punzal",
-    "role": "Project Manager and Backend Developer",
+    "role": "Backend and Frontend",
     "image": "/profile/gil.jpg",
-    "bio": "Gillian oversees the project timeline and Git workflow while managing backend data organization and integration.",
+    "bio": "Passionate about building scalable web applications with modern technologies.",
     "skills": ["React", "Node.js", "TypeScript", "Javascript", "Figma"],
-    "portfolio": "https://gilrpunzal.dev", 
+    "portfolio": "https://punzalgilliandev.netlify.app/", 
     "social": {
       "github": "https://github.com/theholyguacamolee",
       "linkedin": "https://www.linkedin.com/in/gillianrpunzal/",
@@ -16,11 +16,11 @@
   {
     "id": 2,
     "name": "Chariz Kyle A. Santos",
-    "role": "UI/UX and Frontend Lead",
+    "role": "UI/UX and Frontend",
     "image": "/profile/chariz.jpg",
-    "bio": "Chariz leads the design direction and transforms creative mockups into responsive, user-friendly web interfaces.",
+    "bio": "Lead UI/UX Designer and Front-End Developer, responsible for creating easy-to-use and attractive interfaces while making sure the website runs smoothly. With a keen eye for design, Chariz bridges creativity and functionality to bring the team's ideas to life on the web.",
     "skills": ["Python", "HTML", "CSS", "Canva"],
-    "portfolio": "https://github.com/charizkyle/my_portfolio",
+    "portfolio": "https://kycha06.pythonanywhere.com/",
     "social": {
       "github": "https://github.com/charizkyle",
       "linkedin": "https://www.linkedin.com/in/charizkylesantos/",
@@ -30,9 +30,9 @@
   {
     "id": 3,
     "name": "Eunice Q. Reyes",
-    "role": "Documentation Lead, QA Tester and Content Manager",
+    "role": "Frontend",
     "image": "/profile/eunice.jpg",
-    "bio": "Eunice tests performance and content accuracy while preparing clear documentation and assisting in project management.",
+    "bio": "A beginner programmer who is open to exploring new platforms and languages, and has an interest in developing simple games and creating websites tailored to personal interests.",
     "skills": ["Python", "CSS", "HTML"],
     "portfolio": "https://github.com/Babbsrey22/personal_webfolio",
     "social": {
@@ -44,11 +44,11 @@
   {
     "id": 4,
     "name": "Iza Marie C. Tomacruz",
-    "role": "Frontend Developer",
+    "role": "UI/UX and Frontend",
     "image": "/profile/Iza.jpeg",
-    "bio": "Iza focuses on implementing user interfaces and enhancing interactivity to bring the team’s designs to life.",
+    "bio": "An aspiring software developer with interests in technology, programming, and embedded systems, and has practical experience with Python, HTML, CSS, and GitHub. Aims to strengthen skills in hardware and software development through academic and hands-on projects.",
     "skills": ["Python", "CSS", "HTML"],
-    "portfolio": "https://github.com/IzaTomacruz/flask_web_application",
+    "portfolio": "https://izatomacruz.pythonanywhere.com",
     "social": {
       "github": "https://github.com/IzaTomacruz",
       "linkedin": "https://www.linkedin.com/in/iza-marie-tomacruz-57004330b",
@@ -58,9 +58,9 @@
   {
     "id": 5,
     "name": "Rasmine J. Blas",
-    "role": "Documentation Lead, QA Tester and Content Manager",
+    "role": "Frontend",
     "image": "/profile/rasmine.jpeg",
-    "bio": "Rasmine ensures content quality and consistency while organizing technical documents and deployment notes.",
+    "bio": "A Computer Engineering student with a strong foundation in coding and a deep passion for technology, who is committed to further developing her technical skills and applying knowledge to create efficient and innovative solutions in the field of computing.",
     "skills": ["Python", "VSCode"],
     "portfolio": "https://github.com/rasmine-b/personal_portfolio",
     "social": {
@@ -72,11 +72,11 @@
   {
     "id": 6,
     "name": "Leonard Mark D. Galivo",
-    "role": "Deployment Specialist",
+    "role": "Backend and Frontend",
     "image": "/profile/Leonard.jpg",
-    "bio": "Leonard manages the website’s hosting setup and domain deployment to ensure smooth and reliable access.",
+    "bio": "Just another programmer who talks to his computer more than people, and somehow, it listens.",
     "skills": ["Python", "Canva", "Flask", "React"],
-    "portfolio": "https://github.com/leonardmarkgalivo/flask_portfolio_website",
+    "portfolio": "https://leonardmarkgalivo.pythonanywhere.com/",
     "social": {
       "github": "https://github.com/leonardmarkgalivo",
       "linkedin": "https://www.linkedin.com/in/leonard-mark-galivo-05343b333",
@@ -86,9 +86,9 @@
   {
     "id": 7,
     "name": "Heidilyn L. Caling",
-    "role": "UI/UX Designer, QA Tester and Content Manager",
+    "role": "Frontend",
     "image": "/profile/heidi.jpeg",
-    "bio": "Heidilyn contributes to the site’s visual design and ensures functionality, responsiveness, and content accuracy across pages.",
+    "bio": "A passionate member of DevSquad with experience in UI/UX design, basic Python programming, and quality assurance testing. Dedicated to creating user-friendly interfaces, ensuring software quality, and continuously learning to enhance both design and coding skills.",
     "skills": ["Python", "HTML"],
     "portfolio": "https://github.com/heidilyncaling/caling_heidilyn_flask_site",
     "social": {
@@ -100,9 +100,9 @@
   {
     "id": 8,
     "name": "Erika Mae I. Villamin",
-    "role": "Frontend Developer",
+    "role": "Backend and Frontend",
     "image": "/profile/erika.jpg",
-    "bio": "Erika assists in developing and refining the site’s layout and interactive elements for a seamless user experience.",
+    "bio": "A motivated student who loves coding, making creative web projects, and learning new technologies.",
     "skills": ["Python", "HTML", "React", "VSCode"],
     "portfolio": "https://erikavillamin.dev",
     "social": {

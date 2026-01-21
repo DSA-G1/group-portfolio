@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import stations from "@/data/stations.json";
 
 const COLORS = {
-  bg: "#12091f",
+  bg: "#1f1131",
   text: "#f3e8ff",
-  lrt1: "#c9ff1a",
-  lrt2: "#7fd1ff",
-  mrt3: "#ff5fa2",
+  lrt1: "#8a910a",
+  lrt2: "#4050be",
+  mrt3: "#902d67",
   walk: "#ffffff",
-  neon: "#ff5fa2"
+  neon: "#ff5fa2",
+  pathHighlight: "#00ff88",
+  pathGlow: "rgba(0, 255, 136, 0.8)"
 };
 
 /* ===============================
@@ -93,16 +95,97 @@ const WALK: [string, string][] = [
 const poly = (arr: string[]) =>
   arr.map((s) => POS[s].join(",")).join(" ");
 
-export default function GraphVisualization() {
-  return (
-    <div className="bg-[#12091f] rounded-[40px] p-6 border-[4px] border-[#ff5fa2] relative">
-      {/* TITLE */}
-      <h3 className="text-[#f181b6] font-header text-4xl mb-2 text-left">
-        MRT AND LRT STATIONS MAP
-      </h3>
+interface GraphVisualizationProps {
+    start: string;
+    end: string;
+    currentNode: string | null;
+    pathResult: { path: string[]; segments: { from: string; to: string }[] } | null;
+}
 
-      <div className="flex justify-center items-center">
+export default function GraphVisualization({ start, end, currentNode, pathResult }: GraphVisualizationProps) {
+  const pathContainerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (pathContainerRef.current) {
+      observer.observe(pathContainerRef.current);
+    }
+
+    return () => {
+      if (pathContainerRef.current) {
+        observer.unobserve(pathContainerRef.current);
+      }
+    };
+  }, [pathResult]);
+
+  useEffect(() => {
+    if (pathResult) {
+      setIsVisible(false);
+    }
+  }, [pathResult]);
+
+  const isInPath = (station: string) => {
+    return pathResult?.path.includes(station) ?? false;
+  };
+
+  const isSegmentInPath = (from: string, to: string) => {
+    if (!pathResult?.segments) return false;
+    return pathResult.segments.some(
+      seg => (seg.from === from && seg.to === to) || (seg.from === to && seg.to === from)
+    );
+  };
+
+  const renderPathSegments = () => {
+    if (!pathResult?.segments) return null;
+    
+    return pathResult.segments.map((seg, idx) => {
+      const fromPos = POS[seg.from];
+      const toPos = POS[seg.to];
+      if (!fromPos || !toPos) return null;
+      
+      return (
+        <line
+          key={`path-${idx}`}
+          x1={fromPos[0]}
+          y1={fromPos[1]}
+          x2={toPos[0]}
+          y2={toPos[1]}
+          stroke="url(#pathGradient)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          style={{
+            filter: `drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 16px rgba(148, 185, 255, 0.6))`
+          }}
+        />
+      );
+    });
+  };
+
+  return (
+    <div className="rounded-[40px] p-6 relative">
+      {/* TITLE */}
+      <h3 className="text-white font-header text-2xl md:text-4xl">LRT AND MRT STATIONS MAP</h3>
+
+      <div className="flex justify-center items-center relative">
         <svg width="1080" height="880" viewBox="0 0 960 820">
+          {/* GRADIENT DEFINITION */}
+          <defs>
+            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{ stopColor: "#cdffd8", stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: "#94b9ff", stopOpacity: 1 }} />
+            </linearGradient>
+          </defs>
           {/* LINES */}
           <polyline points={poly(LRT1)} stroke={COLORS.lrt1} strokeWidth="4" fill="none" />
           <polyline points={poly(LRT2)} stroke={COLORS.lrt2} strokeWidth="4" fill="none" />
@@ -122,24 +205,30 @@ export default function GraphVisualization() {
             />
           ))}
 
+          {/* HIGHLIGHT PATH SEGMENTS (rendered on top) */}
+          {renderPathSegments()}
+
           {/* Stations */}
           {Object.entries(POS).map(([name, [x, y]]) => {
             const isTransfer = WALK.flat().includes(name);
             const isLRT1 = LRT1.includes(name);
+            const inPath = isInPath(name);
+            const isStart = pathResult?.path[0] === name;
+            const isEnd = pathResult?.path[pathResult.path.length - 1] === name;
 
-            let textX = isLRT1 ? x - 12 : x + 8;
-            let textY = y + 4;
+            let textX = isLRT1 ? x - 20 : x + 16;
+            let textY = y + 5;
             let anchor: "start" | "end" | "middle" = isLRT1 ? "end" : "start";
 
             // Adjusted labels for Balintawak and Roosevelt
             if (name === "Balintawak") {
-              textX = x + 25; // move label right
-              textY = y - 10; // higher
+              textX = x + 35;
+              textY = y - 14;
               anchor = "middle";
             }
             if (name === "Roosevelt") {
-              textX = x;        // centered
-              textY = y - 20;   // slightly lower than before
+              textX = x;
+              textY = y - 28;
               anchor = "middle";
             }
 
@@ -147,39 +236,89 @@ export default function GraphVisualization() {
               ["Anonas","Katipunan","Santolan","Marikina-Pasig","Antipolo"].includes(name)
             ) {
               textX = x;
-              textY = y - 12;
+              textY = y - 20;
               anchor = "middle";
             }
 
             if (["Legarda","Pureza","Recto","Taft","Magallanes"].includes(name)) {
               textX = x;
-              textY = y + 18;
+              textY = y + 26;
               anchor = "middle";
             }
 
             if (["North Avenue","Quezon Avenue","Kamuning"].includes(name)) {
-              textX = x - 12;
-              textY = y + 12;
+              textX = x - 20;
+              textY = y + 16;
               anchor = "end";
             }
 
             if (name === "Betty Go-Belmonte") {
-              textX = x - 12;
+              textX = x - 20;
               anchor = "end";
+            }
+
+            // Determine station line color
+            let lineColor = "#fff";
+            if (isLRT1) lineColor = COLORS.lrt1;
+            else if (LRT2.includes(name)) lineColor = COLORS.lrt2;
+            else if (MRT3.includes(name)) lineColor = COLORS.mrt3;
+
+            // Determine station appearance
+            let stationFill = "none";
+            let stationRadius = 6;
+            let stationStroke = lineColor;
+            let stationStrokeWidth = 3;
+            let glowFilter = "";
+
+            if (isStart) {
+              stationFill = "url(#pathGradient)";
+              stationRadius = 7;
+              stationStroke = "url(#pathGradient)";
+              stationStrokeWidth = 2;
+              glowFilter = "drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 12px rgba(148, 185, 255, 0.6))";
+            } else if (isEnd) {
+              stationFill = "url(#pathGradient)";
+              stationRadius = 7;
+              stationStroke = "url(#pathGradient)";
+              stationStrokeWidth = 2;
+              glowFilter = "drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 12px rgba(148, 185, 255, 0.6))";
+            } else if (inPath) {
+              stationFill = "url(#pathGradient)";
+              stationRadius = 7;
+              stationStroke = "url(#pathGradient)";
+              stationStrokeWidth = 2;
+              glowFilter = `drop-shadow(0 0 8px rgba(205, 255, 216, 0.8)) drop-shadow(0 0 12px rgba(148, 185, 255, 0.6))`;
             }
 
             return (
               <g key={name}>
-                {isTransfer && (
-                  <circle cx={x} cy={y} r={9} fill="none" stroke="#fff" strokeWidth="2" />
-                )}
-                <circle cx={x} cy={y} r={4} fill="#fff" />
+                {/* Background circle to hide the line */}
+                <circle 
+                  cx={x} 
+                  cy={y} 
+                  r={stationRadius + 1} 
+                  fill={COLORS.bg}
+                />
+                {/* Station circle */}
+                <circle 
+                  cx={x} 
+                  cy={y} 
+                  r={stationRadius} 
+                  fill={stationFill}
+                  stroke={stationStroke}
+                  strokeWidth={stationStrokeWidth}
+                  style={{
+                    filter: glowFilter,
+                    transition: "all 0.3s ease"
+                  }}
+                />
                 <text
                   x={textX}
                   y={textY}
                   fontSize="11"
                   fill={COLORS.text}
                   textAnchor={anchor}
+                  fontWeight="normal"
                 >
                   {name.toUpperCase()}
                 </text>
@@ -187,40 +326,36 @@ export default function GraphVisualization() {
             );
           })}
         </svg>
-      </div>
 
-      {/* LEGEND - BIGGER */}
-      <div
-        className="absolute bottom-6 right-6 rounded-2xl p-6 text-base text-white space-y-3"
-        style={{
-          background: "#1a0f2f",
-          border: `3px solid ${COLORS.neon}`,
-          boxShadow: `
-            0 0 12px ${COLORS.neon},
-            0 0 28px rgba(255,95,162,0.8),
-            inset 0 0 14px rgba(255,95,162,0.4)
-          `
-        }}
-      >
-        <div className="flex items-center gap-3">
-          <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt1 }} />
-          <span>LRT-1 LINE</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="w-10 h-1 rounded" style={{ background: COLORS.lrt2 }} />
-          <span>LRT-2 LINE</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="w-10 h-1 rounded" style={{ background: COLORS.mrt3 }} />
-          <span>MRT-3 LINE</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="w-3 h-3 rounded-full bg-white" />
-          <span>STATION</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="w-10 border-t-2 border-dashed border-white" />
-          <span>WALK TRANSFER</span>
+        {/* LEGEND - positioned at lower right of graph */}
+        <div
+          className="absolute bottom-2 right-2 md:bottom-4 lg:bottom-6 md:right-4 lg:right-6 rounded-lg md:rounded-xl lg:rounded-2xl p-2 md:p-3 lg:p-6 text-xs md:text-sm lg:text-base text-white space-y-1 md:space-y-2 lg:space-y-3"
+          style={{
+            background: "#1f1131",
+            border: `3px solid #ffcaef`,
+            boxShadow: `
+              0 0 12px #ffcaef,
+              0 0 28px rgba(255,202,239,0.8),
+              inset 0 0 14px rgba(255,202,239,0.4)
+            `
+          }}
+        >
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 h-1 rounded" style={{ background: COLORS.lrt1 }} />
+            <span>LRT-1 LINE</span>
+          </div>
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 h-1 rounded" style={{ background: COLORS.lrt2 }} />
+            <span>LRT-2 LINE</span>
+          </div>
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 h-1 rounded" style={{ background: COLORS.mrt3 }} />
+            <span>MRT-3 LINE</span>
+          </div>
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="w-6 md:w-8 lg:w-10 border-t-2 border-dashed border-white" />
+            <span>WALK TRANSFER</span>
+          </div>
         </div>
       </div>
     </div>
