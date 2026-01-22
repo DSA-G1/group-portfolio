@@ -18,6 +18,7 @@ export default function SortInfo({ algo }: { algo: AlgoKey }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const [labelsRes, infoRes, descRes] = await Promise.all([
           api.get("/sorting-algorithms/metadata/labels"),
           api.get("/sorting-algorithms/metadata/info"),
@@ -25,8 +26,13 @@ export default function SortInfo({ algo }: { algo: AlgoKey }) {
         ]);
         setLabels(labelsRes.data);
         setDescriptions(descRes.data);
+        
+        // If algo is selected, get its info; otherwise show first algorithm
         if (algo && infoRes.data[algo]) {
           setInfo(infoRes.data[algo]);
+        } else if (infoRes.data && Object.keys(infoRes.data).length > 0) {
+          // Default to bubble sort if no algo selected
+          setInfo(infoRes.data["bubble"]);
         }
       } catch (error) {
         console.error("Failed to fetch algorithm info:", error);
@@ -34,13 +40,25 @@ export default function SortInfo({ algo }: { algo: AlgoKey }) {
         setLoading(false);
       }
     };
-    if (algo) {
-      fetchData();
-    }
+    fetchData();
   }, [algo]);
 
-  const title = labels[algo] ? `${labels[algo]} Info` : "Sort Info";
-  const description = descriptions[algo];
+  const displayAlgo = algo || "bubble";
+  const title = labels[displayAlgo] ? `${labels[displayAlgo]} Info` : "Sort Info";
+  const description = descriptions[displayAlgo];
+
+  if (loading) {
+    return (
+      <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef] animate-pulse">
+        <div className="h-8 bg-gray-600 rounded w-32 mb-4"></div>
+        <div className="space-y-3">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-10 bg-gray-600 rounded"></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">

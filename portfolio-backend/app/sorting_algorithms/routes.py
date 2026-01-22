@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.sorting_algorithms.models import SortingAlgorithmOperation
-from app.sorting_algorithms.utils import bubble_sort_steps, selection_sort_steps, insertion_sort_steps, quick_sort_steps, merge_sort_steps
+from app.sorting_algorithms.utils import bubble_sort_steps, selection_sort_steps, insertion_sort_steps, quick_sort_steps, merge_sort_steps, ALGO_LABELS, ALGO_INFO, ALGO_DESCRIPTIONS
 
 sorting_bp = Blueprint('sorting', __name__, url_prefix='/sorting-algorithms')
 
@@ -214,5 +214,34 @@ def get_operation(op_id):
         if not operation:
             return jsonify({'error': 'Operation not found'}), 404
         return jsonify(operation.to_dict()), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ===== METADATA ENDPOINTS =====
+
+@sorting_bp.route('/metadata/labels', methods=['GET'])
+def get_labels():
+    """Get algorithm labels."""
+    try:
+        return jsonify(ALGO_LABELS), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@sorting_bp.route('/metadata/info', methods=['GET'])
+def get_info():
+    """Get algorithm complexity information."""
+    try:
+        return jsonify(ALGO_INFO), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@sorting_bp.route('/metadata/descriptions', methods=['GET'])
+def get_descriptions():
+    """Get algorithm descriptions."""
+    try:
+        return jsonify(ALGO_DESCRIPTIONS), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

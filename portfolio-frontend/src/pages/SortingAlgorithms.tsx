@@ -152,15 +152,7 @@ export default function SortingAlgorithmVisualizer() {
                 hasArray={arr.length > 0}
               />
 
-              <div
-                className={`transition-opacity ${
-                  arr.length === 0
-                    ? "opacity-40 pointer-events-none"
-                    : "opacity-100"
-                }`}
-              >
-                <SortInfo algo={algo} />
-              </div>
+              <SortInfo algo={algo} />
             </div>
 
             <div className="lg:col-span-2 space-y-6">
