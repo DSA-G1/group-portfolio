@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "title": "Queue and Dequeue",
+    "title": "Queue and Deque",
     "category": "Data Structures and Algorithms",
     "image": "/projects/queue.png",
-    "description": "A data structure project implementing queue and dequeue functionalities.",
+    "description": "A data structure project implementing queue and deque functionalities.",
     "technologies": ["Python"],
   "link": "/works/queue"
   },
@@ -43,5 +43,14 @@
     "description": "A data structure project implementing various sorting algorithms.",
     "technologies": ["Python"],
     "link": "/works/sortingalgorithms"
+  },
+  {
+    "id": 6,
+    "title": "Coming Soon",
+    "category": "Data Structures and Algorithms",
+    "image": "/projects/coming-soon.png",
+    "description": "This project is coming soon.",
+    "technologies": ["Python"],
+    "link": ""
   }
 ]

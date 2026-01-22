@@ -34,7 +34,7 @@
     "image": "/profile/eunice.jpg",
     "bio": "A beginner programmer who is open to exploring new platforms and languages, and has an interest in developing simple games and creating websites tailored to personal interests.",
     "skills": ["Python", "CSS", "HTML"],
-    "portfolio": "https://github.com/Babbsrey22/personal_webfolio",
+    "portfolio": "https://babbsrey22.pythonanywhere.com/",
     "social": {
       "github": "https://github.com/Babbsrey22",
       "linkedin": "https://www.linkedin.com/in/eunice-reyes-27777a36a/",
@@ -62,7 +62,7 @@
     "image": "/profile/rasmine.jpeg",
     "bio": "A Computer Engineering student with a strong foundation in coding and a deep passion for technology, who is committed to further developing her technical skills and applying knowledge to create efficient and innovative solutions in the field of computing.",
     "skills": ["Python", "VSCode"],
-    "portfolio": "https://github.com/rasmine-b/personal_portfolio",
+    "portfolio": "https://rasmineblas.pythonanywhere.com/",
     "social": {
       "github": "https://github.com/rasmine-b",
       "linkedin": "https://www.linkedin.com/in/rasmineblas",
@@ -90,7 +90,7 @@
     "image": "/profile/heidi.jpeg",
     "bio": "A passionate member of DevSquad with experience in UI/UX design, basic Python programming, and quality assurance testing. Dedicated to creating user-friendly interfaces, ensuring software quality, and continuously learning to enhance both design and coding skills.",
     "skills": ["Python", "HTML"],
-    "portfolio": "https://github.com/heidilyncaling/caling_heidilyn_flask_site",
+    "portfolio": "https://heidilyncaling.pythonanywhere.com/",
     "social": {
       "github": "https://github.com/heidilyncaling",
       "linkedin": "https://www.linkedin.com/in/heidilyn-caling-187134396/",
