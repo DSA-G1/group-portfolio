@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ControlPanel from "@/components/sorting-algorithms/ControlPanel";
 import Visualization from "@/components/sorting-algorithms/Visualization";
 import SortInfo from "@/components/sorting-algorithms/SortInfo";
-import { generators, parseCsv, AlgoKey } from "@/components/sorting-algorithms/utils";
+import { parseCsv, AlgoKey, Frame } from "@/components/sorting-algorithms/utils";
 import api from "@/services/api";
 
 export default function SortingAlgorithmVisualizer() {
@@ -15,12 +15,8 @@ export default function SortingAlgorithmVisualizer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [frames, setFrames] = useState<Frame[]>([]);
   const timerRef = useRef<number | null>(null);
-
-  const frames = useMemo(() => {
-    if (!algo || !generators[algo]) return [{ array: arr }];
-    return generators[algo](arr);
-  }, [arr, algo]);
 
   useEffect(() => {
     setIdx(0);
@@ -63,6 +59,7 @@ export default function SortingAlgorithmVisualizer() {
 
   function clearArray() {
     setArr([]);
+    setFrames([]);
     setIdx(0);
     setIsPlaying(false);
   }
@@ -74,11 +71,11 @@ export default function SortingAlgorithmVisualizer() {
 
   useEffect(() => {
     if (arr.length > 0 && algo) {
-      sendToBackend(arr, algo);
+      sortWithBackend(arr, algo);
     }
   }, [arr, algo]);
 
-  async function sendToBackend(array: number[], algorithm: AlgoKey) {
+  async function sortWithBackend(array: number[], algorithm: AlgoKey) {
     try {
       setLoading(true);
       const algoMap: Record<AlgoKey, string> = {
@@ -89,11 +86,39 @@ export default function SortingAlgorithmVisualizer() {
         quick: "quick-sort",
       };
 
-      await api.post(`/sorting-algorithms/${algoMap[algorithm]}`, {
+      console.log(`Making request to /sorting-algorithms/${algoMap[algorithm]}`);
+      const response = await api.post(`/sorting-algorithms/${algoMap[algorithm]}`, {
         array,
       });
+      
+      console.log("Full response:", response);
+      console.log("API Response data:", response.data);
+      
+      // Check different possible response structures
+      let framesData = null;
+      if (response.data?.steps && Array.isArray(response.data.steps)) {
+        framesData = response.data.steps;
+        console.log("Using response.data.steps");
+      } else if (Array.isArray(response.data)) {
+        framesData = response.data;
+        console.log("Using response.data directly");
+      } else {
+        console.log("Response data structure:", Object.keys(response.data || {}));
+      }
+
+      if (framesData && framesData.length > 0) {
+        console.log(`Setting ${framesData.length} frames`);
+        setFrames(framesData);
+      } else {
+        console.log("No frame data found, using fallback");
+        setFrames([{ array }]);
+      }
     } catch (error) {
-      console.warn("Backend call failed, using local implementation", error);
+      console.error("Backend sorting failed:", error);
+      if (error instanceof Error) {
+        console.error("Error message:", error.message);
+      }
+      setFrames([{ array }]);
     } finally {
       setLoading(false);
     }

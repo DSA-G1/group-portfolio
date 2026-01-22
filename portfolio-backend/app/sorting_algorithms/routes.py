@@ -18,14 +18,14 @@ def bubble_sort():
         if not isinstance(input_array, list):
             return jsonify({'error': 'Array must be a list'}), 400
         
-        output_array, steps = bubble_sort_steps(input_array)
+        output_array, frames = bubble_sort_steps(input_array)
         
         # Save to database
         operation = SortingAlgorithmOperation(
             algorithm_name='bubble_sort',
             input_array=input_array,
             output_array=output_array,
-            steps=steps,
+            steps=frames,
             complexity_time='O(n²)',
             complexity_space='O(1)'
         )
@@ -37,7 +37,7 @@ def bubble_sort():
             'algorithm': 'bubble_sort',
             'input': input_array,
             'output': output_array,
-            'steps': steps,
+            'steps': frames,
             'complexity': {'time': 'O(n²)', 'space': 'O(1)'}
         }), 201
     except Exception as e:
@@ -56,14 +56,14 @@ def selection_sort():
         if not isinstance(input_array, list):
             return jsonify({'error': 'Array must be a list'}), 400
         
-        output_array, steps = selection_sort_steps(input_array)
+        output_array, frames = selection_sort_steps(input_array)
         
         # Save to database
         operation = SortingAlgorithmOperation(
             algorithm_name='selection_sort',
             input_array=input_array,
             output_array=output_array,
-            steps=steps,
+            steps=frames,
             complexity_time='O(n²)',
             complexity_space='O(1)'
         )
@@ -75,7 +75,7 @@ def selection_sort():
             'algorithm': 'selection_sort',
             'input': input_array,
             'output': output_array,
-            'steps': steps,
+            'steps': frames,
             'complexity': {'time': 'O(n²)', 'space': 'O(1)'}
         }), 201
     except Exception as e:
@@ -94,14 +94,14 @@ def insertion_sort():
         if not isinstance(input_array, list):
             return jsonify({'error': 'Array must be a list'}), 400
         
-        output_array, steps = insertion_sort_steps(input_array)
+        output_array, frames = insertion_sort_steps(input_array)
         
         # Save to database
         operation = SortingAlgorithmOperation(
             algorithm_name='insertion_sort',
             input_array=input_array,
             output_array=output_array,
-            steps=steps,
+            steps=frames,
             complexity_time='O(n²)',
             complexity_space='O(1)'
         )
@@ -113,7 +113,7 @@ def insertion_sort():
             'algorithm': 'insertion_sort',
             'input': input_array,
             'output': output_array,
-            'steps': steps,
+            'steps': frames,
             'complexity': {'time': 'O(n²)', 'space': 'O(1)'}
         }), 201
     except Exception as e:
@@ -132,14 +132,14 @@ def quick_sort():
         if not isinstance(input_array, list):
             return jsonify({'error': 'Array must be a list'}), 400
         
-        output_array, steps = quick_sort_steps(input_array)
+        output_array, frames = quick_sort_steps(input_array)
         
         # Save to database
         operation = SortingAlgorithmOperation(
             algorithm_name='quick_sort',
             input_array=input_array,
             output_array=output_array,
-            steps=steps,
+            steps=frames,
             complexity_time='O(n log n)',
             complexity_space='O(log n)'
         )
@@ -151,7 +151,7 @@ def quick_sort():
             'algorithm': 'quick_sort',
             'input': input_array,
             'output': output_array,
-            'steps': steps,
+            'steps': frames,
             'complexity': {'time': 'O(n log n)', 'space': 'O(log n)'}
         }), 201
     except Exception as e:
@@ -170,14 +170,14 @@ def merge_sort():
         if not isinstance(input_array, list):
             return jsonify({'error': 'Array must be a list'}), 400
         
-        output_array, steps = merge_sort_steps(input_array)
+        output_array, frames = merge_sort_steps(input_array)
         
         # Save to database
         operation = SortingAlgorithmOperation(
             algorithm_name='merge_sort',
             input_array=input_array,
             output_array=output_array,
-            steps=steps,
+            steps=frames,
             complexity_time='O(n log n)',
             complexity_space='O(n)'
         )
@@ -189,7 +189,7 @@ def merge_sort():
             'algorithm': 'merge_sort',
             'input': input_array,
             'output': output_array,
-            'steps': steps,
+            'steps': frames,
             'complexity': {'time': 'O(n log n)', 'space': 'O(n)'}
         }), 201
     except Exception as e:

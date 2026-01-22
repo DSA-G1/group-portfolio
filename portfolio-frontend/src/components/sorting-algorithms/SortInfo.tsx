@@ -1,10 +1,47 @@
-import React from "react";
-import { algoInfo, algoLabels, algoDescriptions, AlgoKey } from "./utils";
+import React, { useEffect, useState } from "react";
+import { AlgoKey } from "./utils";
+import api from "@/services/api";
+
+type AlgoInfo = {
+  best: string;
+  average: string;
+  worst: string;
+  space: string;
+};
 
 export default function SortInfo({ algo }: { algo: AlgoKey }) {
-  const info = algoInfo[algo];
-  const title = algoLabels[algo] ? `${algoLabels[algo]} Info` : "Sort Info";
-  const description = algoDescriptions[algo];
+  const [info, setInfo] = useState<AlgoInfo | null>(null);
+  const [labels, setLabels] = useState<Record<AlgoKey, string>>({} as any);
+  const [descriptions, setDescriptions] = useState<Record<AlgoKey, string>>({} as any);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [labelsRes, infoRes, descRes] = await Promise.all([
+          api.get("/sorting-algorithms/metadata/labels"),
+          api.get("/sorting-algorithms/metadata/info"),
+          api.get("/sorting-algorithms/metadata/descriptions"),
+        ]);
+        setLabels(labelsRes.data);
+        setDescriptions(descRes.data);
+        if (algo && infoRes.data[algo]) {
+          setInfo(infoRes.data[algo]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch algorithm info:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (algo) {
+      fetchData();
+    }
+  }, [algo]);
+
+  const title = labels[algo] ? `${labels[algo]} Info` : "Sort Info";
+  const description = descriptions[algo];
+
   return (
     <div className="bg-[#1f1131] rounded-[40px] p-6 border-[4px] border-[#ffcaef]">
       <h3 className="text-[#ffcaef] font-body text-4xl mb-2">{title}</h3>
